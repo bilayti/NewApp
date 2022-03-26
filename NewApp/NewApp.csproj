@@ -555,6 +555,7 @@
     <Content Include="Content\wickedpicker.css" />
     <Content Include="css\jquery-ui.css" />
     <Content Include="css\StyleSheet.css" />
+    <Content Include="CustomScripts\Manage-user.js" />
     <Content Include="DataTable\css\jquery-ui.css" />
     <Content Include="DataTable\js\jquery-ui.js" />
     <Content Include="File\jquery-1.10.2.js" />

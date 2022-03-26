@@ -237,7 +237,6 @@ _UserList.Clear();
         #endregion
 
         #region Manage User
-        [HttpPost]
         public JsonResult GetAutoStudentData(string username)
         {
             List<string> result = new List<string>();

@@ -24,14 +24,11 @@ namespace NewApp
             if (e.Exception != null)
             {
                 ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('" + "ERROR: Record could not be updated!" + "');", true);
-                //litInfo2.Text = "ERROR: Record could not be updated!";
             }
             else
             {
                 ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('" + "Record updated successfully." + "');", true);
-                //litInfo2.Text = "Record updated successfully.";
 
-                //audit-log
                 AuditLogModule.LogEntry("User Lock/Unlock Updated");
             }
         }
@@ -40,14 +37,11 @@ namespace NewApp
             if (e.Exception != null)
             {
                 ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('" + "ERROR: Record could not be deleted!" + "');", true);
-                //litInfo2.Text = "ERROR: Record could not be deleted!";
             }
             else
             {
                 ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('" + "Record deleted successfully." + "');", true);
-                //litInfo2.Text = "Record deleted successfully.";
 
-                //audit-log
                 AuditLogModule.LogEntry("User Deleted");
             }
         }
@@ -58,14 +52,12 @@ namespace NewApp
                 char[] sepa = { '-' };
                 string tokens = e.CommandArgument.ToString();
                 string loginId = tokens;
-                //if resetting Administrator password then not to allow.
                 if (IsItAdministrator(loginId))
                 {
                     return;
                 }
                 else
                 {
-                    //show ChangePassword DetailsView
                     spanResetPasssword.Visible = true;
                 }
             }
@@ -151,7 +143,6 @@ namespace NewApp
                 string salt = Guid.NewGuid().ToString();
 
                 hfSalt.Value = salt;
-                //GridView1.Rows[0].Cells[0].Text
                 Label loginIdd = (Label)gridUsers.SelectedRow.FindControl("lblDistrictCodeR");
                 Label lblLoginIdUser = (Label)gridUsers.SelectedRow.FindControl("lblLoginIdUser");
                 string loginId = lblLoginIdUser.Text.ToString();
