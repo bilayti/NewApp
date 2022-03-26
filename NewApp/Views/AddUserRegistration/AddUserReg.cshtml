@@ -4,23 +4,28 @@
 }
 
 @{var listItems = new List<System.Web.UI.WebControls.ListItem>
-    {
-         new System.Web.UI.WebControls.ListItem { Text = "ADMIN", Value="1" }, 
-          new System.Web.UI.WebControls.ListItem { Text = "MANAGER", Value="4" } ,
-          new System.Web.UI.WebControls.ListItem { Text = "SALES", Value="2" } ,
-          new System.Web.UI.WebControls.ListItem { Text = "CUSTOMER", Value="3" }
+{
+         new System.Web.UI.WebControls.ListItem { Text = "ADMIN", Value="1" },
+         new System.Web.UI.WebControls.ListItem { Text = "SALES", Value="2" } ,
+         new System.Web.UI.WebControls.ListItem { Text = "CUSTOMER", Value="3" },
+         new System.Web.UI.WebControls.ListItem { Text = "MANAGER", Value="4" } 
+
     };
 }
 
 @{var status = new List<System.Web.UI.WebControls.ListItem>
-    {
+{
           new System.Web.UI.WebControls.ListItem { Text = " -- Select -- ", Value="0" },
           new System.Web.UI.WebControls.ListItem { Text = "OPEN", Value="1" },
           //new System.Web.UI.WebControls.ListItem { Text = "PENDING", Value="2" } ,
           new System.Web.UI.WebControls.ListItem { Text = "CLOSED", Value="3" }
     };
 }
-
+<script src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/dfs.gis.js"></script>
+<script src="../File/jquery-1.10.2.js" type="text/javascript"></script>
+<link href="~/File/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script src="../File/jquery-ui.js" type="text/javascript"></script>
 <style type="text/css">
     .Required {
         border-left: 3px solid red;
@@ -30,6 +35,7 @@
         border-left: 3px solid red;
     }
 </style>
+
 
 <div id="page-wrapper">
     <div class="graphs">
@@ -93,7 +99,6 @@
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" id="txtFirstName" class="form-control Required" />
-                                    @*@Html.TextBox("txtFirstName", null, new { @class = "form-control" })*@
                                 </div>
 
                                 <div class="col-md-2">
@@ -101,7 +106,6 @@
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" id="txtMiddleName" class="form-control" />
-                                    @*@Html.TextBox("txtMiddleName", null, new { @class = "form-control" })*@
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -115,13 +119,13 @@
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" id="txtLastName" class="form-control" />
-                                    @*@Html.TextBox("txtLastName", null, new { @class = "form-control" })*@
                                 </div>
                                 <div class="col-md-2">
                                     <label class="control-label">Password</label>
                                 </div>
                                 <div class="col-md-4">
                                     @Html.Password("txtPassword", null, new { @class = "form-control" })
+                                    @Html.Hidden("hfSalt")
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -318,8 +322,8 @@
             $("#btnSave").show();
             $("#btnUpdate").hide();
             $('#btnBacktoSearch').show();
-            $('#txtConfirmPassword').prop("enabled", true)
-            $('#txtPassword').prop("enabled", true)
+            $('#txtConfirmPassword').prop("disabled", true)
+            $('#txtPassword').prop("disabled", true)
         }
     });
 
@@ -416,8 +420,6 @@
         var y = ValidateDropDown('DDLRequired');
         if (!x || !y)
             return false;
-        //alert('susss');
-        //return false
         var chkActive = '';
         if ($('#chkIsActive').is(":checked")) {
             chkActive = 'Y'
@@ -508,7 +510,6 @@
                 if (data.toString() == "Successfully Saved!") {
                     alert('Saved Successfully');
                     ClearControl();
-                    //window.location.reload();
                 }
                 else {
                     alert('Already Exist');
@@ -521,7 +522,7 @@
     }
 
     function ClearControl() {
-        $('#ddlUserType').val('');
+        $("#ddlUserType").prop("selectedIndex", 0).val();
         $('#txtUserID').val('');
         $('#txtFirstName').val('');
         $('#txtMiddleName').val('');
@@ -531,12 +532,12 @@
         $('#txtEmailId').val('');
         $('#txtMobileNo').val('');
         $('#txtSAPID').val('');
-        $('#ddlStatus').val('');
+        $("#ddlStatus").prop("selectedIndex", 0).val();
         $('#txtRemarks').val('');
         $('#chkIsActive').prop('checked', false);
         $("#btnSave").show();
         $("#btnUpdate").hide();
-        $('#btnBacktoSearch').hide();
+        $('#btnBacktoSearch').show();
 
         $('#chkAging').prop('checked', false);
         $('#chkPending').prop('checked', false);

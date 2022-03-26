@@ -13,12 +13,11 @@
     <script src="File/jquery-1.10.2.js" type="text/javascript"></script>
     <link href="~/File/jquery-ui.css" rel="stylesheet" type="text/css" />
     <script src="File/jquery-ui.js" type="text/javascript"></script>
-    <script type="text/javascript">
+    <script>
         $(function () {
             SearchText();
         });
         function SearchText() {
-            debugger;
             $(".autosuggest").autocomplete({
                 source: function (request, response) {
                     $.ajax({
@@ -30,7 +29,6 @@
                         success: function (data) {
                             JSON.parse(JSON.stringify(data));
                             if (data.length > 0) {
-
                                 response($.map(data, function (item) {
                                     return {
                                         label: item.split('/')[0],
@@ -45,6 +43,7 @@
                             }
                         },
                         error: function (xhr, status, error) {
+                            //Printing error message
                             console.warn(xhr.responseText);
                         }
                     });
@@ -53,50 +52,54 @@
                     if (ui.item.val == -1) {
                         return false;
                     }
-                    document.getElementById('<%=lblStudentName.ClientID %>').innerHTML = ui.item.val1;
-                    document.getElementById('<%=hdnStudentName.ClientID %>').value = ui.item.val1;
-                    document.getElementById('<%=hfCustomerId.ClientID %>').value = ui.item.val2;
-                    document.getElementById('<%=lblSAPID.ClientID %>').innerHTML = ui.item.val3;
+                    else {
+                        if (ui.item.value != '') {
+                        document.getElementById('<%=lblStudentName.ClientID %>').innerHTML = ui.item.val1;
+                        document.getElementById('<%=hdnStudentName.ClientID %>').value = ui.item.val1;
+                        document.getElementById('<%=hfCustomerId.ClientID %>').value = ui.item.val2;
+                        document.getElementById('<%=lblSAPID.ClientID %>').innerHTML = ui.item.val3;
                 }
-            });
+            }
         }
-    </script>
-    <script type="text/javascript">
-        var hiddenFieldStr = '';
+    });
+}
 
-        function ComputeHash() {
+//Password GIS
+var hiddenFieldStr = '';
 
-            //validate password for valid chars.
-            var NewPassword = document.getElementById('<%= txtNewPassword.ClientID %>').value;
-            var NewPasswordConfirm = document.getElementById('<%= txtNewPasswordConfirm.ClientID %>').value;
-            var lblErrMsg2 = document.getElementById('<%= lblErrMsg.ClientID %>');
-            var hfSalt = document.getElementById('<%= hfSalt.ClientID %>');
+function ComputeHash() {
 
-            if (ValidatePassword(NewPassword) == false) {
-                //display error msg.
-                lblErrMsg2.innerHTML = 'Password must contain at least one upper case letter, one special character, one numeric number, and length should be at least 8 characters!<br />';
-                return false;
-            }
+    //validate password for valid chars.
+    var NewPassword = document.getElementById('<%= txtNewPassword.ClientID %>').value;
+    var NewPasswordConfirm = document.getElementById('<%= txtNewPasswordConfirm.ClientID %>').value;
+    var lblErrMsg2 = document.getElementById('<%= lblErrMsg.ClientID %>');
+    var hfSalt = document.getElementById('<%= hfSalt.ClientID %>');
 
-            if (NewPassword != NewPasswordConfirm) {
-                //display error msg.
-                lblErrMsg2.innerHTML = 'Password and Confirm Password must match!<br />';
-                return false;
-            }
+    if (ValidatePassword(NewPassword) == false) {
+        //display error msg.
+        lblErrMsg2.innerHTML = 'Password must contain at least one upper case letter, one special character, one numeric number, and length should be at least 8 characters!<br />';
+        return false;
+    }
 
-            shaObj = new jsSHA(NewPassword, "ASCII");
-            var passwordHash = shaObj.getHash("SHA-256", "HEX");
-            if (NewPassword.length > 0) {
-                document.getElementById('<%= txtNewPassword.ClientID %>').value = passwordHash;
-            }
+    if (NewPassword != NewPasswordConfirm) {
+        //display error msg.
+        lblErrMsg2.innerHTML = 'Password and Confirm Password must match!<br />';
+        return false;
+    }
 
-            //compute confirm password salted hash
-            shaObj = new jsSHA(NewPasswordConfirm, "ASCII");
-            var confirmPasswordHash = shaObj.getHash("SHA-256", "HEX");
-            shaObj = new jsSHA(hfSalt.value + confirmPasswordHash, "ASCII");
-            var confirmPasswordSaltedHash = shaObj.getHash("SHA-256", "HEX");
-            if (NewPasswordConfirm.length > 0) {
-                document.getElementById('<%= txtNewPasswordConfirm.ClientID %>').value = confirmPasswordSaltedHash;
+    shaObj = new jsSHA(NewPassword, "ASCII");
+    var passwordHash = shaObj.getHash("SHA-256", "HEX");
+    if (NewPassword.length > 0) {
+        document.getElementById('<%= txtNewPassword.ClientID %>').value = passwordHash;
+    }
+
+    //compute confirm password salted hash
+    shaObj = new jsSHA(NewPasswordConfirm, "ASCII");
+    var confirmPasswordHash = shaObj.getHash("SHA-256", "HEX");
+    shaObj = new jsSHA(hfSalt.value + confirmPasswordHash, "ASCII");
+    var confirmPasswordSaltedHash = shaObj.getHash("SHA-256", "HEX");
+    if (NewPasswordConfirm.length > 0) {
+        document.getElementById('<%= txtNewPasswordConfirm.ClientID %>').value = confirmPasswordSaltedHash;
             }
 
             hfSalt.value = '';
@@ -107,12 +110,11 @@
 
 
             document.getElementById('<%= txtNewPassword.ClientID %>').value = '';
-            document.getElementById('<%= txtNewPasswordConfirm.ClientID %>').value = '';
+            sdocument.getElementById('<%= txtNewPasswordConfirm.ClientID %>').value = '';
 
-            //submit form
-            return true;
-        }
-
+    //submit form
+    return true;
+}
     </script>
 </head>
 <body>

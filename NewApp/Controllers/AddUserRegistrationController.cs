@@ -80,7 +80,6 @@ namespace NewApp.Controllers
         #endregion
 
         int result = 0;
-        [HttpPost]
         public JsonResult UserRegDetails(UserRegistrationDetails _UserReg)
         {
             try
@@ -94,7 +93,7 @@ namespace NewApp.Controllers
                 _Cmd.Parameters.AddWithValue("@F_NAME", Encoder.HtmlEncode(_UserReg.F_NAME));
                 _Cmd.Parameters.AddWithValue("@M_NAME", Encoder.HtmlEncode(_UserReg.M_NAME));
                 _Cmd.Parameters.AddWithValue("@L_NAME", Encoder.HtmlEncode(_UserReg.L_NAME));
-                // _Cmd.Parameters.AddWithValue("@PASSWORD1", _UserReg.PASSWORD1);
+                _Cmd.Parameters.AddWithValue("@PASSWORD1", "45f238b0ebc278486948ab92322d412b4f91ed17ee80fc9ad13433dc6c7ce035");
                 _Cmd.Parameters.AddWithValue("@EMAIL", Encoder.HtmlEncode(_UserReg.EMAIL));
                 _Cmd.Parameters.AddWithValue("@MOBILE", Encoder.HtmlEncode(_UserReg.MOBILE));
                 _Cmd.Parameters.AddWithValue("@REMARKS1", Encoder.HtmlEncode(_UserReg.REMARKS1));
@@ -158,7 +157,6 @@ namespace NewApp.Controllers
 
 
         #region GET USER DETAILS
-        [HttpPost]
         public JsonResult FillUserDetail(int sUserID)
         {
             try
