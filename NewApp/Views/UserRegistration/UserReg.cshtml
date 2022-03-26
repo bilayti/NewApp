@@ -15,14 +15,12 @@
 @{var status = new List<System.Web.UI.WebControls.ListItem>
     {
           new System.Web.UI.WebControls.ListItem { Text = "OPEN", Value="1" }, 
-          //new System.Web.UI.WebControls.ListItem { Text = "PENDING", Value="2" } ,
           new System.Web.UI.WebControls.ListItem { Text = "CLOSED", Value="3" }
     };
 }
 
 <script type="text/javascript">
     function AddReg() {
-        //alert('hello');
         window.location.href = '@Url.Action("AddUserReg", "AddUserRegistration")';
     }
 
@@ -44,7 +42,6 @@
             traditional: true,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                debugger;
                 $('#theadmydata').empty();
                 $('#tbodymydata').empty();
                 var rowhead = "<tr style='background: rgba(158, 158, 158, 0.13)'><th>User Code</th><th>User Name</th><th>User Type</th><th>SAP Id</th><th>Status</th><th>Is Active</th><th>#</th>";
@@ -83,7 +80,7 @@
 <div id="page-wrapper"> 
     <div class="graphs">
         <div class="md">
-            @*Account Information Area   *@
+            @*Account Information Area*@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12">
