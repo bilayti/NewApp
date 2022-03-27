@@ -287,8 +287,12 @@
                                     <button type="button" id="btnUpdate" class="btn btn-xs btn-primary" style="width: 50px;font-family:Arial;" onclick="return AddUserRegistrations();">Update</button>
                                     <button type="button" id="btnBacktoSearch" class="btn btn-xs btn-primary" style="width: 100px;font-family:Arial;">Back to Search</button>
                                     <button type="button" id="btnCancel" class="btn btn-xs btn-success warning_4" style="width: 50px;font-family:Arial;">Cancel</button>
+                                    <br />
                                 </div>
                                 <div class="col-md-4">
+                                    <br />
+                                    <marquee><label class="control-label lblName">Note: The default password for this user will be <b>Welcome@1234</b></label></marquee>
+                                </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -316,6 +320,7 @@
                 FillUserDetail(_UserId);
                 $('#txtConfirmPassword').prop("disabled", true)
                 $('#txtPassword').prop("disabled", true)
+                $(".lblName").hide();
             }
         }
         else {
@@ -324,6 +329,7 @@
             $('#btnBacktoSearch').show();
             $('#txtConfirmPassword').prop("disabled", true)
             $('#txtPassword').prop("disabled", true)
+            $(".lblName").show();
         }
     });
 

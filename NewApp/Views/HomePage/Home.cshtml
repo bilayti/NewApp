@@ -1717,8 +1717,6 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
     }
     // END
 
-
-
     //Pending Order Report Report Code
     function PendingOrderReport() {
         //$("#loader").show();
@@ -1778,10 +1776,10 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
             });
 
         }
-        // END
+    // END
 
-        //Item Purchase Report Code
-        function ItemPurchase() {
+    //Item Purchase Report Code
+    function ItemPurchase() {
             //$("#loader").show();
             $('#divMyReports').hide();
             $('#divReport').hide();
@@ -1842,793 +1840,793 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
                     });
                 });
             }
-            // END
+    // END
 
-            //Invoice Report Code
-            function InvoiceReport() {
-                //$("#loader").show();
-                $('#divMyReports').hide();
-                $('#divReport').hide();
-                $('#divMyReportsBank').hide();
-                $('#divMyReportsItemPurchase').hide();
-                $('#divMyReportsPendingOrderReport').hide();
-                $('#divMyReportsAccount').hide();
-                $('#divMyReportsInvoice').show();
-                var CardCode = $('#ddlCustomerName').val();
-                var FromDT = $('#txtFromDT').val();
-                var ToDT = $('#txtToDT').val();
-                var radiovalue = '';
-                if ($("#radio_1").is(":checked")) {
-                    radiovalue = 1;
-                }
-                else if ($("#radio_2").is(":checked")) {
-                    radiovalue = 2;
-                }
-                else
-                    radiovalue = 3;
-                $('#tblMyReportsInvoice').dataTable
-                    ({
-                        destroy: true,
-                        "ajax":
-                            {
-                                "url": '@Url.Action("InvoiceReport")',
-                                "data": { "sCardCode": CardCode, "sFromDate": FromDT, "sToDate": ToDT, 'sradio': radiovalue },
-                                "type": "POST"
-                            },
-                        "columns":
-                            [
-                                { "data": "Document_ENo_IN" },
-                                { "data": "CardCode_IN" },
-                                { "data": "CardName_IN" },
-                                { "data": "DocDate_C1" },
-                            {
-                                "mRender": function (data, type, row) {
-                                    return "<span style='float: right;'>" + row.Total + "</span>"
-                                }
-                            },
-                                { "data": "Location" },
-                            {
-                                "mRender": function (data, type, row) {
-                                    return "<a href='#' id='InvoicePDF' onclick= \"return fnCrystelReport('" + row.Document_ENo_IN + "','" + row.DocDate_C1 + "')\">Download Invoice</a>"
-                                }, targets: 'no-sort', orderable: false
-                            }
-                            ]
-                    });
-                    $('#tblMyReportsInvoice').on('xhr.dt', function (e, settings, json) {
-                        $.each(json.data, function (a, data) {
-                        });
-                    });
-                }
-                // END
-
-                //Account Statement Report Code
-                function AccountStatement() {
-                    ////debugger;
-                    //$("#loader").show();
-                    $('#divMyReports').hide();
-                    $('#divReport').hide();
-                    $('#divMyReportsBank').hide();
-                    $('#divMyReportsItemPurchase').hide();
-                    $('#divMyReportsPendingOrderReport').hide();
-                    $('#divMyReportsInvoice').hide();
-                    $('#divMyReportsAccount').show();
-                    var CardCode = $('#ddlCustomerName').val();
-                    var FromDT = $('#txtFromDTStmt').val();
-                    var ToDT = $('#txtToDTStmt').val();
-                    var radiovalue = '';
-                    if ($("#radio_1").is(":checked")) {
-                        radiovalue = 1;
-                    }
-                    else if ($("#radio_2").is(":checked")) {
-                        radiovalue = 2;
-                    }
-                    else
-                        radiovalue = 3;
-                    $('#tblMyReportsAccount').dataTable
-                            ({
-                                destroy: true,
-                                "bSort": false,
-                                "ajax":
-                                    {
-                                        "url": '@Url.Action("AccountStatement", "HomePage")',
-                                        "data": { "sCardCode": CardCode, "sFromDate": FromDT, "sToDate": ToDT, 'sradio': radiovalue },
-                                        "type": "POST"
-                                    },
-                                "columns":
-                                    [
-                                        { "data": "CardName" },
-                                        { "data": "CardCode" },
-                                        { "data": "Location" },
-                                        { "data": "TransType" },
-                                        { "data": "REFDATE" },
-                                        { "data": "Series" },
-                                        { "data": "baseRef" },
-                                        { "data": "Ref2" },
-                                        {
-                                            "mRender": function (data, type, row) {
-                                                return "<span style='float: right;'>" + row.DEBIT + "</span>"
-                                            }
-                                        },
-                                        {
-                                            "mRender": function (data, type, row) {
-                                                return "<span style='float: right;'>" + row.CREDIT + "</span>"
-                                            }
-                                        },
-                                        {
-                                            "mRender": function (data, type, row) {
-                                                return "<span style='float: right;'>" + row.RunningTotal + "</span>"
-                                            }
-                                        }
-
-                                    ]
-                            });
-                            $('#tblMyReportsAccount').on('xhr.dt', function (e, settings, json) {
-                                $.each(json.data, function (a, data) {
-                                });
-                            });
+    //Invoice Report Code
+    function InvoiceReport() {
+        //$("#loader").show();
+        $('#divMyReports').hide();
+        $('#divReport').hide();
+        $('#divMyReportsBank').hide();
+        $('#divMyReportsItemPurchase').hide();
+        $('#divMyReportsPendingOrderReport').hide();
+        $('#divMyReportsAccount').hide();
+        $('#divMyReportsInvoice').show();
+        var CardCode = $('#ddlCustomerName').val();
+        var FromDT = $('#txtFromDT').val();
+        var ToDT = $('#txtToDT').val();
+        var radiovalue = '';
+        if ($("#radio_1").is(":checked")) {
+            radiovalue = 1;
+        }
+        else if ($("#radio_2").is(":checked")) {
+            radiovalue = 2;
+        }
+        else
+            radiovalue = 3;
+        $('#tblMyReportsInvoice').dataTable
+            ({
+                destroy: true,
+                "ajax":
+                    {
+                        "url": '@Url.Action("InvoiceReport")',
+                        "data": { "sCardCode": CardCode, "sFromDate": FromDT, "sToDate": ToDT, 'sradio': radiovalue },
+                        "type": "POST"
+                    },
+                "columns":
+                    [
+                        { "data": "Document_ENo_IN" },
+                        { "data": "CardCode_IN" },
+                        { "data": "CardName_IN" },
+                        { "data": "DocDate_C1" },
+                    {
+                        "mRender": function (data, type, row) {
+                            return "<span style='float: right;'>" + row.Total + "</span>"
                         }
-                        // END
-                        // Account statement report PDF
-                        function AccountStatementPDF() {
-                            //debugger;
-                            //$("#loader").show();
-                            $('#divMyReports').hide();
-                            $('#divReport').hide();
-                            $('#divMyReportsBank').hide();
-                            $('#divMyReportsItemPurchase').hide();
-                            $('#divMyReportsPendingOrderReport').hide();
-                            $('#divMyReportsInvoice').hide();
-                            $('#divMyReportsAccount').show();
-                            var CardCode = $('#ddlCustomerName').val();
-                            var FromDT = $('#txtFromDTStmt').val();
-                            var ToDT = $('#txtToDTStmt').val();
-                            var radiovalue = '';
-                            if ($("#radio_1").is(":checked")) {
-                                radiovalue = 1;
-                            }
-                            else if ($("#radio_2").is(":checked")) {
-                                radiovalue = 2;
-                            }
-                            else
-                                radiovalue = 3;
-                            $('#tblMyReportsAccount').dataTable
-                                    ({
-                                        destroy: true,
+                    },
+                        { "data": "Location" },
+                    {
+                        "mRender": function (data, type, row) {
+                            return "<a href='#' id='InvoicePDF' onclick= \"return fnCrystelReport('" + row.Document_ENo_IN + "','" + row.DocDate_C1 + "')\">Download Invoice</a>"
+                        }, targets: 'no-sort', orderable: false
+                    }
+                    ]
+            });
+            $('#tblMyReportsInvoice').on('xhr.dt', function (e, settings, json) {
+                $.each(json.data, function (a, data) {
+                });
+            });
+        }
+    // END
 
-                                        "ajax":
-                                            {
-                                                "url": '@Url.Action("AccountStatement", "HomePage")',
-                                                "data": { "sCardCode": CardCode, "sFromDate": FromDT, "sToDate": ToDT, 'sradio': radiovalue },
-                                                "type": "POST"
-                                            },
-                                        "columns":
-                                            [
-                                                { "data": "CardName" },
-                                                { "data": "CardCode" },
-                                                { "data": "Location" },
-                                                { "data": "TransType" },
-                                                { "data": "REFDATE" },
-                                                { "data": "Series" },
-                                                { "data": "baseRef" },
-                                                { "data": "Ref2" },
-                                                {
-                                                    "mRender": function (data, type, row) {
-                                                        return "<span style='float: right;'>" + row.DEBIT + "</span>"
-                                                    }
-                                                },
-                                                {
-                                                    "mRender": function (data, type, row) {
-                                                        return "<span style='float: right;'>" + row.CREDIT + "</span>"
-                                                    }
-                                                },
-                                                {
-                                                    "mRender": function (data, type, row) {
-                                                        return "<span style='float: right;'>" + row.RunningTotal + "</span>"
-                                                    }
-                                                }
+    //Account Statement Report Code
+    function AccountStatement() {
+        ////debugger;
+        //$("#loader").show();
+        $('#divMyReports').hide();
+        $('#divReport').hide();
+        $('#divMyReportsBank').hide();
+        $('#divMyReportsItemPurchase').hide();
+        $('#divMyReportsPendingOrderReport').hide();
+        $('#divMyReportsInvoice').hide();
+        $('#divMyReportsAccount').show();
+        var CardCode = $('#ddlCustomerName').val();
+        var FromDT = $('#txtFromDTStmt').val();
+        var ToDT = $('#txtToDTStmt').val();
+        var radiovalue = '';
+        if ($("#radio_1").is(":checked")) {
+            radiovalue = 1;
+        }
+        else if ($("#radio_2").is(":checked")) {
+            radiovalue = 2;
+        }
+        else
+            radiovalue = 3;
+        $('#tblMyReportsAccount').dataTable
+        ({
+            destroy: true,
+            "bSort": false,
+            "ajax":
+                {
+                    "url": '@Url.Action("AccountStatement", "HomePage")',
+                    "data": { "sCardCode": CardCode, "sFromDate": FromDT, "sToDate": ToDT, 'sradio': radiovalue },
+                    "type": "POST"
+                },
+            "columns":
+                [
+                    { "data": "CardName" },
+                    { "data": "CardCode" },
+                    { "data": "Location" },
+                    { "data": "TransType" },
+                    { "data": "REFDATE" },
+                    { "data": "Series" },
+                    { "data": "baseRef" },
+                    { "data": "Ref2" },
+                    {
+                        "mRender": function (data, type, row) {
+                            return "<span style='float: right;'>" + row.DEBIT + "</span>"
+                        }
+                    },
+                    {
+                        "mRender": function (data, type, row) {
+                            return "<span style='float: right;'>" + row.CREDIT + "</span>"
+                        }
+                    },
+                    {
+                        "mRender": function (data, type, row) {
+                            return "<span style='float: right;'>" + row.RunningTotal + "</span>"
+                        }
+                    }
 
-                                            ]
-                                    });
-                                    $('#tblMyReportsAccount').on('xhr.dt', function (e, settings, json) {
-                                        $.each(json.data, function (a, data) {
-                                        });
-                                    });
+                ]
+        });
+        $('#tblMyReportsAccount').on('xhr.dt', function (e, settings, json) {
+            $.each(json.data, function (a, data) {
+            });
+        });
+       }
+    // END
+    // Account statement report PDF
+    function AccountStatementPDF() {
+        //debugger;
+        //$("#loader").show();
+        $('#divMyReports').hide();
+        $('#divReport').hide();
+        $('#divMyReportsBank').hide();
+        $('#divMyReportsItemPurchase').hide();
+        $('#divMyReportsPendingOrderReport').hide();
+        $('#divMyReportsInvoice').hide();
+        $('#divMyReportsAccount').show();
+        var CardCode = $('#ddlCustomerName').val();
+        var FromDT = $('#txtFromDTStmt').val();
+        var ToDT = $('#txtToDTStmt').val();
+        var radiovalue = '';
+        if ($("#radio_1").is(":checked")) {
+            radiovalue = 1;
+        }
+        else if ($("#radio_2").is(":checked")) {
+            radiovalue = 2;
+        }
+        else
+            radiovalue = 3;
+        $('#tblMyReportsAccount').dataTable
+                ({
+                    destroy: true,
+
+                    "ajax":
+                        {
+                            "url": '@Url.Action("AccountStatement", "HomePage")',
+                            "data": { "sCardCode": CardCode, "sFromDate": FromDT, "sToDate": ToDT, 'sradio': radiovalue },
+                            "type": "POST"
+                        },
+                    "columns":
+                        [
+                            { "data": "CardName" },
+                            { "data": "CardCode" },
+                            { "data": "Location" },
+                            { "data": "TransType" },
+                            { "data": "REFDATE" },
+                            { "data": "Series" },
+                            { "data": "baseRef" },
+                            { "data": "Ref2" },
+                            {
+                                "mRender": function (data, type, row) {
+                                    return "<span style='float: right;'>" + row.DEBIT + "</span>"
                                 }
-                                //Bank Receipt Report Report Code
-                                function BankReceiptReport() {
-                                    $('#divMyReportsInvoice').hide();
-                                    $('#divMyReportsCredit').hide();
-                                    $('#divReport').hide();
-                                    $('#divMyReportsItemPurchase').hide();
-                                    $('#divMyReportsPendingOrderReport').hide();
-                                    $('#divMyReportsAccount').hide();
-                                    $('#divMyReportsBank').show();
-                                    var CardCode = $('#ddlCustomerName').val();
-                                    var FromDT = $('#txtFromDT').val();
-                                    var ToDT = $('#txtToDT').val();
-                                    var radiovalue = '';
-                                    if ($("#radio_1").is(":checked")) {
-                                        radiovalue = 1;
-                                    }
-                                    else if ($("#radio_2").is(":checked")) {
-                                        radiovalue = 2;
-                                    }
-                                    else
-                                        radiovalue = 3;
-                                    $('#tblMyReportsBank').dataTable
-                                        ({
-                                            destroy: true,
-                                            "ajax":
-                                                {
-                                                    "url": '@Url.Action("BankReceiptReport")',
-                                                    "data": { "sCardCode": CardCode, "sFromDate": FromDT, "sToDate": ToDT, 'sradio': radiovalue },
-                                                    "type": "POST"
-                                                },
-                                            "columns":
-                                                [
-                                                    { "data": "Document_No1" }, //, targets: 'no-sort', orderable: false
-                                                    { "data": "Posting_Date1" },
-                                                    { "data": "Discription1" },
-
-                                                    { "data": "PaymentType" },
-                                                    { "data": "ChequeNo" },
-                                                    { "data": "ChequeDate" },
-                                                    { "data": "DriaweeBankName" },
-                                                    {
-                                                        "mRender": function (data, type, row) {
-                                                            return "<span style='float: right;'>" + row.CheckAmount + "</span>"
-                                                        }
-                                                    },
-                                    {
-                                        "mRender": function (data, type, row) {
-                                            return "<a href='#' id='InvoicePDF' onclick= \"return fnCrystelReportPaymentSummary('" + row.Document_No1 + "','" + row.Posting_Date1 + "')\">Download Payment Details</a>"
-                                        }, targets: 'no-sort', orderable: false
-                                    }
-                                                ]
-                                        });
-                                        $('#tblMyReportsBank').on('xhr.dt', function (e, settings, json) {
-                                            $.each(json.data, function (a, data) {
-                                            });
-                                        });
-                                    }
-                                    // END
-
-                                    //Credit Note Report Report Code
-                                    function CreditNoteReport() {
-                                        $('#divReport').hide();
-                                        $('#divMyReportsInvoice').hide();
-                                        $('#divMyReportsBank').hide();
-                                        $('#divMyReportsItemPurchase').hide();
-                                        $('#divMyReportsPendingOrderReport').hide();
-                                        $('#divMyReportsAccount').hide();
-                                        $('#divMyReportsCredit').show();
-                                        var CardCode = $('#ddlCustomerName').val();
-                                        var FromDT = $('#txtFromDT').val();
-                                        var ToDT = $('#txtToDT').val();
-                                        $('#theadmydata').empty();
-                                        var rowhead = "<tr style='background: rgba(158, 158, 158, 0.13)'></tr>";
-                                        //rowhead += "<th>C Form Days</th><th>Advance</th><th>0-15</th><th>16-30</th><th>31-45</th><th>>45</th><th>Total</th></tr>";
-                                        $('#theadmydata').html(rowhead);
-                                        var radiovalue = '';
-                                        if ($("#radio_1").is(":checked")) {
-                                            radiovalue = 1;
-                                        }
-                                        else if ($("#radio_2").is(":checked")) {
-                                            radiovalue = 2;
-                                        }
-                                        else
-                                            radiovalue = 3;
-                                        $('#tblMyReportsCredit').dataTable
-                                            ({
-                                                destroy: true,
-                                                "ajax":
-                                                    {
-                                                        "url": '@Url.Action("CreditNoteReport")',
-                                                        "data": { "sCardCode": CardCode, "sFromDate": FromDT, "sToDate": ToDT, 'sradio': radiovalue },
-                                                        "type": "POST"
-                                                    },
-                                                "columns":
-                                                    [
-                                                        { "data": "CardName_C1" },
-                                                        { "data": "CardCode_C1" },
-                                                        { "data": "CREDIT_NOTE_NO_C1" },
-                                                        { "data": "DocDate_C1" },
-
-                                                        { "data": "ItemCode_C1" },
-                                                        { "data": "Description_C1" },
-                                                        {
-                                                            "mRender": function (data, type, row) {
-                                                                return "<span style='float: right;'>" + row.Quantity_C1 + "</span>"
-                                                            }
-                                                        },
-                                                        {
-                                                            "mRender": function (data, type, row) {
-                                                                return "<span style='float: right;'>" + row.ITEM_VALUE_C1 + "</span>"
-                                                            }
-                                                        },
-                                                        { "data": "Open_Qty_C1" },
-                                                        {
-                                                            "mRender": function (data, type, row) {
-                                                                return "<a href='#' id='InvoicePDF' onclick= \"return fnCrystelReportCreditNote('" + row.CREDIT_NOTE_NO_C1 + "','" + row.DocDate_C1 + "')\">Download Credit Note</a>"
-                                                            }, targets: 'no-sort', orderable: false
-                                                        }
-
-                                                    ]
-                                            });
-                                            $('#tblMyReportsCredit').on('xhr.dt', function (e, settings, json) {
-                                                $.each(json.data, function (a, data) {
-                                                });
-                                            });
-                                        }
-                                        // END
-
-                                        //Bind Over Less Than 15
-                                        function BindOverLessThan15() {
-                                            var sCardCode = '';
-                                            sCardCode = $('#ddlCustomerName').val();
-                                            $('#tblMyDataList').dataTable
-                                                ({
-                                                    destroy: true,
-                                                    "ajax":
-                                                        {
-                                                            "url": '@Url.Action("BindViewLessThanEqual15")',
-                                            "data": { "sCardCode": sCardCode },
-                                            "type": "POST"
-                                        },
-                                    "columns":
-                                        [
-                                            //{ "data": "Sno", targets: 'no-sort', orderable: false },
-                                            { "data": "DocNum_Less" },
-                                            { "data": "DocDate_Less" },
-                                            { "data": "DocDueDate_Less" },
-                                            {
-                                                "mRender": function (data, type, row) {
-                                                    return "<span style='float: right;'>" + row.Doctotal_Less + "</span>"
-                                                }
-                                            },
-                                            {
-                                                "mRender": function (data, type, row) {
-                                                    return "<span style='float: right;'>" + row.BalancAmount_Less + "</span>"
-                                                }
-                                            },
-                                            { "data": "DAYS_Less1" },
-                                        ]
-                                });
-                                $('#tblMyDataList').on('xhr.dt', function (e, settings, json) {
-                                    $.each(json.data, function (a, data) {
-                                    });
-                                });
-                            }
-                            // END
-
-                            //Bind Over Greater Than 15
-                            function BindOverDueGre15() {
-                                var sCardCode = '';
-                                sCardCode = $('#ddlCustomerName').val();
-                                $('#tblMyDataList2').DataTable
-                                        ({
-                                            destroy: true,
-                                            "ajax":
-                                            {
-                                                "url": '@Url.Action("BindViewGreaterThan15")',
-                                                        "data": { "sCardCode": sCardCode },
-                                                        "type": "POST"
-                                                    },
-                                                    "columns":
-                                                        [
-                                                            //{ "data": "Sno", targets: 'no-sort', orderable: false },
-                                                            { "data": "DocNum_Gre" },
-                                                            { "data": "DocDate_Gre" },
-                                                            { "data": "DocDueDate_Gre" },
-                                                            {
-                                                                "mRender": function (data, type, row) {
-                                                                    return "<span style='float: right;'>" + row.Doctotal_Gre + "</span>"
-                                                                }
-                                                            },
-                                                            {
-                                                                "mRender": function (data, type, row) {
-                                                                    return "<span style='float: right;'>" + row.BalancAmount_Gre + "</span>"
-                                                                }
-                                                            },
-                                                            { "data": "DAYS_Less" },
-                                                        ]
-                                                });
-                                                $('#tblMyDataList2').on('xhr.dt', function (e, settings, json) {
-                                                    $.each(json.data, function (a, data) {
-                                                    });
-                                                });
-                                            }
-                                            // END
-
-                                            //Bind Exp Payment
-                                            function BindOverExpPay() {
-                                                var sCardCode = '';
-                                                sCardCode = $('#ddlCustomerName').val();
-                                                $('#tblMyDataList3').DataTable
-                                                        ({
-                                                            destroy: true,
-                                                            "ajax":
-                                                            {
-                                                                "url": '@Url.Action("BindViewExpPaymnet")',
-                                                                "data": { "sCardCode": sCardCode },
-                                                                "type": "POST"
-                                                            },
-                                                            "columns":
-                                                                [
-                                                                    //{ "data": "Sno", targets: 'no-sort', orderable: false },
-                                                                    { "data": "Document_No2" },
-                                                                    { "data": "DocDate2" },
-                                                                    { "data": "DocDueDate2" },
-                                                                    {
-                                                                        "mRender": function (data, type, row) {
-                                                                            return "<span style='float: right;'>" + row.DocTotal2 + "</span>"
-                                                                        }
-                                                                    },
-                                                                    {
-                                                                        "mRender": function (data, type, row) {
-                                                                            return "<span style='float: right;'>" + row.BalancAmount2 + "</span>"
-                                                                        }
-                                                                    },
-                                                                    { "data": "DAYS2" },
-                                                                ]
-                                                        });
-                                                        $('#tblMyDataList3').on('xhr.dt', function (e, settings, json) {
-                                                            $.each(json.data, function (a, data) {
-                                                            });
-                                                        });
-                                                    }
-                                                    // END
-
-
-                                                    //Bind Order Value
-                                                    function BindOverOrderValue() {
-                                                        var sCardCode = '';
-                                                        sCardCode = $('#ddlCustomerName').val();
-                                                        $('#tblMyDataList4').DataTable
-                                                                ({
-                                                                    destroy: true,
-                                                                    "ajax":
-                                                                    {
-                                                                        "url": '@Url.Action("BindViewOrderValue")',
-                                                                        "data": { "sCardCode": sCardCode },
-                                                                        "type": "POST"
-                                                                    },
-                                                                    "columns":
-                                                                        [
-                                                                            //{ "data": "Sno", targets: 'no-sort', orderable: false },
-                                                                            { "data": "Document_No3" },
-                                                                            { "data": "Document_Date3" },
-                                                                            { "data": "Posting_Date3" },
-                                                                            {
-                                                                                "mRender": function (data, type, row) {
-                                                                                    return "<span style='float: right;'>" + row.DocTotal3 + "</span>"
-                                                                                }
-                                                                            },
-                                                                            {
-                                                                                "mRender": function (data, type, row) {
-                                                                                    return "<span style='float: right;'>" + row.BalancAmount3 + "</span>"
-                                                                                }
-                                                                            },
-                                                                            { "data": "DAYS3" },
-                                                                        ]
-                                                                });
-                                                                $('#tblMyDataList4').on('xhr.dt', function (e, settings, json) {
-                                                                    $.each(json.data, function (a, data) {
-                                                                    });
-                                                                });
-                                                            }
-                                                            // END
-                                                            //Bind partially unpaid invoice
-                                                            function BindPartiallyUnpaidInvoice() {
-                                                                //debugger;
-                                                                var sCardCode = '';
-                                                                sCardCode = $('#ddlCustomerName').val();
-                                                                $('#tblMyDataList5').DataTable
-                                                                        ({
-                                                                            destroy: true,
-                                                                            "ajax":
-                                                                            {
-                                                                                "url": '@Url.Action("PartiallyUnpaidInvoice")',
-                                        "data": { "sCardCode": sCardCode },
-                                        "type": "POST"
-                                    },
-                                    "columns":
-                                        [
-                                            //{ "data": "Sno", targets: 'no-sort', orderable: false },
-                                            { "data": "InvoiceNo" },
-                                            { "data": "InvoiceDate" },
-                                            { "data": "UnpaidDueDate" },
-                                            {
-                                                "mRender": function (data, type, row) {
-                                                    return "<span style='float: right;'>" + row.InvoiceAmount + "</span>"
-                                                }
-                                            },
-                                            {
-                                                "mRender": function (data, type, row) {
-                                                    return "<span style='float: right;'>" + row.PaidAmount + "</span>"
-                                                }
-                                            },
-                                            {
-                                                "mRender": function (data, type, row) {
-                                                    return "<span style='float: right;'>" + row.BalancAmount + "</span>"
-                                                }
-                                            },
-                                            { "data": "UnpaidDueDays" }
-                                        ]
-                                });
-                                $('#tblMyDataList5').on('xhr.dt', function (e, settings, json) {
-                                    $.each(json.data, function (a, data) {
-                                    });
-                                });
-                            }
-                            // END
-
-                            //FOR BIND AGING REPORT DETAILS ROW WISE
-                            function BindAgingReportRowWise(CardCode) {
-                                var radiovalue = '';
-                                if ($("#radio_1").is(":checked")) {
-                                    radiovalue = 1;
+                            },
+                            {
+                                "mRender": function (data, type, row) {
+                                    return "<span style='float: right;'>" + row.CREDIT + "</span>"
                                 }
-                                else if ($("#radio_2").is(":checked")) {
-                                    radiovalue = 2;
+                            },
+                            {
+                                "mRender": function (data, type, row) {
+                                    return "<span style='float: right;'>" + row.RunningTotal + "</span>"
                                 }
-                                else
-                                    radiovalue = 3;
-                                $('#tblMyDataListAgingDetail').DataTable
-                                        ({
-                                            destroy: true,
-                                            "ajax":
-                                            {
-                                                "url": '@Url.Action("BindAgingReportRowWise")',
-                                "data": { "sCardCode": CardCode },
+                            }
+
+                        ]
+                });
+                $('#tblMyReportsAccount').on('xhr.dt', function (e, settings, json) {
+                    $.each(json.data, function (a, data) {
+                    });
+                });
+    }
+
+    //Bank Receipt Report Report Code
+    function BankReceiptReport() {
+        $('#divMyReportsInvoice').hide();
+        $('#divMyReportsCredit').hide();
+        $('#divReport').hide();
+        $('#divMyReportsItemPurchase').hide();
+        $('#divMyReportsPendingOrderReport').hide();
+        $('#divMyReportsAccount').hide();
+        $('#divMyReportsBank').show();
+        var CardCode = $('#ddlCustomerName').val();
+        var FromDT = $('#txtFromDT').val();
+        var ToDT = $('#txtToDT').val();
+        var radiovalue = '';
+        if ($("#radio_1").is(":checked")) {
+            radiovalue = 1;
+        }
+        else if ($("#radio_2").is(":checked")) {
+            radiovalue = 2;
+        }
+        else
+            radiovalue = 3;
+        $('#tblMyReportsBank').dataTable
+            ({
+                destroy: true,
+                "ajax":
+                    {
+                        "url": '@Url.Action("BankReceiptReport")',
+                        "data": { "sCardCode": CardCode, "sFromDate": FromDT, "sToDate": ToDT, 'sradio': radiovalue },
+                        "type": "POST"
+                    },
+                "columns":
+                    [
+                        { "data": "Document_No1" }, //, targets: 'no-sort', orderable: false
+                        { "data": "Posting_Date1" },
+                        { "data": "Discription1" },
+
+                        { "data": "PaymentType" },
+                        { "data": "ChequeNo" },
+                        { "data": "ChequeDate" },
+                        { "data": "DriaweeBankName" },
+                        {
+                            "mRender": function (data, type, row) {
+                                return "<span style='float: right;'>" + row.CheckAmount + "</span>"
+                            }
+                        },
+        {
+            "mRender": function (data, type, row) {
+                return "<a href='#' id='InvoicePDF' onclick= \"return fnCrystelReportPaymentSummary('" + row.Document_No1 + "','" + row.Posting_Date1 + "')\">Download Payment Details</a>"
+            }, targets: 'no-sort', orderable: false
+        }
+                    ]
+            });
+            $('#tblMyReportsBank').on('xhr.dt', function (e, settings, json) {
+                $.each(json.data, function (a, data) {
+                });
+            });
+        }
+    // END
+
+    //Credit Note Report Report Code
+    function CreditNoteReport() {
+        $('#divReport').hide();
+        $('#divMyReportsInvoice').hide();
+        $('#divMyReportsBank').hide();
+        $('#divMyReportsItemPurchase').hide();
+        $('#divMyReportsPendingOrderReport').hide();
+        $('#divMyReportsAccount').hide();
+        $('#divMyReportsCredit').show();
+        var CardCode = $('#ddlCustomerName').val();
+        var FromDT = $('#txtFromDT').val();
+        var ToDT = $('#txtToDT').val();
+        $('#theadmydata').empty();
+        var rowhead = "<tr style='background: rgba(158, 158, 158, 0.13)'></tr>";
+        //rowhead += "<th>C Form Days</th><th>Advance</th><th>0-15</th><th>16-30</th><th>31-45</th><th>>45</th><th>Total</th></tr>";
+        $('#theadmydata').html(rowhead);
+        var radiovalue = '';
+        if ($("#radio_1").is(":checked")) {
+            radiovalue = 1;
+        }
+        else if ($("#radio_2").is(":checked")) {
+            radiovalue = 2;
+        }
+        else
+            radiovalue = 3;
+        $('#tblMyReportsCredit').dataTable
+            ({
+                destroy: true,
+                "ajax":
+                    {
+                        "url": '@Url.Action("CreditNoteReport")',
+                        "data": { "sCardCode": CardCode, "sFromDate": FromDT, "sToDate": ToDT, 'sradio': radiovalue },
+                        "type": "POST"
+                    },
+                "columns":
+                    [
+                        { "data": "CardName_C1" },
+                        { "data": "CardCode_C1" },
+                        { "data": "CREDIT_NOTE_NO_C1" },
+                        { "data": "DocDate_C1" },
+
+                        { "data": "ItemCode_C1" },
+                        { "data": "Description_C1" },
+                        {
+                            "mRender": function (data, type, row) {
+                                return "<span style='float: right;'>" + row.Quantity_C1 + "</span>"
+                            }
+                        },
+                        {
+                            "mRender": function (data, type, row) {
+                                return "<span style='float: right;'>" + row.ITEM_VALUE_C1 + "</span>"
+                            }
+                        },
+                        { "data": "Open_Qty_C1" },
+                        {
+                            "mRender": function (data, type, row) {
+                                return "<a href='#' id='InvoicePDF' onclick= \"return fnCrystelReportCreditNote('" + row.CREDIT_NOTE_NO_C1 + "','" + row.DocDate_C1 + "')\">Download Credit Note</a>"
+                            }, targets: 'no-sort', orderable: false
+                        }
+
+                    ]
+            });
+            $('#tblMyReportsCredit').on('xhr.dt', function (e, settings, json) {
+                $.each(json.data, function (a, data) {
+                });
+            });
+        }
+    // END
+
+    //Bind Over Less Than 15
+    function BindOverLessThan15() {
+        var sCardCode = '';
+        sCardCode = $('#ddlCustomerName').val();
+        $('#tblMyDataList').dataTable
+            ({
+                destroy: true,
+                "ajax":
+                    {
+                        "url": '@Url.Action("BindViewLessThanEqual15")',
+        "data": { "sCardCode": sCardCode },
+        "type": "POST"
+    },
+        "columns":
+        [
+        //{ "data": "Sno", targets: 'no-sort', orderable: false },
+        { "data": "DocNum_Less" },
+        { "data": "DocDate_Less" },
+        { "data": "DocDueDate_Less" },
+        {
+            "mRender": function (data, type, row) {
+                return "<span style='float: right;'>" + row.Doctotal_Less + "</span>"
+            }
+        },
+        {
+            "mRender": function (data, type, row) {
+                return "<span style='float: right;'>" + row.BalancAmount_Less + "</span>"
+            }
+        },
+        { "data": "DAYS_Less1" },
+        ]
+        });
+    $('#tblMyDataList').on('xhr.dt', function (e, settings, json) {
+    $.each(json.data, function (a, data) {
+    });
+    });
+    }
+    // END
+
+    //Bind Over Greater Than 15
+    function BindOverDueGre15() {
+        var sCardCode = '';
+        sCardCode = $('#ddlCustomerName').val();
+        $('#tblMyDataList2').DataTable
+                ({
+                    destroy: true,
+                    "ajax":
+                    {
+                        "url": '@Url.Action("BindViewGreaterThan15")',
+                                "data": { "sCardCode": sCardCode },
                                 "type": "POST"
                             },
                             "columns":
                                 [
                                     //{ "data": "Sno", targets: 'no-sort', orderable: false },
-                                    //{ "data": "TransId" },
-                                    { "data": "Refdate" },
-                                    { "data": "CurrentBalance" },
-                                    { "data": "Remarks" },
+                                    { "data": "DocNum_Gre" },
+                                    { "data": "DocDate_Gre" },
+                                    { "data": "DocDueDate_Gre" },
                                     {
                                         "mRender": function (data, type, row) {
-                                            return "<span style='float: right;'>" + row.DocTotal_AD + "</span>"
+                                            return "<span style='float: right;'>" + row.Doctotal_Gre + "</span>"
                                         }
                                     },
                                     {
                                         "mRender": function (data, type, row) {
-                                            return "<span style='float: right;'>" + row.DocumentValueLC + "</span>"
+                                            return "<span style='float: right;'>" + row.BalancAmount_Gre + "</span>"
                                         }
                                     },
-                                    { "data": "LineID" },
+                                    { "data": "DAYS_Less" },
                                 ]
                         });
-                        $('#tblMyDataListAgingDetail').on('xhr.dt', function (e, settings, json) {
+                        $('#tblMyDataList2').on('xhr.dt', function (e, settings, json) {
                             $.each(json.data, function (a, data) {
                             });
                         });
                     }
-                    // END
+    // END
 
-                    //FOR BIND ITEM PURCHASE REPORT ITEM SUB GROUP ROW WISE
-                    function BindItemSubGroup(ItemGroupName) {
-                        //debugger;
-                        var FromDT = $('#txtFromDT').val();
-                        var ToDT = $('#txtToDT').val();
-                        var CardCode = $('#ddlCustomerName').val();
-                        var radiovalue = '';
-                        if ($("#radio_1").is(":checked")) {
-                            radiovalue = 1;
-                        }
-                        else if ($("#radio_2").is(":checked")) {
-                            radiovalue = 2;
-                        }
-                        else
-                            radiovalue = 3;
-                        $('#tblMyDataListSubGroup').DataTable
-                                ({
-                                    destroy: true,
-                                    "ajax":
-                                    {
-                                        "url": '@Url.Action("BindItemSubGroup")',
-                                                                                    "data": { "sCardCode": CardCode, "sFromDate": FromDT, "sToDate": ToDT, 'sRadio': radiovalue, 'sGroupName': ItemGroupName },
-                                                                                    "type": "POST"
-                                                                                },
-                                                                                "columns":
-                                                                                    [
-                                                                                        { "data": "ItemGroup_ITEM" },
-                                                                                        {
-                                                                                            "mRender": function (data, type, row) {
-                                                                                                return "<span style='float: right;'>" + row.QuantitySub_ITEM + "</span>"
-                                                                                            }
-                                                                                        },
-                                                                                        {
-                                                                                            "mRender": function (data, type, row) {
-                                                                                                return "<span style='float: right;'>" + row.DocTotalSub_ITEM + "</span>"
-                                                                                            }
-                                                                                        },
-                                                                                    ]
-                                                                            });
-                                                                            $('#tblMyDataListSubGroup').on('xhr.dt', function (e, settings, json) {
-                                                                                $.each(json.data, function (a, data) {
-                                                                                });
-                                                                            });
-                                                                        }
-                                                                        // END
+    //Bind Exp Payment
+    function BindOverExpPay() {
+        var sCardCode = '';
+        sCardCode = $('#ddlCustomerName').val();
+        $('#tblMyDataList3').DataTable
+                ({
+                    destroy: true,
+                    "ajax":
+                    {
+                        "url": '@Url.Action("BindViewExpPaymnet")',
+                        "data": { "sCardCode": sCardCode },
+                        "type": "POST"
+                    },
+                    "columns":
+                        [
+                            //{ "data": "Sno", targets: 'no-sort', orderable: false },
+                            { "data": "Document_No2" },
+                            { "data": "DocDate2" },
+                            { "data": "DocDueDate2" },
+                            {
+                                "mRender": function (data, type, row) {
+                                    return "<span style='float: right;'>" + row.DocTotal2 + "</span>"
+                                }
+                            },
+                            {
+                                "mRender": function (data, type, row) {
+                                    return "<span style='float: right;'>" + row.BalancAmount2 + "</span>"
+                                }
+                            },
+                            { "data": "DAYS2" },
+                        ]
+                });
+                $('#tblMyDataList3').on('xhr.dt', function (e, settings, json) {
+                    $.each(json.data, function (a, data) {
+                    });
+                });
+            }
+    // END
 
-                                                                        //FOR BIND ITEM PURCHASE REPORT ITEM SUB GROUP Item ROW WISE
-                                                                        function BindItemGroupItem(ItemGroupName) {
-                                                                            //debugger;
-                                                                            var FromDT = $('#txtFromDT').val();
-                                                                            var ToDT = $('#txtToDT').val();
-                                                                            var CardCode = $('#ddlCustomerName').val();
-                                                                            var radiovalue = '';
-                                                                            if ($("#radio_1").is(":checked")) {
-                                                                                radiovalue = 1;
-                                                                            }
-                                                                            else if ($("#radio_2").is(":checked")) {
-                                                                                radiovalue = 2;
-                                                                            }
-                                                                            else
-                                                                                radiovalue = 3;
-                                                                            $('#tblMyDataListItem').DataTable
-                                                                                    ({
-                                                                                        destroy: true,
-                                                                                        "ajax":
-                                                                                        {
-                                                                                            "url": '@Url.Action("BindItemGroupItem")',
-                                                                                    "data": { "sCardCode": CardCode, "sFromDate": FromDT, "sToDate": ToDT, 'sRadio': radiovalue, 'sGroupName': ItemGroupName },
-                                                                                    "type": "POST"
-                                                                                },
-                                                                                "columns":
-                                                                                    [
-                                                                                        { "data": "DocEntry_ITEM" },
-                                                                                        { "data": "CardCode_ITEM" },
-                                                                                        { "data": "CardName_ITEM" },
-                                                                                        { "data": "ItemCode_ITEM" },
-                                                                                        { "data": "Discription_ITEM" },
-                                                                                        {
-                                                                                            "mRender": function (data, type, row) {
-                                                                                                return "<span style='float: right;'>" + row.Quantity_ITEM + "</span>"
-                                                                                            }
-                                                                                        },
-                                                                                        {
-                                                                                            "mRender": function (data, type, row) {
-                                                                                                return "<span style='float: right;'>" + row.DocTotal_ITEM + "</span>"
-                                                                                            }
-                                                                                        },
-                                                                                    ]
-                                                                            });
-                                                                            $('#tblMyDataListItem').on('xhr.dt', function (e, settings, json) {
-                                                                                $.each(json.data, function (a, data) {
-                                                                                });
-                                                                            });
-                                                                        }
-                                                                        // END
-                                                                        function fnCrystelReport(DocNum, date) {
-                                                                            //debugger;
-                                                                            $.ajax({
-                                                                                url: "/HomePage/ExportRPT",
-                                                                                type: "POST",
-                                                                                data: JSON.stringify({ 'sDocNum': DocNum, 'sDocDate': date }),
-                                                                                dataType: "json",
-                                                                                traditional: true,
-                                                                                contentType: "application/json; charset=utf-8",
-                                                                                success: function (data) {
-                                                                                 //debugger;
-                                                                                    //console.log(data);
-                                                                                    JSON.parse(JSON.stringify(data));
-                                                                                    if (data.recordFound > 0) {
-                                                                                        window.open("../Export.aspx");
-                                                                                    }
-                                                                                    else {
-                                                                                        alert('No Record Found');
-                                                                                    }
-                                                                                },
-                                                                                error: function (xhr, status, error) {
-                                                                                    //debugger;
-                                                                                    console.warn(xhr.responseText);
-                                                                                }
-                                                                            });
-                                                                        }
-                                                                        function fnCrystelReportCreditNote(DocNum, date) {
-                                                                            //debugger;
-                                                                            $.ajax({
-                                                                                url: "/HomePage/ExportRPTCreditNote",
-                                                                                type: "POST",
-                                                                                data: JSON.stringify({ 'sDocNum': DocNum, 'sDocDate': date }),
-                                                                                dataType: "json",
-                                                                                traditional: true,
-                                                                                contentType: "application/json; charset=utf-8",
-                                                                                success: function (data) {
-                                                                                    //console.log(data);
-                                                                                    JSON.parse(JSON.stringify(data));
-                                                                                    if (data.recordFound > 0) {
-                                                                                        window.open("../Export.aspx");
-                                                                                    }
-                                                                                    else {
-                                                                                        alert('No Record Found');
-                                                                                    }
-                                                                                },
-                                                                                error: function (xhr, status, error) {
-                                                                                    console.warn(xhr.responseText);
-                                                                                }
-                                                                            });
-                                                                        }
-                                                                        function fnCrystelReportPaymentSummary(DocNum, date) {
-                                                                            //debugger;
-                                                                            $.ajax({
-                                                                                url: '@Url.Action("ExportRPTPaymentSummary", "HomePage")',/*"/HomePage/ExportRPTPaymentSummary",*/
-                                                                                type: "POST",
-                                                                                data: JSON.stringify({ 'sDocNum': DocNum, 'sDocDate': date }),
-                                                                                dataType: "json",
-                                                                                traditional: true,
-                                                                                contentType: "application/json; charset=utf-8",
-                                                                                success: function (data) {
-                                                                                    //console.log(data);
-                                                                                    JSON.parse(JSON.stringify(data));
-                                                                                    if (data.recordFound > 0) {
-                                                                                        window.open("../Export.aspx");
-                                                                                    }
-                                                                                    else {
-                                                                                        alert('No Record Found');
-                                                                                    }
-                                                                                },
-                                                                                error: function (xhr, status, error) {
-                                                                                    console.warn(xhr.responseText);
-                                                                                }
-                                                                            });
-                                                                        }
-                                                                        function fnCrystelReportAccountStatement(CardCode, FromDate, Todate) {
-                                                                            //debugger;
-                                                                            $.ajax({
-                                                                                url: '@Url.Action("ExportRPTAccountStatement", "HomePage")',/*"/HomePage/ExportRPTAccountStatement",*/
-                                                                                type: "POST",
-                                                                                data: JSON.stringify({ 'CardCode': CardCode, 'FromDate': FromDate, 'Todate': Todate }),
-                                                                                dataType: "json",
-                                                                                traditional: true,
-                                                                                contentType: "application/json; charset=utf-8",
-                                                                                success: function (data) {
-                                                                                    //console.log(data);
-                                                                                    JSON.parse(JSON.stringify(data));
-                                                                                    if (data.recordFound > 0) {
-                                                                                        window.open("../Export.aspx");
-                                                                                    }
-                                                                                    else {
-                                                                                        alert('No Record Found');
-                                                                                    }
-                                                                                },
-                                                                                error: function (xhr, status, error) {
-                                                                                    console.warn(xhr.responseText);
-                                                                                }
-                                                                            });
-                                                                        }
-                                                                        //AccountStatementReportPDF(CardCode, FromDT, ToDT, radiovalue);
-                                                                        function AccountStatementReportPDF(CardCode, FromDT, ToDT, radiovalue) {
-                                                                            //debugger;
-                                                                            $.ajax({
-                                                                                url: "/HomePage/ExportRPTAccountStatementPDFData",
-                                                                                type: "POST",
-                                                                                data: JSON.stringify({ 'sCardCode': CardCode, 'sFromDate': FromDT, 'sToDate': ToDT, 'sRadio': radiovalue }),
-                                                                                dataType: "json",
-                                                                                traditional: true,
-                                                                                contentType: "application/json; charset=utf-8",
-                                                                                success: function (data) {
-                                                                                    //console.log(data);
-                                                                                    JSON.parse(JSON.stringify(data));
-                                                                                    if (data.recordFound > 0) {
-                                                                                        window.open("../Export.aspx");
-                                                                                    }
-                                                                                    else {
-                                                                                        alert('No Record Found');
-                                                                                    }
-                                                                                },
-                                                                                error: function (xhr, status, error) {
-                                                                                    //console.log(error);
-                                                                                    console.warn(xhr.responseText);
-                                                                                }
-                                                                            });
-                                                                        }
+    //Bind Order Value
+    function BindOverOrderValue() {
+        var sCardCode = '';
+        sCardCode = $('#ddlCustomerName').val();
+        $('#tblMyDataList4').DataTable
+                ({
+                    destroy: true,
+                    "ajax":
+                    {
+                        "url": '@Url.Action("BindViewOrderValue")',
+                        "data": { "sCardCode": sCardCode },
+                        "type": "POST"
+                    },
+                    "columns":
+                        [
+                            //{ "data": "Sno", targets: 'no-sort', orderable: false },
+                            { "data": "Document_No3" },
+                            { "data": "Document_Date3" },
+                            { "data": "Posting_Date3" },
+                            {
+                                "mRender": function (data, type, row) {
+                                    return "<span style='float: right;'>" + row.DocTotal3 + "</span>"
+                                }
+                            },
+                            {
+                                "mRender": function (data, type, row) {
+                                    return "<span style='float: right;'>" + row.BalancAmount3 + "</span>"
+                                }
+                            },
+                            { "data": "DAYS3" },
+                        ]
+                });
+                $('#tblMyDataList4').on('xhr.dt', function (e, settings, json) {
+                    $.each(json.data, function (a, data) {
+                    });
+                });
+            }
+    // END
+    //Bind partially unpaid invoice
+    function BindPartiallyUnpaidInvoice() {
+        //debugger;
+        var sCardCode = '';
+        sCardCode = $('#ddlCustomerName').val();
+        $('#tblMyDataList5').DataTable
+                ({
+                    destroy: true,
+                    "ajax":
+                    {
+                        "url": '@Url.Action("PartiallyUnpaidInvoice")',
+                "data": { "sCardCode": sCardCode },
+                "type": "POST"
+            },
+            "columns":
+                [
+                    //{ "data": "Sno", targets: 'no-sort', orderable: false },
+                    { "data": "InvoiceNo" },
+                    { "data": "InvoiceDate" },
+                    { "data": "UnpaidDueDate" },
+                    {
+                        "mRender": function (data, type, row) {
+                            return "<span style='float: right;'>" + row.InvoiceAmount + "</span>"
+                        }
+                    },
+                    {
+                        "mRender": function (data, type, row) {
+                            return "<span style='float: right;'>" + row.PaidAmount + "</span>"
+                        }
+                    },
+                    {
+                        "mRender": function (data, type, row) {
+                            return "<span style='float: right;'>" + row.BalancAmount + "</span>"
+                        }
+                    },
+                    { "data": "UnpaidDueDays" }
+                ]
+        });
+        $('#tblMyDataList5').on('xhr.dt', function (e, settings, json) {
+            $.each(json.data, function (a, data) {
+            });
+        });
+    }
+    // END
+
+    //FOR BIND AGING REPORT DETAILS ROW WISE
+     function BindAgingReportRowWise(CardCode) {
+        var radiovalue = '';
+        if ($("#radio_1").is(":checked")) {
+            radiovalue = 1;
+        }
+        else if ($("#radio_2").is(":checked")) {
+            radiovalue = 2;
+        }
+        else
+            radiovalue = 3;
+        $('#tblMyDataListAgingDetail').DataTable
+                ({
+                    destroy: true,
+                    "ajax":
+                    {
+                        "url": '@Url.Action("BindAgingReportRowWise")',
+        "data": { "sCardCode": CardCode },
+        "type": "POST"
+    },
+    "columns":
+        [
+            //{ "data": "Sno", targets: 'no-sort', orderable: false },
+            //{ "data": "TransId" },
+            { "data": "Refdate" },
+            { "data": "CurrentBalance" },
+            { "data": "Remarks" },
+            {
+                "mRender": function (data, type, row) {
+                    return "<span style='float: right;'>" + row.DocTotal_AD + "</span>"
+                }
+            },
+            {
+                "mRender": function (data, type, row) {
+                    return "<span style='float: right;'>" + row.DocumentValueLC + "</span>"
+                }
+            },
+            { "data": "LineID" },
+        ]
+    });
+    $('#tblMyDataListAgingDetail').on('xhr.dt', function (e, settings, json) {
+    $.each(json.data, function (a, data) {
+    });
+    });
+    }
+    // END
+
+    //FOR BIND ITEM PURCHASE REPORT ITEM SUB GROUP ROW WISE
+    function BindItemSubGroup(ItemGroupName) {
+        //debugger;
+        var FromDT = $('#txtFromDT').val();
+        var ToDT = $('#txtToDT').val();
+        var CardCode = $('#ddlCustomerName').val();
+        var radiovalue = '';
+        if ($("#radio_1").is(":checked")) {
+            radiovalue = 1;
+        }
+        else if ($("#radio_2").is(":checked")) {
+            radiovalue = 2;
+        }
+        else
+            radiovalue = 3;
+        $('#tblMyDataListSubGroup').DataTable
+                ({
+                    destroy: true,
+                    "ajax":
+                    {
+        "url": '@Url.Action("BindItemSubGroup")',
+            "data": { "sCardCode": CardCode, "sFromDate": FromDT, "sToDate": ToDT, 'sRadio': radiovalue, 'sGroupName': ItemGroupName },
+            "type": "POST"
+        },
+        "columns":
+            [
+                { "data": "ItemGroup_ITEM" },
+                {
+                    "mRender": function (data, type, row) {
+                        return "<span style='float: right;'>" + row.QuantitySub_ITEM + "</span>"
+                    }
+                },
+                {
+                    "mRender": function (data, type, row) {
+                        return "<span style='float: right;'>" + row.DocTotalSub_ITEM + "</span>"
+                    }
+                },
+            ]
+    });
+    $('#tblMyDataListSubGroup').on('xhr.dt', function (e, settings, json) {
+        $.each(json.data, function (a, data) {
+        });
+    });
+}
+    // END
+
+    //FOR BIND ITEM PURCHASE REPORT ITEM SUB GROUP Item ROW WISE
+    function BindItemGroupItem(ItemGroupName) {
+        //debugger;
+        var FromDT = $('#txtFromDT').val();
+        var ToDT = $('#txtToDT').val();
+        var CardCode = $('#ddlCustomerName').val();
+        var radiovalue = '';
+        if ($("#radio_1").is(":checked")) {
+            radiovalue = 1;
+        }
+        else if ($("#radio_2").is(":checked")) {
+            radiovalue = 2;
+        }
+        else
+            radiovalue = 3;
+        $('#tblMyDataListItem').DataTable
+                ({
+                    destroy: true,
+                    "ajax":
+                    {
+                        "url": '@Url.Action("BindItemGroupItem")',
+                "data": { "sCardCode": CardCode, "sFromDate": FromDT, "sToDate": ToDT, 'sRadio': radiovalue, 'sGroupName': ItemGroupName },
+                "type": "POST"
+            },
+            "columns":
+                [
+                    { "data": "DocEntry_ITEM" },
+                    { "data": "CardCode_ITEM" },
+                    { "data": "CardName_ITEM" },
+                    { "data": "ItemCode_ITEM" },
+                    { "data": "Discription_ITEM" },
+                    {
+                        "mRender": function (data, type, row) {
+                            return "<span style='float: right;'>" + row.Quantity_ITEM + "</span>"
+                        }
+                    },
+                    {
+                        "mRender": function (data, type, row) {
+                            return "<span style='float: right;'>" + row.DocTotal_ITEM + "</span>"
+                        }
+                    },
+                ]
+        });
+        $('#tblMyDataListItem').on('xhr.dt', function (e, settings, json) {
+            $.each(json.data, function (a, data) {
+            });
+        });
+    }
+    // END
+    function fnCrystelReport(DocNum, date) {
+        //debugger;
+        $.ajax({
+            url: "/HomePage/ExportRPT",
+            type: "POST",
+            data: JSON.stringify({ 'sDocNum': DocNum, 'sDocDate': date }),
+            dataType: "json",
+            traditional: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                //debugger;
+                //console.log(data);
+                JSON.parse(JSON.stringify(data));
+                if (data.recordFound > 0) {
+                    window.open("../Export.aspx");
+                }
+                else {
+                    alert('No Record Found');
+                }
+            },
+            error: function (xhr, status, error) {
+                //debugger;
+                console.warn(xhr.responseText);
+            }
+        });
+    }
+    function fnCrystelReportCreditNote(DocNum, date) {
+        //debugger;
+        $.ajax({
+            url: "/HomePage/ExportRPTCreditNote",
+            type: "POST",
+            data: JSON.stringify({ 'sDocNum': DocNum, 'sDocDate': date }),
+            dataType: "json",
+            traditional: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                //console.log(data);
+                JSON.parse(JSON.stringify(data));
+                if (data.recordFound > 0) {
+                    window.open("../Export.aspx");
+                }
+                else {
+                    alert('No Record Found');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.warn(xhr.responseText);
+            }
+        });
+    }
+    function fnCrystelReportPaymentSummary(DocNum, date) {
+        //debugger;
+        $.ajax({
+            url: '@Url.Action("ExportRPTPaymentSummary", "HomePage")',/*"/HomePage/ExportRPTPaymentSummary",*/
+            type: "POST",
+            data: JSON.stringify({ 'sDocNum': DocNum, 'sDocDate': date }),
+            dataType: "json",
+            traditional: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                //console.log(data);
+                JSON.parse(JSON.stringify(data));
+                if (data.recordFound > 0) {
+                    window.open("../Export.aspx");
+                }
+                else {
+                    alert('No Record Found');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.warn(xhr.responseText);
+            }
+        });
+    }
+    function fnCrystelReportAccountStatement(CardCode, FromDate, Todate) {
+        //debugger;
+        $.ajax({
+            url: '@Url.Action("ExportRPTAccountStatement", "HomePage")',/*"/HomePage/ExportRPTAccountStatement",*/
+            type: "POST",
+            data: JSON.stringify({ 'CardCode': CardCode, 'FromDate': FromDate, 'Todate': Todate }),
+            dataType: "json",
+            traditional: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                //console.log(data);
+                JSON.parse(JSON.stringify(data));
+                if (data.recordFound > 0) {
+                    window.open("../Export.aspx");
+                }
+                else {
+                    alert('No Record Found');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.warn(xhr.responseText);
+            }
+        });
+    }
+    //AccountStatementReportPDF(CardCode, FromDT, ToDT, radiovalue);
+    function AccountStatementReportPDF(CardCode, FromDT, ToDT, radiovalue) {
+        //debugger;
+        $.ajax({
+            url: "/HomePage/ExportRPTAccountStatementPDFData",
+            type: "POST",
+            data: JSON.stringify({ 'sCardCode': CardCode, 'sFromDate': FromDT, 'sToDate': ToDT, 'sRadio': radiovalue }),
+            dataType: "json",
+            traditional: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                //console.log(data);
+                JSON.parse(JSON.stringify(data));
+                if (data.recordFound > 0) {
+                    window.open("../Export.aspx");
+                }
+                else {
+                    alert('No Record Found');
+                }
+            },
+            error: function (xhr, status, error) {
+                //console.log(error);
+                console.warn(xhr.responseText);
+            }
+        });
+    }
 </script>
 @*<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">*@
 <link href="~/DataTable/css/jquery-ui.css" rel="stylesheet" />
