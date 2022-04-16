@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageUser.aspx.cs" Inherits="NewApp.ManageUser" %>
 
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,17 +19,16 @@
         function SearchText() {
             $(".autosuggest").autocomplete({
                 source: function (request, response) {
+                    var searchString = $('#txtSearchStringId').val();
                     $.ajax({
-                        url: "http://localhost:14457/HomePage/GetManageUserData",
                         type: "POST",
-                        data: "{'username':'" + document.getElementById('txtAdmissionId').value + "'}",
-                        //header("Content-Type: application/json; charset=UTF-8"),
-                        contentType: "application/json; charset=UTF-8",
+                        url: '/ManageUser.aspx/GetManagedUserData',
+                        data: '{searchString: "' + searchString + '" }',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
                         success: function (data) {
-                            console.log(data);
-                            JSON.parse(JSON.stringify(data));
-                            if (data.length > 0) {
-                                response($.map(data, function (item) {
+                            if (data.d.length > 0) {
+                                response($.map(data.d, function (item) {
                                     return {
                                         label: item.split(',')[0],
                                         val1: item.split(',')[1],
@@ -44,9 +42,7 @@
                             }
                         },
                         error: function (xhr, status, error) {
-                            //Printing error message
-                            console.log(error);
-                            //console.warn(xhr.responseText);
+                            console.warn(xhr.responseText);
                         }
                     });
                 },
@@ -121,7 +117,7 @@ return true;
 </head>
 <body>
     <form id="form1" runat="server">
-
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
         <div>
             <div class="InputForm" style="width: 90%">
                 <h2>Manage users</h2>
@@ -134,7 +130,7 @@ return true;
                             <div class="control-group">
                                 <asp:Label ID="routename" runat="server" CssClass="control-label" Style="font-size: 14px;">First Name/SAP ID/Login Id<span style="color:Red;"> *</span></asp:Label>
                                 <div class="controls">
-                                    <input type="text" id="txtAdmissionId" style="width: 70%;" class="autosuggest" placeholder="Search with First Name/SAP ID/Login Id" />
+                                    <input type="text" id="txtSearchStringId" style="width: 70%;" class="autosuggest" placeholder="Search with First Name/SAP ID/Login Id" />
                                     <asp:Button ID="btnGO" runat="server" CssClass="button_example" Text="Search" OnClick="btnGO_Click" />
                                     <asp:HiddenField ID="hfCustomerId" runat="server" />
                                 </div>

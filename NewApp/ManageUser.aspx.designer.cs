@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NewApp {
-    
-    
-    public partial class ManageUser {
-        
+namespace NewApp
+{
+
+
+    public partial class ManageUser
+    {
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -20,7 +22,16 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
+        /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+
         /// <summary>
         /// btnBack control.
         /// </summary>
@@ -29,7 +40,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnBack;
-        
+
         /// <summary>
         /// routename control.
         /// </summary>
@@ -38,7 +49,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label routename;
-        
+
         /// <summary>
         /// btnGO control.
         /// </summary>
@@ -47,7 +58,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGO;
-        
+
         /// <summary>
         /// hfCustomerId control.
         /// </summary>
@@ -56,7 +67,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfCustomerId;
-        
+
         /// <summary>
         /// lblSession control.
         /// </summary>
@@ -65,7 +76,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSession;
-        
+
         /// <summary>
         /// lblStudentName control.
         /// </summary>
@@ -74,7 +85,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblStudentName;
-        
+
         /// <summary>
         /// lblSAPID control.
         /// </summary>
@@ -83,7 +94,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSAPID;
-        
+
         /// <summary>
         /// hdnStudentName control.
         /// </summary>
@@ -92,7 +103,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnStudentName;
-        
+
         /// <summary>
         /// litInfo control.
         /// </summary>
@@ -101,7 +112,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litInfo;
-        
+
         /// <summary>
         /// spanResetPasssword control.
         /// </summary>
@@ -110,7 +121,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl spanResetPasssword;
-        
+
         /// <summary>
         /// Label3 control.
         /// </summary>
@@ -119,7 +130,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label3;
-        
+
         /// <summary>
         /// txtNewPassword control.
         /// </summary>
@@ -128,7 +139,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNewPassword;
-        
+
         /// <summary>
         /// rfvNewPassword control.
         /// </summary>
@@ -137,7 +148,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNewPassword;
-        
+
         /// <summary>
         /// hfSalt control.
         /// </summary>
@@ -146,7 +157,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfSalt;
-        
+
         /// <summary>
         /// Label1 control.
         /// </summary>
@@ -155,7 +166,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
-        
+
         /// <summary>
         /// txtNewPasswordConfirm control.
         /// </summary>
@@ -164,7 +175,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNewPasswordConfirm;
-        
+
         /// <summary>
         /// rfvNewPasswordConfirm control.
         /// </summary>
@@ -173,7 +184,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNewPasswordConfirm;
-        
+
         /// <summary>
         /// lblErrMsg control.
         /// </summary>
@@ -182,7 +193,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblErrMsg;
-        
+
         /// <summary>
         /// btnSubmit control.
         /// </summary>
@@ -191,7 +202,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSubmit;
-        
+
         /// <summary>
         /// btnReset control.
         /// </summary>
@@ -200,7 +211,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnReset;
-        
+
         /// <summary>
         /// litInfo2 control.
         /// </summary>
@@ -209,7 +220,7 @@ namespace NewApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litInfo2;
-        
+
         /// <summary>
         /// gridUsers control.
         /// </summary>

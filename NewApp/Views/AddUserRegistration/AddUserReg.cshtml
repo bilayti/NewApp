@@ -292,6 +292,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
+                                <p id="userpwd"><marquee>The default password for this user will be <b>Welcome@1234</b></marquee></p>
                             </div>
                         </div>
                     </div>
@@ -331,12 +332,11 @@
     function FillUserDetail(_UserId) {
         debugger;
         $.ajax({
-            url: "/AddUserRegistration/FillUserDetail",
             type: "POST",
-            data: JSON.stringify({ 'sUserID': _UserId }),
+            url: "/AddUserRegistration/FillUserDetail",
+            data: "{'sUserID':'" + _UserId + "'}",
+            contentType: "application/json; charset=utf-8",
             dataType: "json",
-            traditional: true,
-            contentType: "application/json;",
             success: function (data) {
                 JSON.parse(JSON.stringify(data));
                 if (data.length > 0) {
