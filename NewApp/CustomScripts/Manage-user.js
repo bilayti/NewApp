@@ -40,10 +40,10 @@ function SearchText() {
             else {
                 if (ui.item.value != '') {
                     debugger;
-                    document.getElementById('<%=lblStudentName.ClientID %>').innerHTML = ui.item.val1;
+                    document.getElementById('<%=lblStudentName.ClientID %>').value = ui.item.val1;
                     document.getElementById('<%=hdnStudentName.ClientID %>').value = ui.item.val1;
                     document.getElementById('<%=hfCustomerId.ClientID %>').value = ui.item.val2;
-                    document.getElementById('<%=lblSAPID.ClientID %>').innerHTML = ui.item.val3;
+                    document.getElementById('<%=lblSAPID.ClientID %>').value = ui.item.val3;
                 }
             }
         }

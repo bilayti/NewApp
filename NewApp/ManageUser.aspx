@@ -21,20 +21,21 @@
             $(".autosuggest").autocomplete({
                 source: function (request, response) {
                     $.ajax({
+                        url: "http://localhost:14457/HomePage/GetManageUserData",
                         type: "POST",
-                        contentType: "application/json; charset=utf-8",
-                        url: "HomePage/GetAutoStudentData",
                         data: "{'username':'" + document.getElementById('txtAdmissionId').value + "'}",
-                        dataType: "json",
+                        //header("Content-Type: application/json; charset=UTF-8"),
+                        contentType: "application/json; charset=UTF-8",
                         success: function (data) {
+                            console.log(data);
                             JSON.parse(JSON.stringify(data));
                             if (data.length > 0) {
                                 response($.map(data, function (item) {
                                     return {
-                                        label: item.split('/')[0],
-                                        val1: item.split('/')[1],
-                                        val2: item.split('/')[2],
-                                        val3: item.split('/')[3]
+                                        label: item.split(',')[0],
+                                        val1: item.split(',')[1],
+                                        val2: item.split(',')[2],
+                                        val3: item.split(',')[3]
                                     }
                                 }));
                             }
@@ -44,7 +45,8 @@
                         },
                         error: function (xhr, status, error) {
                             //Printing error message
-                            console.warn(xhr.responseText);
+                            console.log(error);
+                            //console.warn(xhr.responseText);
                         }
                     });
                 },
@@ -106,14 +108,14 @@ function ComputeHash() {
             //submit form
             return true;
         }
-        function ClearPwd() {
+function ClearPwd() {
 
 
-            document.getElementById('<%= txtNewPassword.ClientID %>').value = '';
-            sdocument.getElementById('<%= txtNewPasswordConfirm.ClientID %>').value = '';
+    document.getElementById('<%= txtNewPassword.ClientID %>').value = '';
+    sdocument.getElementById('<%= txtNewPasswordConfirm.ClientID %>').value = '';
 
-    //submit form
-    return true;
+//submit form
+return true;
 }
     </script>
 </head>

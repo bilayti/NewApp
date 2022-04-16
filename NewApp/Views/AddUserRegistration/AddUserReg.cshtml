@@ -336,16 +336,15 @@
             data: JSON.stringify({ 'sUserID': _UserId }),
             dataType: "json",
             traditional: true,
-            contentType: "application/json; charset=utf-8",
+            contentType: "application/json;",
             success: function (data) {
+                JSON.parse(JSON.stringify(data));
                 if (data.length > 0) {
                     $('#ddlUserType').val(data[0].USER_TYPEID)
                     $('#txtUserID').val(data[0].USER_CODE)
                     $('#txtFirstName').val(data[0].F_NAME)
                     $('#txtMiddleName').val(data[0].M_NAME)
                     $('#txtLastName').val(data[0].L_NAME)
-                    //$('#txtPassword').val(data[0].PASSWORD1)
-                    //$('#txtConfirmPassword').val(data[0].PASSWORD1)
                     $('#txtEmailId').val(data[0].EMAIL)
                     $('#txtMobileNo').val(data[0].MOBILE)
                     $('#txtSAPID').val(data[0].SAP_ID)
@@ -437,7 +436,7 @@
                 "','SAP_ID':'" + $("#txtSAPID").val() +
                 "','IsActive':'" + chkActive +
                 "','USER_STATUS':'" + $("#ddlStatus").val() + "'}",
-            contentType: "application/json;charset=utf-8",
+            contentType: "application/json;",
             datatype: "json",
             success: function (data) {
                 if (data.toString() == "Updated successfully !") {
@@ -504,7 +503,7 @@
             url: "/AddUserRegistration/UserAuthorization",
             data: "{'USERID':'" + _UserId + "','Aging':'" + chkAging + "','PendingOrder':'" + chkPending + "','ItemPurchase':'" + chkItem +
                 "','Invoice':'" + chkInvoice + "','AccountStatement':'" + chkAccount + "','CollectionSUmmary':'" + chkCollection + "','CreditNote':'" + chkCredit + "'}",
-            contentType: "application/json;charset=utf-8",
+            contentType: "application/json;",
             datatype: "json",
             success: function (data) {
                 if (data.toString() == "Successfully Saved!") {

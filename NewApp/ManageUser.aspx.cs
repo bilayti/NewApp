@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Web.Script.Services;
 using AdminBase;
+using System.Web.Mvc;
 
 namespace NewApp
 {
@@ -325,6 +326,30 @@ namespace NewApp
 
             }
         }
-        
+        [HttpPost]
+        public JsonResult GetAutoStudentData(string username)
+        {
+            List<string> result = new List<string>();
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
+            {
+                using (SqlCommand cmd = new SqlCommand("select (Convert(varchar(100),F_NAME+' - '+CONVERT(varchar(10),USERID,0)+' - '+F_NAME+' - '+SAP_ID+' - '+USER_CODE))NAME,F_NAME,USERID,SAP_ID from PUSR where F_NAME LIKE '%'+@SearchText+'%' or USERID LIKE '%'+@SearchText+'%' or SAP_ID LIKE '%'+@SearchText+'%' or USER_CODE LIKE '%'+@SearchText+'%'", con))
+                {
+                    con.Open();
+                    cmd.Parameters.AddWithValue("@SearchText", username);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        result.Add(string.Format("{0}/{1}/{2}/{3}", dr["NAME"], dr["F_NAME"], dr["USERID"], dr["SAP_ID"]));
+                    }
+
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        private JsonResult Json(List<string> result, JsonRequestBehavior allowGet)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
