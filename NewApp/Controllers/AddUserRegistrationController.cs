@@ -80,7 +80,7 @@ namespace NewApp.Controllers
         #endregion
 
         int result = 0;
-        public JsonResult UserRegDetails(UserRegistrationDetails _UserReg)
+        public JsonResult InsertUpdateUserRegDetails(UserRegistrationDetails _UserReg)
         {
             try
             {
@@ -103,14 +103,17 @@ namespace NewApp.Controllers
                 _Con.Open();
                 result = _Cmd.ExecuteNonQuery();
                 _Con.Close();
-                if (result > 0)
+                if (result == 0)
                 {
-                    return Json("Successfully Saved!");
-                    
+                    return Json("Record Already Exist!");
+                }
+                else if(result < 0)
+                {
+                    return Json("Record Updated Successfully");
                 }
                 else
                 {
-                    return Json("Record Updated Successfully");
+                    return Json("Record saved successfully");
                 }
 
             }
@@ -121,7 +124,7 @@ namespace NewApp.Controllers
         }
 
         [HttpPost]
-        public JsonResult UserAuthorization(UserRegistrationDetails _UserReg)
+        public JsonResult UserReportAuthorization(UserRegistrationDetails _UserReg)
         {
             try
             {
@@ -139,13 +142,13 @@ namespace NewApp.Controllers
                 _Con.Open();
                 result = _Cmd.ExecuteNonQuery();
                 _Con.Close();
-                if (result > 0)
+                if (result < 0)
                 {
-                    return Json("Successfully Saved!");
+                    return Json("Record Updated Successfully");
                 }
                 else
                 {
-                    return Json("Already Exist");
+                    return Json("Record Saved Successfully");
                 }
 
             }
@@ -157,7 +160,7 @@ namespace NewApp.Controllers
 
 
         #region GET USER DETAILS
-        public JsonResult FillUserDetail(int sUserID)
+        public JsonResult FillUserDetails(int sUserID)
         {
             try
             {

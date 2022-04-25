@@ -314,7 +314,7 @@
                 $("#btnSave").hide();
                 $('#btnBacktoSearch').show();
                 _UserId = pathname[1];
-                FillUserDetail(_UserId);
+                FillUserDetails(_UserId);
                 $('#txtConfirmPassword').prop("disabled", true)
                 $('#txtPassword').prop("disabled", true)
             }
@@ -329,16 +329,14 @@
     });
 
     //Find Customer Name
-    function FillUserDetail(_UserId) {
-        debugger;
+    function FillUserDetails(_UserId) {
         $.ajax({
             type: "POST",
-            url: "/AddUserRegistration/FillUserDetail",
+            url: "/AddUserRegistration/FillUserDetails",
             data: "{'sUserID':'" + _UserId + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
-                JSON.parse(JSON.stringify(data));
                 if (data.length > 0) {
                     $('#ddlUserType').val(data[0].USER_TYPEID)
                     $('#txtUserID').val(data[0].USER_CODE)
@@ -406,7 +404,7 @@
                 }
             },
             error: function (xhr, status, error) {
-                console.log(error);
+                console.warn(xhr.responseText);
             }
         });
     }
@@ -425,36 +423,37 @@
         } else {
             chkActive = 'N'
         }
+        var userId = _UserId;
         $.ajax({
             type: "POST",
-            url: "/AddUserRegistration/UserRegDetails",
-            data: "{'USERID':'" + _UserId + "','USER_TYPEID':'" + $("#ddlUserType").val() + "','USER_CODE':'" + $("#txtUserID").val() + "','F_NAME':'" + $("#txtFirstName").val() + "','M_NAME':'" + $("#txtMiddleName").val() + "','L_NAME':'" + $("#txtLastName").val() +
-                "','PASSWORD1':'" + $("#txtPassword").val() +
-                "','EMAIL':'" + $("#txtEmailId").val() +
-                "','MOBILE':'" + $("#txtMobileNo").val() +
-                "','REMARKS1':'" + $("#txtRemarks").val() +
-                "','SAP_ID':'" + $("#txtSAPID").val() +
-                "','IsActive':'" + chkActive +
-                "','USER_STATUS':'" + $("#ddlStatus").val() + "'}",
+            url: "/AddUserRegistration/InsertUpdateUserRegDetails",
+            data: "{'USERID': '" + userId + "','USER_TYPEID': '" + $("#ddlUserType").val() + "', 'USER_CODE': '" + $("#txtUserID").val() + "', 'F_NAME': '" + $("#txtFirstName").val() + "', 'M_NAME': '" + $("#txtMiddleName").val() + "', 'L_NAME': '" + $("#txtLastName").val() +
+                "','PASSWORD1':'" + $("#txtPassword").val() + "','EMAIL':'" + $("#txtEmailId").val() + "','MOBILE':'" + $("#txtMobileNo").val() + "','REMARKS1':'" + $("#txtRemarks").val() + "','SAP_ID':'" + $("#txtSAPID").val() + "','IsActive':'" + chkActive + "','USER_STATUS':'" + $("#ddlStatus").val() + "'}",
             contentType: "application/json;",
             datatype: "json",
             success: function (data) {
-                if (data.toString() == "Updated successfully !") {
-                    AddUserAuthorization();
+                console.log(data);
+                if (data.toString() == "Record Updated Successfully") {
+                    InsertUpdateUserAuthorization();
                     ClearControl();
                 }
+                else if (data.toString() == "Record Already Exist!")
+                {
+                    alert('Record Already Exist');
+                    return;
+                }
                 else {
-                    alert('Updated successfully !');
+                    InsertUpdateUserAuthorization();
                     ClearControl();
                 }
             },
             error: function (xhr, status, error) {
-                console.log(error);
+                console.warn(xhr.responseText);
             }
         });
     }
 
-    function AddUserAuthorization() {
+    function InsertUpdateUserAuthorization() {
         debugger;
         var chkAging = '';
         var chkPending = '';
@@ -500,22 +499,26 @@
         }
         $.ajax({
             type: "POST",
-            url: "/AddUserRegistration/UserAuthorization",
+            url: "/AddUserRegistration/UserReportAuthorization",
             data: "{'USERID':'" + _UserId + "','Aging':'" + chkAging + "','PendingOrder':'" + chkPending + "','ItemPurchase':'" + chkItem +
                 "','Invoice':'" + chkInvoice + "','AccountStatement':'" + chkAccount + "','CollectionSUmmary':'" + chkCollection + "','CreditNote':'" + chkCredit + "'}",
             contentType: "application/json;",
             datatype: "json",
             success: function (data) {
-                if (data.toString() == "Successfully Saved!") {
-                    alert('Saved Successfully');
+                if (data.toString() == "Record Updated Successfully") {
+                    alert('Record updated successfully');
                     ClearControl();
                 }
+                //else if (data.toString() == "Record Saved Successfully")
+                //{
+                //    alert('Record Saved Successfully');
+                //}
                 else {
-                    alert('Already Exist');
+                    alert('Record Saved Successfully');
                 }
             },
             error: function (xhr, status, error) {
-                console.log(error);
+                console.warn(xhr.responseText);
             }
         });
     }
