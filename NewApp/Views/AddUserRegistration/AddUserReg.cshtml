@@ -427,8 +427,21 @@
         $.ajax({
             type: "POST",
             url: "/AddUserRegistration/InsertUpdateUserRegDetails",
-            data: "{'USERID': '" + userId + "','USER_TYPEID': '" + $("#ddlUserType").val() + "', 'USER_CODE': '" + $("#txtUserID").val() + "', 'F_NAME': '" + $("#txtFirstName").val() + "', 'M_NAME': '" + $("#txtMiddleName").val() + "', 'L_NAME': '" + $("#txtLastName").val() +
-                "','PASSWORD1':'" + $("#txtPassword").val() + "','EMAIL':'" + $("#txtEmailId").val() + "','MOBILE':'" + $("#txtMobileNo").val() + "','REMARKS1':'" + $("#txtRemarks").val() + "','SAP_ID':'" + $("#txtSAPID").val() + "','IsActive':'" + chkActive + "','USER_STATUS':'" + $("#ddlStatus").val() + "'}",
+            data: JSON.stringify({
+                'USERID': userId,
+                'USER_TYPEID': $("#ddlUserType").val(),
+                'USER_CODE': $("#txtUserID").val(),
+                'F_NAME': $("#txtFirstName").val(),
+                'M_NAME': $("#txtMiddleName").val(),
+                'L_NAME': $("#txtLastName").val() ,
+                'PASSWORD1': $("#txtPassword").val() ,
+                'EMAIL':  $("#txtEmailId").val(),
+                'MOBILE': $("#txtMobileNo").val(),
+                'REMARKS1': $("#txtRemarks").val(),
+                'SAP_ID': $("#txtSAPID").val(),
+                'IsActive': chkActive,
+                'USER_STATUS': $("#ddlStatus").val()
+            }),
             contentType: "application/json;",
             datatype: "json",
             success: function (data) {
@@ -500,8 +513,16 @@
         $.ajax({
             type: "POST",
             url: "/AddUserRegistration/UserReportAuthorization",
-            data: "{'USERID':'" + _UserId + "','Aging':'" + chkAging + "','PendingOrder':'" + chkPending + "','ItemPurchase':'" + chkItem +
-                "','Invoice':'" + chkInvoice + "','AccountStatement':'" + chkAccount + "','CollectionSUmmary':'" + chkCollection + "','CreditNote':'" + chkCredit + "'}",
+            data: JSON.stringify({
+                'USERID': _UserId,
+                'Aging': chkAging,
+                'PendingOrder': chkPending,
+                'ItemPurchase': chkItem,
+                'Invoice': chkInvoice ,
+                'AccountStatement':chkAccount ,
+                'CollectionSUmmary': chkCollection,
+                'CreditNote': chkCredit
+            }),
             contentType: "application/json;",
             datatype: "json",
             success: function (data) {

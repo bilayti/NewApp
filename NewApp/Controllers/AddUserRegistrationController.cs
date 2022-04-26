@@ -11,7 +11,7 @@ using Microsoft.Security.Application;
 
 namespace NewApp.Controllers
 {
-    public class AddUserRegistrationController : BaseController
+    public class AddUserRegistrationController : Controller
     {
         string username = string.Empty;
         string lastseen = string.Empty;
