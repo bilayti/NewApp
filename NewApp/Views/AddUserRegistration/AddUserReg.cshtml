@@ -442,7 +442,7 @@
                 'IsActive': chkActive,
                 'USER_STATUS': $("#ddlStatus").val()
             }),
-            contentType: "application/json;",
+            contentType: "application/json; charset=utf-8",
             datatype: "json",
             success: function (data) {
                 console.log(data);
@@ -523,7 +523,7 @@
                 'CollectionSUmmary': chkCollection,
                 'CreditNote': chkCredit
             }),
-            contentType: "application/json;",
+            contentType: "application/json; charset=utf-8",
             datatype: "json",
             success: function (data) {
                 if (data.toString() == "Record Updated Successfully") {
