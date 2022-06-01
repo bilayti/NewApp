@@ -333,7 +333,7 @@ namespace NewApp
             List<string> result = new List<string>();
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
             {
-                using (SqlCommand cmd = new SqlCommand("select (Convert(varchar(100),F_NAME+' - '+CONVERT(varchar(10),USERID,0)+' - '+F_NAME+' - '+SAP_ID+' - '+USER_CODE))NAME,F_NAME,USERID,SAP_ID from PUSR where F_NAME LIKE '%'+@SearchText+'%' or USERID LIKE '%'+@SearchText+'%' or SAP_ID LIKE '%'+@SearchText+'%' or USER_CODE LIKE '%'+@SearchText+'%'", con))
+                using (SqlCommand cmd = new SqlCommand("select (Convert(varchar(100),F_NAME+' - '+CONVERT(varchar(10),USERID,0)+' - '+F_NAME+' - '+SAP_ID+' - '+USER_CODE))NAME,F_NAME,USERID,SAP_ID from PUSR where F_NAME LIKE '%'+@SearchText+'%' and F_NAME != 'ADMIN' or USERID LIKE '%'+@SearchText+'%' and USERID not in (0) or SAP_ID LIKE '%'+@SearchText+'%' and SAP_ID not in (69999) or USER_CODE LIKE '%'+@SearchText+'%' and USER_CODE !='ADMIN'", con))
                 {
                     con.Open();
                     cmd.Parameters.AddWithValue("@SearchText", searchString);

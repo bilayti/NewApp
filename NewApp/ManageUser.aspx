@@ -23,7 +23,7 @@
                     $.ajax({
                         type: "POST",
                         url: '/ManageUser.aspx/GetManagedUserData',
-                        data: '{searchString: "' + searchString + '" }',
+                        data: JSON.stringify({ 'searchString': searchString }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (data) {

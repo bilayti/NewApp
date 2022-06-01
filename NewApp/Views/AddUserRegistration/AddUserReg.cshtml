@@ -333,7 +333,7 @@
         $.ajax({
             type: "POST",
             url: "/AddUserRegistration/FillUserDetails",
-            data: "{'sUserID':'" + _UserId + "'}",
+            data: JSON.stringify({sUserID: _UserId}),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
@@ -530,10 +530,6 @@
                     alert('Record updated successfully');
                     ClearControl();
                 }
-                //else if (data.toString() == "Record Saved Successfully")
-                //{
-                //    alert('Record Saved Successfully');
-                //}
                 else {
                     alert('Record Saved Successfully');
                 }
