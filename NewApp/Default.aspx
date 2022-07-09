@@ -23,12 +23,12 @@
 <body>
     <form id="form1" runat="server">
 
-        <div id="wrapper" style="background-color: #009639;">
+        <div id="wrapper" style="background-color: #02AFF3;">
             <!-- Navigation -->
             <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: -20px; margin-top: -20px; height: 71px; background-color: white; padding: 10px 5px 20px 20px; top: 0px; left: 0px;">
                 <div class="navbar-header" style="margin-top: -8px">
-                    <a class="navbar-brand" href="https://www.usgboral.com/en_in/" target="_blank">
-                        <img src="icons/rsz_usg_boral_logo.png" />
+                    <a class="navbar-brand" href="https://www.usgknauf.com/" target="_blank">
+                        <img src="icons/USG Knauf Logo.jpg" width="190" height="50" />
                     </a>
 
                 </div>
@@ -37,7 +37,7 @@
                 <div class="nav navbar-nav navbar-right" style="font-family: Verdana; font-size: large; font-weight: bold;">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <asp:Button ID="btnLoginPage" runat="server" Style="margin-top: 20px; border-radius: 5px;" Text="LOGIN" CssClass="btn btn-xs btn-primary" OnClick="btnLoginPage_Click" /></li>
+                            <asp:Button ID="btnLoginPage" runat="server" Style="margin-top: 20px; border-radius: 5px; background-color:#02AEF2 !important; border-color:rgb(2,174,242) !important;" Text="LOGIN" CssClass="btn btn-xs btn-primary" OnClick="btnLoginPage_Click" /></li>
                     </ul>
                 </div>
                 <!-- /.navbar-static-side -->
