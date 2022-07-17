@@ -1,0 +1,51 @@
+﻿.MarginTop1 {
+    margin-top: 1%;
+}
+
+.CurrentActiveTab {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+
+.table tbody tr {
+    background: #fff;
+}
+
+.height12 {
+    height: 20px;
+}
+
+.ReportTable {
+    width: 100% !important;
+}
+
+    .ReportTable td {
+        width: 15% !important;
+    }
+
+    .ReportTable th {
+        width: 21% !important;
+    }
+
+.table td, .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    padding: 5px !important;
+}
+
+.align {
+    text-align: right;
+    float: right;
+}
+
+.graphs {
+    padding: 0px !important;
+}
+
+.MarqueStyle {
+    background: #02AFF3;
+    color: white;
+    font-size: medium;
+    font-family: Verdana;
+    height: 28px !important;
+    padding: 5px 5px 5px 5px;
+}

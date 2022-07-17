@@ -636,6 +636,7 @@
     <Content Include="Content\jspdf\libs\sprintf.js" />
     <Content Include="Content\tableExport.js" />
     <Content Include="Content\wickedpicker.css" />
+    <Content Include="css\HomeCss.css" />
     <Content Include="css\jquery-ui.css" />
     <Content Include="css\StyleSheet.css" />
     <Content Include="CustomScripts\Manage-user.js" />
@@ -853,6 +854,7 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
+    <Content Include="Views\Shared\_LoaderPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
