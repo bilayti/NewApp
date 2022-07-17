@@ -1290,7 +1290,8 @@ _UserList.Clear();
 
                         ReportDocument rd = new ReportDocument();
                         //rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "Final Invoice Layout-NEW 20082020.rpt"));
-                        rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "TCS Invoice- Item 03-11-2020.rpt"));
+                        //rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "TCS Invoice- Item 03-11-2020.rpt"));
+                        rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "AR  Invoice Item Knauf.rpt"));
                         rd.SetDataSource(_DS1.Tables[0]);
 
                         if (rd.Subreports.Count > 0)
