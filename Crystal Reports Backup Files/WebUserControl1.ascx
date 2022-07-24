@@ -8,13 +8,13 @@
     <br />
     <asp:Label ID="Label1" runat="server" Text="Enter the code shown above:" AssociatedControlID="txtCaptchaCodeInput"></asp:Label>
     <br />
-    <asp:TextBox ID="txtCaptchaCodeInput" runat="server" EnableViewState="False" TabIndex="3"></asp:TextBox>
-    <asp:RequiredFieldValidator ID="rvfCaptchaCode" runat="server" 
-        ControlToValidate="txtCaptchaCodeInput" Display="Dynamic" 
-        EnableViewState="False" ErrorMessage="Verification code is required!" 
+    <asp:TextBox ID="txtCaptchaCodeInput" runat="server" AutoCompleteType="None" EnableViewState="False" TabIndex="3"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rvfCaptchaCode" runat="server"
+        ControlToValidate="txtCaptchaCodeInput" Display="Dynamic"
+        EnableViewState="False" ErrorMessage="Verification code is required!"
         SetFocusOnError="True" ToolTip="Verification code is required!">*</asp:RequiredFieldValidator>
-        
-    
+
+
     <script type="text/javascript">
         function ClearPwd() {
 
@@ -22,9 +22,9 @@
             document.getElementById('<%= PasswordFieldID %>').value = '';
 
 
-                //submit form
-                return true;
-            }
-        </script>
-    
+            //submit form
+            return true;
+        }
+    </script>
+
 </div>

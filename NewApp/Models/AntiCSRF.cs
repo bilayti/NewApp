@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
-using System.Configuration;
-using System.Collections;
-using System.Data.SqlClient;
-using System.Data;
-using Microsoft.ApplicationBlocks.Data;
-using Microsoft.Security.Application;
-using System.ComponentModel;
 using System.Text;
-using NewApp.Models;
 
 /// <summary>
 /// Summary description for AntiCSRF

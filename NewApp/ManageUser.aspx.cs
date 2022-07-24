@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Microsoft.Security.Application;
 using System.Data;
 using NewApp.Models;
-using System.Web.Services;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Web.Script.Services;
 using AdminBase;
 using System.Web.Mvc;
+using System.Web;
 
 namespace NewApp
 {
@@ -215,7 +212,7 @@ namespace NewApp
             string districtCode = FormattingHelper.ValidateIntegersOnly(((HiddenField)gridUsers.Rows[e.RowIndex].FindControl("hfDistrictCodeR")).Value);
             string statecode = FormattingHelper.ValidateIntegersOnly(((HiddenField)gridUsers.Rows[e.RowIndex].FindControl("hdnstatecode")).Value);
             //if resetting Administrator password then not to allow.
-            if (IsItAdministrator(Encoder.HtmlEncode(loginId)))
+            if (IsItAdministrator(HttpUtility.HtmlEncode(loginId)))
             {
                 e.Cancel = true;
                 return;
@@ -227,7 +224,7 @@ namespace NewApp
             string districtCode = FormattingHelper.ValidateIntegersOnly(((HiddenField)gridUsers.Rows[e.NewEditIndex].FindControl("hfDistrictCodeE")).Value);
 
             //if resetting Administrator password then not to allow.
-            if (IsItAdministrator(Encoder.HtmlEncode(loginId)))
+            if (IsItAdministrator(HttpUtility.HtmlEncode(loginId)))
             {
                 e.Cancel = true;
                 return;
