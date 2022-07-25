@@ -7,43 +7,16 @@
 <head runat="server">
     <title>Login :: USG BORAL</title>
     <link type="text/css" rel="stylesheet" href="~/css/style1.css" />
-    <style type="text/css">
-        .Required111 {
-            border-left: 5px solid red;
-        }
-    </style>
-    <style type="text/css">
-        #btnLogin {
-            background-color: #56575b;
-            font-weight: bold;
-            color: white;
-        }
-    </style>
-    <style type="text/css">
-        .background {
-            background: url('icons/interanet.png')no-repeat center center fixed;
-            width: 100%;
-            height: 100%;
-            padding: 1px 1px 1px 100px;
-            position: fixed;
-            z-index: -1;
-            min-height: 100%;
-            min-width: 100%;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
-    </style>
+    <link href="~/Content/DefaultImage/DefaultImage.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="background">
+        <div class="LoginBackground">
             <div class="login-wrap">
-                <img src="../../icons/Picture1.jpg" width="100%" height="50px" style="position: relative;" />
+                <img src="../../icons/Picture1.jpg" style="position: relative; width:100%; height:50px" />
                 <div class="login-html">
-                    <center>
-                <label class="tab" style="color:white;">USG BORAL<span style="font-family:'Buxton Sketch';font-size:23px;"> ONLINE !</span></label></center>
+                    <centre>
+                <label class="tab" style="color:white;">USG BORAL<span style="font-family:'Buxton Sketch';font-size:23px;">&nbsp;ONLINE !</span></label></centre>
                     <div class="login-form">
                         <div class="sign-in-htm">
                             <div class="group">
@@ -92,18 +65,19 @@
 
 
                     </div>
-                    <%--<div style="width: 100%; color: white;">
+                    <%-- <div style="width: 100%; color: white;">
 
                         <h4 style="font-size: 12px;">GENERAL INSTRUCTIONS:</h4>
                         <ol style="color: white; font-size: 12px;">
                             <li>Please keep your LoginId & Password in a safe place.</li>
                             <li>Do not try to attempt more than 5 invalid login attempts, otherwise the account
                 will be locked.</li>
-                            <li>In case your account gets locked then contact deepak.tyagi[at]usgboral[dot]com</li>
+                            <li>In case your account gets locked then contact deepak.tyagi[at]knauf[dot]com</li>
 
                         </ol>
 
                     </div>--%>
+                    </centre>
                 </div>
 
             </div>
@@ -112,22 +86,23 @@
             <script type="text/javascript">
                 function ComputeHash() {
                     var txtLoginId = document.getElementById('<%= txtLoginId.ClientID %>');
-                var txtPassword = document.getElementById('<%= txtPassword.ClientID %>');
-                var hfSalt = document.getElementById('<%= hfSalt.ClientID %>');
-                if (txtLoginId.value != '') {
-                    txtPassword.value = Sha256(hfSalt.value + Sha256(txtPassword.value));
-                    hfSalt.value = '';
+                    var txtPassword = document.getElementById('<%= txtPassword.ClientID %>');
+                    var hfSalt = document.getElementById('<%= hfSalt.ClientID %>');
+                    if (txtLoginId.value != '') {
+                        txtPassword.value = Sha256(hfSalt.value + Sha256(txtPassword.value));
+                        hfSalt.value = '';
+                    }
+
                 }
 
-            }
-
-            function ClearPwd() {
-                document.getElementById('<%= txtLoginId.ClientID %>').value = '';
-                document.getElementById('<%= txtPassword.ClientID %>').value = '';
-                document.getElementById('<%= hfSalt.ClientID %>').value = '';
-                return;
-            }
+                function ClearPwd() {
+                    document.getElementById('<%= txtLoginId.ClientID %>').value = '';
+                    document.getElementById('<%= txtPassword.ClientID %>').value = '';
+                    document.getElementById('<%= hfSalt.ClientID %>').value = '';
+                    return;
+                }
             </script>
+        </div>
     </form>
 </body>
 </html>

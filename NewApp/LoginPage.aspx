@@ -13,10 +13,10 @@
     <form id="form1" runat="server">
         <div class="LoginBackground">
             <div class="login-wrap">
-                <img src="../../icons/Picture1.jpg" style="position: relative; width:100%; height:50px" />
+                <img src="../../icons/USG Knauf Logo.jpg" style="position: relative; width:100%; height:50px" />
                 <div class="login-html">
                     <centre>
-                <label class="tab" style="color:white;">USG BORAL<span style="font-family:'Buxton Sketch';font-size:23px;">&nbsp;ONLINE !</span></label></centre>
+                <label class="tab" style="color:white;">USG KNAUF<span style="font-family:'Buxton Sketch';font-size:23px;">&nbsp;ONLINE !</span></label></centre>
                     <div class="login-form">
                         <div class="sign-in-htm">
                             <div class="group">
@@ -51,7 +51,7 @@
                             </div>
                             <div class="group">
                                 <asp:Button ID="btnLogin" class="button" Text="Login" runat="server" TabIndex="5"
-                                    ValidationGroup="UserManagement"
+                                    ValidationGroup="UserManagement" Style="background-color:#02AFF3 !important;"
                                     OnClick="btnLogin_Click" OnClientClick="ComputeHash();" />
                                 <asp:Button ID="btnReset" runat="server" Text="Reset" class="button"
                                     ValidationGroup="UserManagement" TabIndex="6" EnableViewState="false"

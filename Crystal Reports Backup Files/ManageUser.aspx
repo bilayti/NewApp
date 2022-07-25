@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageUser.aspx.cs" Inherits="NewApp.ManageUser" %>
 
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,29 +12,28 @@
     <script src="File/jquery-1.10.2.js" type="text/javascript"></script>
     <link href="~/File/jquery-ui.css" rel="stylesheet" type="text/css" />
     <script src="File/jquery-ui.js" type="text/javascript"></script>
-    <script type="text/javascript">
+    <script>
         $(function () {
             SearchText();
         });
         function SearchText() {
             $(".autosuggest").autocomplete({
                 source: function (request, response) {
+                    var searchString = $('#txtSearchStringId').val();
                     $.ajax({
                         type: "POST",
+                        url: '/ManageUser.aspx/GetManagedUserData',
+                        data: JSON.stringify({ 'searchString': searchString }),
                         contentType: "application/json; charset=utf-8",
-                        url: "HomePage/GetAutoStudentData",
-                        data: "{'username':'" + document.getElementById('txtAdmissionId').value + "'}",
                         dataType: "json",
                         success: function (data) {
-                            console.log(data);
-                            if (data.length > 0) {
-
-                                response($.map(data, function (item) {
+                            if (data.d.length > 0) {
+                                response($.map(data.d, function (item) {
                                     return {
-                                        label: item.split('/')[0],
-                                        val1: item.split('/')[1],
-                                        val2: item.split('/')[2],
-                                        val3: item.split('/')[3]
+                                        label: item.split(',')[0],
+                                        val1: item.split(',')[1],
+                                        val2: item.split(',')[2],
+                                        val3: item.split(',')[3]
                                     }
                                 }));
                             }
@@ -43,8 +41,8 @@
                                 response([{ label: 'No Records Found', val: -1 }]);
                             }
                         },
-                        error: function (result) {
-                            alert("Error");
+                        error: function (xhr, status, error) {
+                            console.warn(xhr.responseText);
                         }
                     });
                 },
@@ -52,71 +50,74 @@
                     if (ui.item.val == -1) {
                         return false;
                     }
-                    document.getElementById('<%=lblStudentName.ClientID %>').innerHTML = ui.item.val1;
-                    document.getElementById('<%=hdnStudentName.ClientID %>').value = ui.item.val1;
-                    document.getElementById('<%=hfCustomerId.ClientID %>').value = ui.item.val2;
-                    document.getElementById('<%=lblSAPID.ClientID %>').innerHTML = ui.item.val3;
+                    else {
+                        if (ui.item.value != '') {
+                        document.getElementById('<%=lblStudentName.ClientID %>').innerHTML = ui.item.val1;
+                        document.getElementById('<%=hdnStudentName.ClientID %>').value = ui.item.val1;
+                        document.getElementById('<%=hfCustomerId.ClientID %>').value = ui.item.val2;
+                        document.getElementById('<%=lblSAPID.ClientID %>').innerHTML = ui.item.val3;
                 }
-            });
+            }
         }
-    </script>
-    <script type="text/javascript">
-        var hiddenFieldStr = '';
+    });
+}
 
-        function ComputeHash() {
+//Password GIS
+var hiddenFieldStr = '';
 
-            //validate password for valid chars.
-            var NewPassword = document.getElementById('<%= txtNewPassword.ClientID %>').value;
-            var NewPasswordConfirm = document.getElementById('<%= txtNewPasswordConfirm.ClientID %>').value;
-            var lblErrMsg2 = document.getElementById('<%= lblErrMsg.ClientID %>');
-            var hfSalt = document.getElementById('<%= hfSalt.ClientID %>');
+function ComputeHash() {
 
-            if (ValidatePassword(NewPassword) == false) {
-                //display error msg.
-                lblErrMsg2.innerHTML = 'Password must contain at least one upper case letter, one special character, one numeric number, and length should be at least 8 characters!<br />';
-                return false;
-            }
+    //validate password for valid chars.
+    var NewPassword = document.getElementById('<%= txtNewPassword.ClientID %>').value;
+    var NewPasswordConfirm = document.getElementById('<%= txtNewPasswordConfirm.ClientID %>').value;
+    var lblErrMsg2 = document.getElementById('<%= lblErrMsg.ClientID %>');
+    var hfSalt = document.getElementById('<%= hfSalt.ClientID %>');
 
-            if (NewPassword != NewPasswordConfirm) {
-                //display error msg.
-                lblErrMsg2.innerHTML = 'Password and Confirm Password must match!<br />';
-                return false;
-            }
+    if (ValidatePassword(NewPassword) == false) {
+        //display error msg.
+        lblErrMsg2.innerHTML = 'Password must contain at least one upper case letter, one special character, one numeric number, and length should be at least 8 characters!<br />';
+        return false;
+    }
 
-            shaObj = new jsSHA(NewPassword, "ASCII");
-            var passwordHash = shaObj.getHash("SHA-256", "HEX");
-            if (NewPassword.length > 0) {
-                document.getElementById('<%= txtNewPassword.ClientID %>').value = passwordHash;
-            }
+    if (NewPassword != NewPasswordConfirm) {
+        //display error msg.
+        lblErrMsg2.innerHTML = 'Password and Confirm Password must match!<br />';
+        return false;
+    }
 
-            //compute confirm password salted hash
-            shaObj = new jsSHA(NewPasswordConfirm, "ASCII");
-            var confirmPasswordHash = shaObj.getHash("SHA-256", "HEX");
-            shaObj = new jsSHA(hfSalt.value + confirmPasswordHash, "ASCII");
-            var confirmPasswordSaltedHash = shaObj.getHash("SHA-256", "HEX");
-            if (NewPasswordConfirm.length > 0) {
-                document.getElementById('<%= txtNewPasswordConfirm.ClientID %>').value = confirmPasswordSaltedHash;
+    shaObj = new jsSHA(NewPassword, "ASCII");
+    var passwordHash = shaObj.getHash("SHA-256", "HEX");
+    if (NewPassword.length > 0) {
+        document.getElementById('<%= txtNewPassword.ClientID %>').value = passwordHash;
+    }
+
+    //compute confirm password salted hash
+    shaObj = new jsSHA(NewPasswordConfirm, "ASCII");
+    var confirmPasswordHash = shaObj.getHash("SHA-256", "HEX");
+    shaObj = new jsSHA(hfSalt.value + confirmPasswordHash, "ASCII");
+    var confirmPasswordSaltedHash = shaObj.getHash("SHA-256", "HEX");
+    if (NewPasswordConfirm.length > 0) {
+        document.getElementById('<%= txtNewPasswordConfirm.ClientID %>').value = confirmPasswordSaltedHash;
             }
 
             hfSalt.value = '';
             //submit form
             return true;
         }
-        function ClearPwd() {
+function ClearPwd() {
 
 
-            document.getElementById('<%= txtNewPassword.ClientID %>').value = '';
-            document.getElementById('<%= txtNewPasswordConfirm.ClientID %>').value = '';
+    document.getElementById('<%= txtNewPassword.ClientID %>').value = '';
+    sdocument.getElementById('<%= txtNewPasswordConfirm.ClientID %>').value = '';
 
-            //submit form
-            return true;
-        }
-
+//submit form
+return true;
+}
     </script>
 </head>
 <body>
     <form id="form1" runat="server">
-
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
         <div>
             <div class="InputForm" style="width: 90%">
                 <h2>Manage users</h2>
@@ -129,7 +130,7 @@
                             <div class="control-group">
                                 <asp:Label ID="routename" runat="server" CssClass="control-label" Style="font-size: 14px;">First Name/SAP ID/Login Id<span style="color:Red;"> *</span></asp:Label>
                                 <div class="controls">
-                                    <input type="text" id="txtAdmissionId" style="width: 70%;" class="autosuggest" placeholder="Search with First Name/SAP ID/Login Id" />
+                                    <input type="text" id="txtSearchStringId" style="width: 70%;" class="autosuggest" placeholder="Search with First Name/SAP ID/Login Id" />
                                     <asp:Button ID="btnGO" runat="server" CssClass="button_example" Text="Search" OnClick="btnGO_Click" />
                                     <asp:HiddenField ID="hfCustomerId" runat="server" />
                                 </div>

@@ -98,7 +98,7 @@
                     <div class="checkbox-inline1 col-md-12" align="center">
                         <label>
                             <asp:CheckBox ID="chkAgreeTermCondition" runat="server" Text="I Agree" Style="font-size: medium; font-family:Verdana;" />
-                            <asp:Button ID="btnAgreeTermCondition" runat="server" class="btn btn-xs btn-primary" Style="width: 50px; margin-left: 10px;font-family:Verdana;font-weight:bold;" Text="OK" OnClick="btnAgreeTermCondition_Click"></asp:Button>
+                            <asp:Button ID="btnAgreeTermCondition" runat="server" class="btn btn-xs btn-primary" Style="width: 50px; margin-left: 10px; font-family:Verdana; font-weight:bold; background-color:#02AFF3 !important;" Text="OK" OnClick="btnAgreeTermCondition_Click"></asp:Button>
                             <asp:Button ID="btnCancel" runat="server" class="btn btn-xs btn-success warning_4" Style="width: 70px; margin-left: 10px;font-family:Verdana;font-weight:bold;" Text="CANCEL" OnClick="btnCancel_Click"></asp:Button>
                         </label>
                     </div>
