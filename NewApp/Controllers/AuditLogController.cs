@@ -22,6 +22,8 @@ namespace NewApp.Controllers
         #endregion
         string _sExcelPath = ConfigurationManager.AppSettings["ExcelPath"];
         string dtCurrentDate = System.DateTime.Now.ToString("yyyyMMddHHmmss");
+        public List<Auditlog> _UserList = new List<Auditlog>();
+
         #region Connection Methodm
         public void connection()
         {
@@ -36,7 +38,7 @@ namespace NewApp.Controllers
             UserCode = (string)System.Web.HttpContext.Current.Session["USER_CODE"];
             usertype = (Int32)System.Web.HttpContext.Current.Session["USER_TYPEID"];
         }
-        public ActionResult ViewAuditLog()
+        public ActionResult Index()
         {
             try
             {
@@ -73,6 +75,84 @@ namespace NewApp.Controllers
             return View();
          
         }
+        #region GET USER DETAILS
+        [HttpPost]
+        public JsonResult GetAuditLoginDetails(string sLoginId, string sFromDate, string sToDate)
+        {
+            try
+            {
+                DataSet _DS = new DataSet();
+                _UserList.Clear();
+                _DS = new DataSet();
+                List<Parameters> lstparameters = new List<Parameters>();
+                lstparameters.Add(new Parameters("@LoginId", sLoginId.ToString()));
+                lstparameters.Add(new Parameters("@fromDate", sFromDate.ToString()));
+                lstparameters.Add(new Parameters("@toDate", sToDate.ToString()));
+                _DS = dataAccess.GetDataSet("Prc_GetAuditLogDetails",lstparameters);
+                foreach (DataRow _Dr in _DS.Tables[0].Rows)
+                {
+                    _UserList.Add(new Auditlog()
+                    {
+                        RecordID = Convert.ToInt64(_Dr["RecordID"].ToString()),
+                        OperationDetails = _Dr["OperationDetails"].ToString(),
+                        LoginId = _Dr["LoginId"].ToString(),
+                        FromIP = _Dr["FromIP"].ToString(),
+                        OperationPerformedDateTime = _Dr["OperationPerformedDateTime"].ToString(),
+                        FromPage = _Dr["FromPage"].ToString(),
+                        UrlReferrer = _Dr["UrlReferrer"].ToString(),
+                        UserAgent = _Dr["UserAgent"].ToString()
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            //return Json(new { draw = 1, recordsTotal = _UserList.Count, recordsFiltered = 10, data = _UserList }, JsonRequestBehavior.AllowGet);
+            var jsonResult = Json(_UserList, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = Int32.MaxValue;
+            return jsonResult;
+        }
+        [HttpPost]
+        public ActionResult AuditLoginDetailsExcel(string sLoginId, string sFromDate, string sToDate)
+        {
+            string _Result = string.Empty;
+            try
+            {
 
+                DataSet _DS = new DataSet();
+                _UserList.Clear();
+                _DS = new DataSet();
+                List<Parameters> lstparameters = new List<Parameters>();
+                lstparameters.Add(new Parameters("@LoginId", sLoginId.ToString()));
+                lstparameters.Add(new Parameters("@fromDate", sFromDate.ToString()));
+                lstparameters.Add(new Parameters("@toDate", sToDate.ToString()));
+                _DS = dataAccess.GetDataSet("Prc_GetAuditLogDetails", lstparameters);
+
+                foreach (DataRow _Dr in _DS.Tables[0].Rows)
+                {
+                    _UserList.Add(new Auditlog()
+                    {
+                        RecordID = Convert.ToInt64(_Dr["RecordID"].ToString()),
+                        OperationDetails = _Dr["OperationDetails"].ToString(),
+                        LoginId = _Dr["LoginId"].ToString(),
+                        FromIP = _Dr["FromIP"].ToString(),
+                        OperationPerformedDateTime = _Dr["OperationPerformedDateTime"].ToString(),
+                        FromPage = _Dr["FromPage"].ToString(),
+                        UrlReferrer = _Dr["UrlReferrer"].ToString(),
+                        UserAgent = _Dr["UserAgent"].ToString()
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            var jsonResult = Json(_UserList, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = Int32.MaxValue;
+            return jsonResult;
+        }
+        #endregion
     }
 }

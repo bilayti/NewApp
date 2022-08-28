@@ -216,8 +216,8 @@ namespace NewApp.Controllers
         {
             try
             {
-                
-_UserList.Clear();
+
+                _UserList.Clear();
                 _DS = new DataSet();
                 _DS = dataAccess.GetDataSet("SP_USERTYPE_DETAILS");
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
@@ -245,7 +245,7 @@ _UserList.Clear();
         {
             List<string> result = new List<string>();
             try
-            {  
+            {
                 using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("select (Convert(varchar(100),F_NAME+' - '+CONVERT(varchar(10),USERID,0)+' - '+F_NAME+' - '+SAP_ID+' - '+USER_CODE))NAME,F_NAME,USERID,SAP_ID from PUSR where F_NAME LIKE '%'+@SearchText+'%' or USERID LIKE '%'+@SearchText+'%' or SAP_ID LIKE '%'+@SearchText+'%' or USER_CODE LIKE '%'+@SearchText+'%'", con))
@@ -762,7 +762,7 @@ _UserList.Clear();
                 lstparameters.Add(new Parameters("@CARDCODE", sCardCode));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_CUSTOMER_AGING", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_CUSTOMER_AGING_New", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
                     _CustomerList.Add(new CardCodeBind()
@@ -804,7 +804,7 @@ _UserList.Clear();
                 lstparameters.Add(new Parameters("@STATUS", sStatus.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_SALESORDER", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_SALESORDER_New", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
                     _CustomerList.Add(new CardCodeBind()
@@ -847,7 +847,7 @@ _UserList.Clear();
                 lstparameters.Add(new Parameters("@TODATE", sToDate.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_ItemPurchase_Group", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_ItemPurchase_Group_New", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
                     _CustomerList.Add(new CardCodeBind()
@@ -883,7 +883,7 @@ _UserList.Clear();
                 lstparameters.Add(new Parameters("@TODATE", sToDate.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_InvoiceReport", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_InvoiceReport_New", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
                     _CustomerList.Add(new CardCodeBind()
@@ -920,7 +920,7 @@ _UserList.Clear();
                 lstparameters.Add(new Parameters("@TODATE", sToDate.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_AccountStatement", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_AccountStatement_New", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
                     _CustomerList.Add(new CardCodeBind()
@@ -1071,7 +1071,7 @@ _UserList.Clear();
                 lstparameters.Add(new Parameters("@TODATE", sToDate.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_CREDITNOTE", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_CREDITNOTE_New", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
                     _CustomerList.Add(new CardCodeBind()
@@ -1297,7 +1297,7 @@ _UserList.Clear();
                         {
                             List<Parameters> lstparameters1 = new List<Parameters>();
                             lstparameters1.Add(new Parameters("@DOCNUM", sDocNum.ToString()));
-                            lstparameters1.Add(new Parameters("@Date", sDocDate.ToString()));;
+                            lstparameters1.Add(new Parameters("@Date", sDocDate.ToString())); ;
                             _DS1 = dataAccess.GetDataSet("GST_Freight", lstparameters1);
                             rd.Subreports[0].SetDataSource(_DS1.Tables[0]);
                         }
@@ -1426,7 +1426,7 @@ _UserList.Clear();
                     }
                     if (_DS.Tables[0].Rows[0][0].ToString() == "A")
                     {
-                        
+
                         //_DS1 = dataAccess.GetDataSet("UNE_SP_GST_CRNOTE_PORTAL", lstparameters);
                         _DS1 = dataAccess.GetDataSet("UNE_SP_GST_CREDIT_NOTE_PORTAL_FINAL", lstparameters);
                         ReportDocument rd = new ReportDocument();
@@ -1514,7 +1514,7 @@ _UserList.Clear();
             }
 
         }
-        // Account Statement Report
+        // Account Statement Report 
         [HttpPost]
         public ActionResult ExportRPTAccountStatementPDFData(string sCardCode, string sFromDate, string sToDate, string sRadio)
         {

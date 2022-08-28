@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Home :: USG Boral</title>
+    <title>Home :: USG Knauf</title>
     <link href="~/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="~/css/style.css" rel="stylesheet" />

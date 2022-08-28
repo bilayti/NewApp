@@ -32,7 +32,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -120,6 +120,10 @@
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Formatters.Json, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Bin\Microsoft.AspNetCore.Mvc.Formatters.Json.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp">
       <Private>True</Private>
@@ -556,6 +560,7 @@
     </Compile>
     <Compile Include="Models\Agree.cs" />
     <Compile Include="Models\AntiCSRF.cs" />
+    <Compile Include="Models\Auditlog.cs" />
     <Compile Include="Models\AuditLogModule.cs" />
     <Compile Include="Models\Authentication.cs" />
     <Compile Include="Models\CardCode.cs" />
@@ -627,8 +632,11 @@
     <Content Include="Content\jspdf\libs\sprintf.js" />
     <Content Include="Content\tableExport.js" />
     <Content Include="Content\wickedpicker.css" />
+    <Content Include="css\HomePage.css" />
     <Content Include="css\jquery-ui.css" />
     <Content Include="css\StyleSheet.css" />
+    <Content Include="CustomScripts\AuditLog.js" />
+    <Content Include="CustomScripts\HomeDatepicker.js" />
     <Content Include="CustomScripts\Manage-user.js" />
     <Content Include="DataTable\css\jquery-ui.css" />
     <Content Include="DataTable\js\jquery-ui.js" />
@@ -843,6 +851,7 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
+    <Content Include="Views\Shared\_LoaderImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -881,7 +890,7 @@
     <Content Include="Views\ForgetPass\Index.cshtml" />
     <Content Include="Views\ForgotPass\Index.cshtml" />
     <Content Include="Views\Shared\_DashboardManager.cshtml" />
-    <Content Include="Views\AuditLog\ViewAuditLog.cshtml" />
+    <Content Include="Views\AuditLog\Index.cshtml" />
     <Content Include="Views\EnableDisable\Index.cshtml" />
     <Content Include="Views\HomePage\UserType.cshtml" />
     <Content Include="Views\HomePage\Dashboard.cshtml" />

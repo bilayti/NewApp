@@ -94,121 +94,121 @@
     <link href='//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css' />
     <!---//webfonts--->
 </head>
-<body onunload="bodyUnload();" onclick="clicked=true;">
+<body onunload="bodyUnload();" onclick="clicked=true;" >
     <div id="wrapper">
         <!-- Navigation -->
         <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; height: auto; background-color: white; margin-top: -5px; left: 0; top: 0;">
             <div class="navbar-header" style="margin-top: -12px; padding-top: -11px;">
-                <a class="navbar-brand" href="https://www.usgboral.com/en_in/" target="_blank">
-                    @*USG BORAL*@
-                <img src="~/icons/rsz_usg_boral_logo.png" />
-            </a>
+                <a class="navbar-brand" href="https://www.knauf.com/en/" target="_blank">
+                    <img src="../icons/USG Knauf Logo.jpg" width="190" height="50" />
+                </a>
 
-        </div>
-        <!-- /.navbar-header -->
+            </div>
+            <!-- /.navbar-header -->
 
-        <div class="nav navbar-nav navbar-right">
+            <div class="nav navbar-nav navbar-right">
 
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle avatar" data-toggle="dropdown" />
-                    @*<div class="label">
-                            <span style="font-size: 10px; color: black;" id="date_time"></span>
-                            <script type="text/javascript">
-                                window.onload = date_time('date_time');
-                            </script>
-                        </div>*@
-                    <div class="label label-primary">@ViewBag.UserName</div>
-                </li>
-                @if (System.Web.HttpContext.Current.Session["USER_CODE"].ToString() == "ADMIN")
-                {
-                    <li>
-                        @*<a href="~/UserChangePassword.aspx" /><span class="btn btn-xs btn-primary"><b>CHANGE PASSWORD</b></span>*@
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle avatar" data-toggle="dropdown" />
+                        @*<div class="label">
+                                <span style="font-size: 10px; color: black;" id="date_time"></span>
+                                <script type="text/javascript">
+                                    window.onload = date_time('date_time');
+                                </script>
+                            </div>*@
+                        <div class="label label-primary" style="background-color: #02AFF3 !important;">@ViewBag.UserName</div>
                     </li>
-                }
-                else
-                {
+                    @if (System.Web.HttpContext.Current.Session["USER_CODE"].ToString() == "ADMIN")
+                    {
+                        <li>
+                            @*<a href="~/UserChangePassword.aspx" /><span class="btn btn-xs btn-primary"><b>CHANGE PASSWORD</b></span>*@
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="~/UserChangePassword.aspx" /><span class="btn btn-xs btn-primary"><b>CHANGE PASSWORD</b></span>
+                        </li>
+                    }
                     <li>
-                        <a href="~/UserChangePassword.aspx" /><span class="btn btn-xs btn-primary"><b>CHANGE PASSWORD</b></span>
-                    </li>
-                }
-                <li>
-                    <a href="~/LogOutPage.aspx" /><span class="label label-danger"><b>LOGOUT</b></span>
-                </li>
-            </ul>
-        </div>
-
-
-        <div class="navbar-default sidebar" role="navigation">
-
-            <div class="sidebar-nav navbar-collapse">
-
-                <ul class="nav" id="side-menu">
-
-                    <li>
-                        <p><b style="color: white;">@ViewBag.lastseen</b></p>
-                        <a href='@Url.Action("Home", "HomePage")' id="liHome"><i class="fa fa-home fa-fw nav_icon"></i><b>HOME</b></a>
-                    </li>
-                    <li>
-                        <a><i class="fa fa-check-square-o nav_icon"></i><b>USER MANAGEMENT</b><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href='@Url.Action("UserReg", "UserRegistration")'>User Registration</a>
-                            </li>
-                            <li>
-                                <a href='@Url.Action("Index", "EnableDisable")'>Enable/Disable User</a>
-                            </li>
-                            <li>
-                                <a href="~/ManageUser.aspx">Manage User</a>
-                            </li>
-                            @*<li>
-                                    <a href='@Url.Action("ViewAuditLog", "AuditLog")'>View Audit Log</a>
-                                </li>*@
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a><i class="fa fa-cog fa-fw nav_icon"></i><b>SETTINGS</b><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href='@Url.Action("UserType", "HomePage")'>User Type</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href='@Url.Action("Index", "LoginStatus")'><i class="fa fa-sitemap fa-fw nav_icon"></i><b>LOGIN STATUS</b><span class="fa arrow"></span></a>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="~/LogOutPage.aspx" /><i class="fa fa-anchor fa-fw nav_icon"></i><b>LOGOUT</b><span class="fa arrow"></span></a>
-                        <!-- /.nav-second-level -->
+                        <a href="~/LogOutPage.aspx" /><span class="label label-danger"><b>LOGOUT</b></span>
                     </li>
                 </ul>
             </div>
-            <!-- /.sidebar-collapse -->
+
+
+            <div class="navbar-default sidebar" role="navigation">
+
+                <div class="sidebar-nav navbar-collapse">
+
+                    <ul class="nav" id="side-menu">
+
+                        <li>
+                            <p><b style="color: white;">@ViewBag.lastseen</b></p>
+                            <a href='@Url.Action("Home", "HomePage")' id="liHome"><i class="fa fa-home fa-fw nav_icon"></i><b>HOME</b></a>
+                        </li>
+                        <li>
+                            <a><i class="fa fa-check-square-o nav_icon"></i><b>USER MANAGEMENT</b><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href='@Url.Action("UserReg", "UserRegistration")'>User Registration</a>
+                                </li>
+                                <li>
+                                    <a href='@Url.Action("Index", "EnableDisable")'>Enable/Disable User</a>
+                                </li>
+                                <li>
+                                    <a href="~/ManageUser.aspx">Manage User</a>
+                                </li>
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a><i class="fa fa-cog fa-fw nav_icon"></i><b>SETTINGS</b><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href='@Url.Action("UserType", "HomePage")'>User Type</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("Index", "LoginStatus")'><i class="fa fa-sitemap fa-fw nav_icon"></i><b>LOGIN STATUS</b><span class="fa arrow"></span></a>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href='@Url.Action("Index", "AuditLog")'><i class="fa fa-ambulance fa-fw nav_icon"></i><b>AUDIT LOG</b><span class="fa arrow"></span></a>
+                        </li>
+                        <li>
+                            <a href="~/LogOutPage.aspx" /><i class="fa fa-anchor fa-fw nav_icon"></i><b>LOGOUT</b><span class="fa arrow"></span></a>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div>
+            @RenderBody()
         </div>
-        <!-- /.navbar-static-side -->
-    </nav>
 
-    <div>
-        @RenderBody()
+        <!-- /#page-wrapper -->
+        <div class="copy">
+            <p></p>
+        </div>
     </div>
+    <!-- Bootstrap Core JavaScript -->
 
-    <!-- /#page-wrapper -->
-    <div class="copy">
-        <p></p>
-    </div>
-</div>
-<!-- Bootstrap Core JavaScript -->
-
-<script src="~/js/bootstrap.min.js"></script>
-<!-- Metis Menu Plugin JavaScript -->
-<script src="~/js/metisMenu.min.js"></script>
-<script src="~/js/custom.js"></script>
-<!-- Graph JavaScript -->
-<script src="~/js/d3.v3.js"></script>
-<script src="~/js/rickshaw.js"></script>
-@RenderSection("scripts", required: false)
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/js/metisMenu.min.js"></script>
+    <script src="~/js/custom.js"></script>
+    <!-- Graph JavaScript -->
+    <script src="~/js/d3.v3.js"></script>
+    <script src="~/js/rickshaw.js"></script>
+    @RenderSection("scripts", required: false)
 
 </body>
 </html>
