@@ -54,3 +54,6 @@
     -o-background-size: cover;
     background-size: cover;
 }
+.DefaultImage {
+    background: url('../../icons/USG Knauf Logo.jpg')no-repeat center center fixed;
+}

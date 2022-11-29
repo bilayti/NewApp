@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NewApp.css.CrRPT {
+namespace NewApp.CrRPT {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -41,7 +41,7 @@ namespace NewApp.css.CrRPT {
         
         public override string FullResourceName {
             get {
-                return "NewApp.css.CrRPT.GST Final Invoice layout Export PORTAL.rpt";
+                return "NewApp.CrRPT.GST Final Invoice layout Export PORTAL.rpt";
             }
             set {
                 // Do nothing

@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "Home";
-    Layout = null;
+    Layout = "~/Views/Shared/_DashBoard.cshtml";
 }
 
 @{var listStatus = new List<System.Web.UI.WebControls.ListItem>
@@ -15,1125 +15,1087 @@ new System.Web.UI.WebControls.ListItem { Text = "Pending For Invoicing", Value="
 new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
 };
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <title>User :: Home Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script type="application/x-javascript">
-        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
-    </script>
-    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Custom CSS -->
-    <link href="~/css/style.css" rel="stylesheet" />
-    <!-- Nav CSS -->
-    <link href="~/css/custom.css" rel="stylesheet" />
-    <!-- Graph CSS -->
-    <link href="~/css/lines.css" rel="stylesheet" />
-    <link href="~/css/font-awesome.css" rel="stylesheet" />
-    <!----webfonts--->
-    <!-- jQuery -->
-    <script src="~/Content/jquery-1.9.1.js"></script>
-    <link href="~/DataTable/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <script src="~/DataTable/js/jquery.dataTables.min.js"></script>
-    <link href='//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css' />
-    <script type="text/javascript">
-        function date_time(id) {
-            date = new Date;
-            year = date.getFullYear();
-            month = date.getMonth();
-            months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
-            d = date.getDate();
-            day = date.getDay();
-            days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-            h = date.getHours();
-            if (h < 10) {
-                h = "0" + h;
-            }
-            m = date.getMinutes();
-            if (m < 10) {
-                m = "0" + m;
-            }
-            s = date.getSeconds();
-            if (s < 10) {
-                s = "0" + s;
-            }
-            result = '' + days[day] + ' ' + months[month] + ' ' + d + ' ' + year + ' ' + h + ':' + m + ':' + s + ' ' + 'IST';
-            document.getElementById(id).innerHTML = result;
-            setTimeout('date_time("' + id + '");', '1000');
-            return true;
-        }
-    </script>
-    <style type="text/css">
-        #date_time {
-            margin-right: 10%;
-            margin-top: 1%;
-        }
-    </style>
-    <style type="text/css">
-        .MarginTop1 {
-            margin-top: 1%;
-        }
+<link href="~/css/bootstrap.min.css" rel="stylesheet" />
 
-        .CurrentActiveTab {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-bottom-color: transparent;
+<!-- Custom CSS -->
+<link href="~/css/style.css" rel="stylesheet" />
+<!-- Nav CSS -->
+<link href="~/css/custom.css" rel="stylesheet" />
+<!-- Graph CSS -->
+<link href="~/css/lines.css" rel="stylesheet" />
+<link href="~/css/font-awesome.css" rel="stylesheet" />
+<!----webfonts--->
+<!-- jQuery -->
+<script src="~/Content/jquery-1.9.1.js"></script>
+<link href="~/DataTable/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="~/DataTable/js/jquery.dataTables.min.js"></script>
+<link href='//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css' />
+<script type="text/javascript">
+    function date_time(id) {
+        date = new Date;
+        year = date.getFullYear();
+        month = date.getMonth();
+        months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+        d = date.getDate();
+        day = date.getDay();
+        days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+        h = date.getHours();
+        if (h < 10) {
+            h = "0" + h;
         }
-
-        .table tbody tr {
-            background: #fff;
+        m = date.getMinutes();
+        if (m < 10) {
+            m = "0" + m;
         }
-
-        .height12 {
-            height: 20px;
+        s = date.getSeconds();
+        if (s < 10) {
+            s = "0" + s;
         }
+        result = '' + days[day] + ' ' + months[month] + ' ' + d + ' ' + year + ' ' + h + ':' + m + ':' + s + ' ' + 'IST';
+        document.getElementById(id).innerHTML = result;
+        setTimeout('date_time("' + id + '");', '1000');
+        return true;
+    }
+</script>
+<style type="text/css">
+    #date_time {
+        margin-right: 10%;
+        margin-top: 1%;
+    }
+</style>
+<style type="text/css">
+    .MarginTop1 {
+        margin-top: 1%;
+    }
 
-        .ReportTable {
-            width: 100% !important;
+    .CurrentActiveTab {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-bottom-color: transparent;
+    }
+
+    .table tbody tr {
+        background: #fff;
+    }
+
+    .height12 {
+        height: 20px;
+    }
+
+    .ReportTable {
+        width: 100% !important;
+    }
+
+        .ReportTable td {
+            width: 15% !important;
         }
 
-            .ReportTable td {
-                width: 15% !important;
-            }
-
-            .ReportTable th {
-                width: 21% !important;
-            }
-
-        .table td, .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
-            padding: 5px !important;
+        .ReportTable th {
+            width: 21% !important;
         }
 
-        .align {
-            text-align: right;
-            float: right;
+    .table td, .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+        padding: 5px !important;
+    }
+
+    .align {
+        text-align: right;
+        float: right;
+    }
+
+    .graphs {
+        padding: 0px !important;
+    }
+
+    .MarqueStyle {
+        background: #009639;
+        color: white;
+        font-size: medium;
+        font-family: Verdana;
+        height: 28px !important;
+        padding: 5px 5px 5px 5px;
+    }
+</style>
+<script type="text/javascript">
+    //<![CDATA[</span />
+
+    var clicked = false;
+    function CheckBrowser() {
+        if (clicked == false) {
+            //Browser closed
         }
-
-        .graphs {
-            padding: 0px !important;
+        else {
+            //redirected
+            clicked = false;
         }
+    }
 
-        .MarqueStyle {
-            background: #009639;
-            color: white;
-            font-size: medium;
-            font-family: Verdana;
-            height: 28px !important;
-            padding: 5px 5px 5px 5px;
+    function bodyUnload() {
+
+        if (clicked == false)//browser is closed
+        {
+            var request = GetRequest();
+
+            request.open("POST", "../LogOut.aspx", false);
+            request.send();
+            alert('This is close');
         }
-    </style>
-    <script type="text/javascript">
-        //<![CDATA[</span />
-
-        var clicked = false;
-        function CheckBrowser() {
-            if (clicked == false) {
-                //Browser closed
-            }
-            else {
-                //redirected
-                clicked = false;
-            }
+    }
+    function GetRequest() {
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
         }
-
-        function bodyUnload() {
-
-            if (clicked == false)//browser is closed
-            {
-                var request = GetRequest();
-
-                request.open("POST", "../LogOut.aspx", false);
-                request.send();
-                alert('This is close');
-            }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        function GetRequest() {
-            var xmlhttp;
-            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            }
-            else {// code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            return xmlhttp;
-        }
-    </script>
-</head>
-<body onunload="bodyUnload();" onclick="clicked=true;">
-    <div id="wrapper">
-        <div style="display: none; position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.5)" id="loader">
-            <img alt="" src="~/fonts/ajax-loader-6.gif" style="top: 50%; left: 50%; position: absolute; text-align: center;" />
-        </div>
-        <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; height: auto; background-color: white; margin-top: -5px; left: 0; top: 0;">
-            <div class="navbar-header" style="margin-top: -12px; padding-top: -11px;">
-                <a class="navbar-brand" href="https://www.usgboral.com/en_in/" target="_blank">
-                    @*USG BORAL*@
-                    <img src="~/icons/rsz_usg_boral_logo.png" />
-                </a>
+        return xmlhttp;
+    }
+</script>
 
-            </div>
-            <div class="nav navbar-nav navbar-right">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle avatar" data-toggle="dropdown" />
-                        @*<div class="label">
-                                <span style="font-size: 10px;  color: black;" id="date_time"></span>
-                                <script type="text/javascript">
-                                    window.onload = date_time('date_time');
-                                </script>
-                            </div>*@
-                        <div class="label label-primary">@ViewBag.UserName</div>
-                    </li>
-                    <li class="dropdown">
-                        <a href="~/UserChangePassword.aspx" /><span class="btn btn-xs btn-primary">CHANGE PASSWORD</span>
-                    </li>
-                    <li class="dropdown">
-
-                        <a href='#' id="aLogout" /><span class="label label-danger">LOGOUT</span>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div class="graphs">
-            <div id="header" class="MarqueStyle">
+@Html.Partial("_LoaderImage");
+<div id="page-wrapper" style="font-family: Verdana; font-size: 16px; color: black;">
+    <div class="graphs">
+        <div id="header" class="MarqueStyle" style="background-color: #02AFF3;">
+            <marquee onmouseover="this.stop();" onmouseout="this.start();" behavior="alternate" width="100%">
                 <marquee onmouseover="this.stop();" onmouseout="this.start();" behavior="alternate" width="100%">
-                    <marquee onmouseover="this.stop();" onmouseout="this.start();" behavior="alternate" width="100%">
-                        Total Outstanding :- <span id="spnMarqueeTotal">@ViewBag.TotalOut</span> :
-                        Overdue Outstanding :- <span id="spnMarqueeOverdue">@ViewBag.OverdueOut</span>
-                    </marquee>
+                    Total Outstanding :- <span id="spnMarqueeTotal">@ViewBag.TotalOut</span> :
+                    Overdue Outstanding :- <span id="spnMarqueeOverdue">@ViewBag.OverdueOut</span>
                 </marquee>
-            </div>
-            <div class="md">
-                @*Account Information Area   *@
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-8">
-                            <div>
-                                <div class="col-md-4">
-                                    <h4 style="font-family: bookman old style; font-weight: bold;">Account Information</h4>
-                                </div>
-                                <div class="col-md-4">
-                                </div>
-                                <div class="col-md-2">
-                                </div>
-                                <div class="col-md-2">
-                                </div>
+            </marquee>
+        </div>
+        <div class="md">
+            @*Account Information Area   *@
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-8">
+                        <div>
+                            <div class="col-md-4">
+                                <h4 style="font-family: bookman old style; font-weight: bold;">Account Information</h4>
                             </div>
-
-                            <div class="row MarginTop1">
-
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                    </div>
-                                    <div class="col-md-8">
-                                    </div>
-                                </div>
-                                <div class="col-md-6"></div>
-                                <div class="clearfix"></div>
+                            <div class="col-md-4">
                             </div>
-                            <!---->
-                            <div class="row MarginTop1">
-                                <div class="col-md-12">
-                                    <div class="col-md-2" style="margin-left: 0%">
-                                        <label class="control-label">Customer&nbsp; name</label>
-                                    </div>
-                                    <div class="col-md-10">
-
-                                        @{NewApp.Models.CardCodeBind _Rb = new NewApp.Models.CardCodeBind();}
-                                        @*@Html.DropDownList("ddlCustomerName", new SelectList(_Rb.CardCodeBindMethod(), "CardCode", "CardName"), "- Select Customer Name -", new { @class = "form-control" }, new { @onchange="CallChangefunc(this.value)" }))*@
-                                        @Html.DropDownList("ddlCustomerName", new SelectList(_Rb.CardCodeBindMethod(1), "CardCode", "CardName"), "- Select Customer Name -", new { @class = "form-control", @onchange = "OnChangeFill();" })
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="col-md-4">
-                                    </div>
-                                    <div class="col-md-8">
-                                    </div>
-                                </div>
+                            <div class="col-md-2">
                             </div>
-                            <!-- One row -->
-                            <div class="row MarginTop1" style="pointer-events: none;">
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Address</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtAddress", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Sales&nbsp;Person</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtSalesPerson", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
+                            <div class="col-md-2">
                             </div>
-                            <!-- Two row -->
-
-                            <div class="row MarginTop1" style="pointer-events: none;">
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Address2</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtAddress2", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Contact person</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtContract", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row MarginTop1" style="pointer-events: none;">
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">City</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtCity", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Phone</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtPhone", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row MarginTop1" style="pointer-events: none;">
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Post Code</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtPostCode", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Fax</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtFax", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row MarginTop1" style="pointer-events: none;">
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">State</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtState", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Email</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtEmail", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row MarginTop1" style="pointer-events: none;">
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Country</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtCountry", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Last Payment Date</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtLastPaymentOn", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row MarginTop1" style="pointer-events: none;">
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Area</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtArea", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">PAN</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtPAN", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row MarginTop1" style="pointer-events: none;">
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Territory</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtTerritory", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">TIN</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtTIN", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row MarginTop1">
-                                <div class="col-md-6" style="pointer-events: none;">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Credit Days</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("txtCreditDate", null, new { @class = "form-control" })
-                                    </div>
-
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label">GSTIN No.</label>
-                                    </div>
-                                    <div class="col-md-8" style="pointer-events: none;">
-                                        @Html.TextBox("txtGSTINNo", null, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row MarginTop1">
-                                <div class="col-md-6">
-                                    <div class="col-md-4">
-                                        <label class="control-label"></label>
-                                    </div>
-                                    <div class="col-md-8" style="pointer-events: none;">
-
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="col-md-2">
-                                    </div>
-                                    <div class="col-md-10" id="div">
-                                        <input type="radio" id="radio_1" class="rbl" name="report" value="1" checked="checked" />Individual
-                                        <input type="radio" id="radio_2" name="report" value="2" />Linked
-                                        <input type="radio" id="radio_3" name="report" value="3" />All
-                                    </div>
-                                </div>
-                            </div>
-
-                            @* <div class="row MarginTop1" style="pointer-events: none;">
-                                    <div class="col-md-6">
-                                        <div class="col-md-4">
-                                            <label class="control-label">Warehouse</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            @Html.TextBox("txtWarehouse", null, new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="col-md-4">
-                                        </div>
-                                        <div class="col-md-8">
-                                        </div>
-                                    </div>
-                                </div>*@
                         </div>
-                        <div class="col-md-4">
+
+                        <div class="row MarginTop1">
+
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-8">
+                                </div>
+                            </div>
+                            <div class="col-md-6"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!---->
+                        <div class="row MarginTop1">
                             <div class="col-md-12">
-                                <h4 style="font-family: bookman old style; font-weight: bold;">Over Due Details</h4>
-                            </div>
-                            <div class="row MarginTop1" style="pointer-events: none;">
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Balance</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        @Html.TextBox("txtBalance", null, new { @class = "form-control align" })
-                                    </div>
-                                    <div class="col-md-2"></div>
+                                <div class="col-md-2" style="margin-left: 0%">
+                                    <label class="control-label">Customer&nbsp; name</label>
                                 </div>
-                            </div>
+                                <div class="col-md-10">
 
-                            @*<div class="row MarginTop1">
-                                    <div class="col-md-12">
-                                        <div class="col-md-4">
-                                            <label class="control-label">Before Overdue Days</label>
-                                        </div>
-                                        <div class="col-md-6" style="pointer-events: none;">
-                                            @Html.TextBox("txtOverdue15Less", null, new { @class = "form-control" })
-                                        </div>
-                                        <div class="col-md-2">
-                                            <h6><a data-toggle="modal" data-target="#myModal" href="#" style="color: red" onclick="BindOverLessThan15();">(View)</a></h6>
-                                        </div>
-                                    </div>
-                                </div>*@
+                                    @{NewApp.Models.CardCodeBind _Rb = new NewApp.Models.CardCodeBind();}
+                                    @Html.DropDownList("ddlCustomerName", new SelectList(_Rb.CardCodeBindMethod(1), "CardCode", "CardName"), "- Select Customer Name -", new { @class = "form-control", @onchange = "OnChangeFill();" })
+                                </div>
 
-                            <div class="row MarginTop1">
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Due Within 30 Days</label>
-                                    </div>
-                                    <div class="col-md-6" style="pointer-events: none;">
-                                        @Html.TextBox("txtOverdue15Gre", null, new { @class = "form-control align" })
-                                    </div>
-                                    <div class="col-md-2">
-                                        <h6><a href='#' style="color: red" data-toggle="modal" data-target="#myModal2" onclick="BindOverDueGre15();">(View)</a></h6>
-                                    </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-8">
                                 </div>
                             </div>
-
-                            <div class="row MarginTop1" style="pointer-events: none;">
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
-                                        <label class="control-label" style="color: #337ab7">Overdue Days</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        @Html.TextBox("txtOverDueDays", null, new { @class = "form-control align" })
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                            </div>
-
-                            <div class="row MarginTop1">
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
-                                        <label class="control-label" style="color: #337ab7">Expected Payment</label>
-                                    </div>
-                                    <div class="col-md-6" style="pointer-events: none;">
-                                        @Html.TextBox("txtExpPayment", null, new { @class = "form-control align" })
-                                    </div>
-                                    <div class="col-md-2">
-                                        <h6><a href='#' style="color: red" data-toggle="modal" data-target="#myModal3" onclick="BindOverExpPay();">(View)</a></h6>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row MarginTop1">
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
-                                        <label class="control-label" style="color: #337ab7">Partially unpaid invoice</label>
-                                    </div>
-                                    <div class="col-md-6" style="pointer-events: none;">
-                                        @Html.TextBox("txtShortFall", null, new { @class = "form-control align" })
-                                    </div>
-                                    <div class="col-md-2">
-                                        <h6><a href='#' style="color: red" data-toggle="modal" data-target="#myModal5" onclick="BindPartiallyUnpaidInvoice();">(View)</a></h6>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="col-md-12">
-                                    <h4 style="font-family: bookman old style; font-weight: bold; color: black">Health Checkup</h4>
-                                </div>
-                            </div>
-                            <div class="row MarginTop1">
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
-                                        <label class="control-label" style="color: #337ab7">Order Value</label>
-                                    </div>
-                                    <div class="col-md-6" style="pointer-events: none;">
-                                        @Html.TextBox("txtCeiling", null, new { @class = "form-control align" })
-                                    </div>
-                                    <div class="col-md-2">
-                                        <h6><a href='#' style="color: red" data-toggle="modal" data-target="#myModal4" onclick="BindOverOrderValue();">(View)</a></h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row MarginTop1">
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
-                                        <label class="control-label" style="color: #337ab7">Overdue days</label>
-                                    </div>
-                                    <div class="col-md-6" style="pointer-events: none;">
-                                        @Html.TextBox("txtOverduesdays", null, new { @class = "form-control align" })
-                                    </div>
-                                    <div class="col-md-2">
-                                        @*<h6><a href='@Url.Action("Index", "FrmCustomerCheckOut")' style="color:red">(View)</a></h6>*@
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row MarginTop1">
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
-                                        <label class="control-label" style="color: #337ab7">Total overdue</label>
-                                    </div>
-                                    <div class="col-md-6" style="pointer-events: none;">
-                                        @Html.TextBox("txtTotalOverdue", null, new { @class = "form-control align" })
-                                    </div>
-                                    <div class="col-md-2">
-                                        @*<h6><a href='@Url.Action("Index", "FrmCustomerCheckOut")' style="color:red">(View)</a></h6>*@
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row MarginTop1">
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
-                                        <label class="control-label" style="color: #337ab7">Unadjusted credit</label>
-                                    </div>
-                                    <div class="col-md-6" style="pointer-events: none;">
-                                        @Html.TextBox("txtCerditBalance", null, new { @class = "form-control align" })
-                                    </div>
-                                    <div class="col-md-2">
-                                        @*<h6><a href='@Url.Action("Index", "FrmCustomerCheckOut")' style="color:red">(View)</a></h6>*@
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
+                        <!-- One row -->
+                        <div class="row MarginTop1" style="pointer-events: none;">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">Address</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtAddress", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">Sales&nbsp;Person</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtSalesPerson", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Two row -->
+
+                        <div class="row MarginTop1" style="pointer-events: none;">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">Address2</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtAddress2", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">Contact person</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtContract", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row MarginTop1" style="pointer-events: none;">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">City</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtCity", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">Phone</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtPhone", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row MarginTop1" style="pointer-events: none;">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">Post Code</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtPostCode", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">Fax</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtFax", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row MarginTop1" style="pointer-events: none;">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">State</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtState", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">Email</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtEmail", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row MarginTop1" style="pointer-events: none;">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">Country</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtCountry", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">Last Payment Date</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtLastPaymentOn", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row MarginTop1" style="pointer-events: none;">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">Area</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtArea", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">PAN</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtPAN", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row MarginTop1" style="pointer-events: none;">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">Territory</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtTerritory", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">TIN</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtTIN", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row MarginTop1">
+                            <div class="col-md-6" style="pointer-events: none;">
+                                <div class="col-md-4">
+                                    <label class="control-label">Credit Days</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBox("txtCreditDate", null, new { @class = "form-control" })
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label">GSTIN No.</label>
+                                </div>
+                                <div class="col-md-8" style="pointer-events: none;">
+                                    @Html.TextBox("txtGSTINNo", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row MarginTop1">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label"></label>
+                                </div>
+                                <div class="col-md-8" style="pointer-events: none;">
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10" id="div">
+                                    <input type="radio" id="radio_1" class="rbl" name="report" value="1" checked="checked" />Individual
+                                    <input type="radio" id="radio_3" name="report" value="3" />Legal Entity
+                                    <input type="radio" id="radio_2" name="report" value="2" />Parent Code
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="col-md-12">
+                            <h4 style="font-family: bookman old style; font-weight: bold;">Over Due Details</h4>
+                        </div>
+                        <div class="row MarginTop1" style="pointer-events: none;">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <label class="control-label">Balance</label>
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.TextBox("txtBalance", null, new { @class = "form-control align" })
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        </div>
+                        <div class="row MarginTop1">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <label class="control-label">Due Within 30 Days</label>
+                                </div>
+                                <div class="col-md-6" style="pointer-events: none;">
+                                    @Html.TextBox("txtOverdue15Gre", null, new { @class = "form-control align" })
+                                </div>
+                                <div class="col-md-2">
+                                    <h6><a href='#' style="color: red" data-toggle="modal" data-target="#myModal2" onclick="BindOverDueGre15();">(View)</a></h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row MarginTop1" style="pointer-events: none;">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <label class="control-label" style="color: #337ab7">Overdue Days</label>
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.TextBox("txtOverDueDays", null, new { @class = "form-control align" })
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        </div>
+
+                        <div class="row MarginTop1">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <label class="control-label" style="color: #337ab7">Expected Payment</label>
+                                </div>
+                                <div class="col-md-6" style="pointer-events: none;">
+                                    @Html.TextBox("txtExpPayment", null, new { @class = "form-control align" })
+                                </div>
+                                <div class="col-md-2">
+                                    <h6><a href='#' style="color: red" data-toggle="modal" data-target="#myModal3" onclick="BindOverExpPay();">(View)</a></h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row MarginTop1">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <label class="control-label" style="color: #337ab7">Partially unpaid invoice</label>
+                                </div>
+                                <div class="col-md-6" style="pointer-events: none;">
+                                    @Html.TextBox("txtShortFall", null, new { @class = "form-control align" })
+                                </div>
+                                <div class="col-md-2">
+                                    <h6><a href='#' style="color: red" data-toggle="modal" data-target="#myModal5" onclick="BindPartiallyUnpaidInvoice();">(View)</a></h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="col-md-12">
+                                <h4 style="font-family: bookman old style; font-weight: bold; color: black">Health Checkup</h4>
+                            </div>
+                        </div>
+                        <div class="row MarginTop1">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <label class="control-label" style="color: #337ab7">Order Value</label>
+                                </div>
+                                <div class="col-md-6" style="pointer-events: none;">
+                                    @Html.TextBox("txtCeiling", null, new { @class = "form-control align" })
+                                </div>
+                                <div class="col-md-2">
+                                    <h6><a href='#' style="color: red" data-toggle="modal" data-target="#myModal4" onclick="BindOverOrderValue();">(View)</a></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row MarginTop1">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <label class="control-label" style="color: #337ab7">Overdue days</label>
+                                </div>
+                                <div class="col-md-6" style="pointer-events: none;">
+                                    @Html.TextBox("txtOverduesdays", null, new { @class = "form-control align" })
+                                </div>
+                                <div class="col-md-2">
+                                    @*<h6><a href='@Url.Action("Index", "FrmCustomerCheckOut")' style="color:red">(View)</a></h6>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row MarginTop1">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <label class="control-label" style="color: #337ab7">Total overdue</label>
+                                </div>
+                                <div class="col-md-6" style="pointer-events: none;">
+                                    @Html.TextBox("txtTotalOverdue", null, new { @class = "form-control align" })
+                                </div>
+                                <div class="col-md-2">
+                                    @*<h6><a href='@Url.Action("Index", "FrmCustomerCheckOut")' style="color:red">(View)</a></h6>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row MarginTop1">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <label class="control-label" style="color: #337ab7">Unadjusted credit</label>
+                                </div>
+                                <div class="col-md-6" style="pointer-events: none;">
+                                    @Html.TextBox("txtCerditBalance", null, new { @class = "form-control align" })
+                                </div>
+                                <div class="col-md-2">
+                                    @*<h6><a href='@Url.Action("Index", "FrmCustomerCheckOut")' style="color:red">(View)</a></h6>*@
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
-            <div class="container MarginTop1" style="margin-left: 10px; scrollbar-base-color: Background">
-                <ul class="nav nav-tabs" id="MyUl">
-                    @*<li class="active" id="liMenu1" onclick="CurrentActive(this)"><a href="#" style="font-size: small">Aging Report</a></li>
-                        <li id="liMenu2" onclick="CurrentActive(this)"><a href="#" id="" style="font-size: small">Pending Order Report</a></li>
-                        <li id="liMenu3" onclick="CurrentActive(this)"><a href="#" id="" style="font-size: small">Item Purchase</a></li>
-                        <li id="liMenu4" onclick="CurrentActive(this)"><a href="#" style="font-size: small">Invoice Report</a></li>*@
-                    <li class="active" id="liMenu5" onclick="CurrentActive(this)"><a href="#" id="" style="font-size: small">Account Statement</a></li>
-                    @*<li id="liMenu6" onclick="CurrentActive(this)"><a href="#" id="" style="font-size: small">Payment Summary</a></li>
-                        <li id="liMenu7" onclick="CurrentActive(this)"><a href="#" style="font-size: small">Credit Note Report</a></li>
-                        <li id="liMenu8" onclick="CurrentActive(this)"><a href="#" id="" style="font-size: small">Feedback</a></li>*@
-                    @*<li id="liMenu9" onclick="CurrentActive(this)"><a href="#" style="font-size: small">Account Statement Old</a></li>*@
-                    @*<li id="liMenu10" onclick="CurrentActive(this)"><a href="#" style="font-size: small">Collection Summary</a></li>*@
-                </ul>
-                <div class="col-md-12" style="margin-bottom: 10px;display:none;" id="divReportsAgeing">
-                    <div class="col-md-4">
-                        <button type="button" id="btnFindReport1" class="btn btn-xs btn-primary" onclick="GetReports()" style="width: 80px; margin-left: 10px">Get Data</button>
-                        <button type="button" id="exportexcel101" class="btn btn-xs btn-primary" onclick="GetReportExcel()" style="width: 90px; margin-left: 10px">Get To Excel</button>
-                    </div>
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-4">
-                    </div>
-                    <div class="col-md-4">
+        </div>
+        <div class="container MarginTop1" style="margin-left: 10px; scrollbar-base-color: Background">
+            <ul class="nav nav-tabs" id="MyUl">
+                <li class="active" id="liMenu1" onclick="CurrentActive(this)"><a href="#" style="font-size: small">Aging report</a></li>
+                <li id="liMenu2" onclick="CurrentActive(this)"><a href="#" id="" style="font-size: small">Pending order report</a></li>
+                <li id="liMenu3" onclick="CurrentActive(this)"><a href="#" id="" style="font-size: small">Item purchase</a></li>
+                <li id="liMenu4" onclick="CurrentActive(this)"><a href="#" style="font-size: small">Invoice report</a></li>
+                <li id="liMenu5" onclick="CurrentActive(this)"><a href="#" id="" style="font-size: small">Account statement</a></li>
+                <li id="liMenu6" onclick="CurrentActive(this)"><a href="#" style="font-size: small">Credit note report</a></li>
+                <li id="liMenu7" onclick="CurrentActive(this)"><a href="#" id="" style="font-size: small">Payment summary</a></li>
+            </ul>
+            <div class="col-md-12" style="margin-bottom: 10px;" id="divReportsAgeing">
+                <div class="col-md-4">
+                    <button type="button" id="btnFindReport1" class="btn btn-xs btn-primary" onclick="GetReports()" style="width: 80px; background-color: #02AFF3 !important; margin-left: 10px">Get Data</button>
+                    <button type="button" id="exportexcel101" class="btn btn-xs btn-primary" onclick="GetReportExcel()" style="width: 90px; background-color: #02AFF3 !important; margin-left: 10px">Get To Excel</button>
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+            <div class="col-md-12" style="margin-bottom: 10px; display: none" id="divReports">
+                <div class="col-md-1">
+                    <label class="control-label">From Date</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="txtFromDT" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label class="control-label">To Date</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="txtToDT" class="form-control" />
+                </div>
+                <button type="button" id="btnFindReport" class="btn btn-xs btn-primary" onclick="GetReports()" style="width: 80px; background-color: #02AFF3 !important; margin-left: 10px">Get Data</button>
+                <button type="button" id="exportexcel10" class="btn btn-xs btn-primary" onclick="GetReportExcel()" style="width: 90px; background-color: #02AFF3 !important; margin-left: 10px">Get To Excel</button>
+
+            </div>
+            <div class="col-md-12" style="margin-bottom: 10px; display: none;" id="divItemPurchase">
+                <div class="col-md-1">
+                    <label class="control-label">From Date</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="txtFromDTIP" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label class="control-label">To Date</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="txtToDTIP" class="form-control" />
+                </div>
+                <button type="button" id="btnFindReport" class="btn btn-xs btn-primary" onclick="GetReports()" style="width: 80px; background-color: #02AFF3 !important; margin-left: 10px">Get Data</button>
+                <button type="button" id="exportexcel10" class="btn btn-xs btn-primary" onclick="GetReportExcel()" style="width: 90px; background-color: #02AFF3 !important; margin-left: 10px">Get To Excel</button>
+
+            </div>
+            <div id="divPenOrder" style="display: none">
+                <div class="col-md-12">
+                    <div class="col-md-10">
+                        <label class="control-label">Order Received --> Credit Hold --> Released&Accepted --> Order In Warehouse --> Pending For Invoicing --> Invoiced</label>
                     </div>
                 </div>
-                <div class="col-md-12" style="margin-bottom: 10px; display: none" id="divReports">
+                <div class="col-md-12">
                     <div class="col-md-1">
                         <label class="control-label">From Date</label>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" id="txtFromDT" class="form-control" />
+                        <input type="text" id="txtFromDatePen" class="form-control" />
                     </div>
-                    <div class="col-md-2">
-                        <label class="control-label">To Date</label>
-                    </div>
-                    <div class="col-md-2">
-                        <input type="text" id="txtToDT" class="form-control" />
-                    </div>
-                    <button type="button" id="btnFindReport" class="btn btn-xs btn-primary" onclick="GetReports()" style="width: 80px; margin-left: 10px">Get Data</button>
-                    <button type="button" id="exportexcel10" class="btn btn-xs btn-primary" onclick="GetReportExcel()" style="width: 90px; margin-left: 10px">Get To Excel</button>
-
-                </div>
-                <div id="divPenOrder" style="display: none">
-                    <div class="col-md-12">
-                        <div class="col-md-10">
-                            <label class="control-label">Order Received --> Credit Hold --> Released&Accepted --> Order In Warehouse --> Pending For Invoicing --> Invoiced</label>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-1">
-                            <label class="control-label">From Date</label>
-                        </div>
-                        <div class="col-md-2">
-                            <input type="text" id="txtFromDatePen" class="form-control" />
-                        </div>
-                        <div class="col-md-1">
-                            <label class="control-label">To Date</label>
-                        </div>
-                        <div class="col-md-2">
-                            <input type="text" id="txtToDatePen" class="form-control" />
-                        </div>
-                        <div class="col-md-1">
-                            <label class="control-label">Status</label>
-                        </div>
-                        <div class="col-md-2">
-                            @Html.DropDownList("ddlUserType", new SelectList(listStatus, "Value", "Text"), "- Select Status -", new { @class = "form-control" })
-                        </div>
-                        <button type="button" id="btnFindPndOrdReport" class="btn btn-xs btn-primary" onclick="GetReports()" style="width: 80px; margin-left: 10px">Get Data</button>
-                        <button type="button" id="exportexcel11" class="btn btn-xs btn-primary" onclick="GetReportExcel()" style="width: 90px; margin-left: 10px">Get To Excel</button>
-                    </div>
-                </div>
-                <div class="col-md-12" style="margin-bottom: 10px;" id="divAccountStatements">
                     <div class="col-md-1">
-                        <label class="control-label">From Date</label>
-                    </div>
-                    <div class="col-md-2">
-                        <input type="text" id="txtFromDTStmt" class="form-control" />
-                    </div>
-                    <div class="col-md-2">
                         <label class="control-label">To Date</label>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" id="txtToDTStmt" class="form-control" />
+                        <input type="text" id="txtToDatePen" class="form-control" />
                     </div>
-                    <button type="button" id="btnFindReportStmt" class="btn btn-xs btn-primary" onclick="GetReports()" style="width: 80px; margin-left: 10px">Get Data</button>
-                    <button type="button" id="exportexcelStmt" class="btn btn-xs btn-primary" onclick="GetReportExcel()" style="width: 90px; margin-left: 10px">Get To Excel</button>
-                    <button type="button" id="exportPDFStmt" class="btn btn-xs btn-primary" onclick="GetAccountStatementPDF()" style="width: 190px; margin-left: 10px;">Download Account Statement</button>
-
+                    <div class="col-md-1">
+                        <label class="control-label">Status</label>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.DropDownList("ddlUserType", new SelectList(listStatus, "Value", "Text"), "- Select Status -", new { @class = "form-control" })
+                    </div>
+                    <button type="button" id="btnFindPndOrdReport" class="btn btn-xs btn-primary" onclick="GetReports()" style="width: 80px; background-color: #02AFF3 !important; margin-left: 10px">Get Data</button>
+                    <button type="button" id="exportexcel11" class="btn btn-xs btn-primary" onclick="GetReportExcel()" style="width: 90px; background-color: #02AFF3 !important; margin-left: 10px">Get To Excel</button>
                 </div>
             </div>
+            <div class="col-md-12" style="margin-bottom: 10px;display:none;" id="divAccountStatements">
+                <div class="col-md-1">
+                    <label class="control-label">From Date</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="txtFromDTStmt" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label class="control-label">To Date</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="txtToDTStmt" class="form-control" />
+                </div>
+                <button type="button" id="btnFindReportStmt" class="btn btn-xs btn-primary" onclick="GetReports()" style="width: 80px; background-color: #02AFF3 !important; margin-left: 10px">Get Data</button>
+                <button type="button" id="exportexcelStmt" class="btn btn-xs btn-primary" onclick="GetReportExcel()" style="width: 90px; background-color: #02AFF3 !important; margin-left: 10px">Get To Excel</button>
+                <button type="button" id="exportPDFStmt" class="btn btn-xs btn-primary" onclick="GetAccountStatementPDF()" style="width: 190px; background-color: #02AFF3 !important; margin-left: 10px;">Download Account Statement</button>
 
-            @*//Aging--*@
-            <div class="table-responsive" id="divReport" style="margin-left: 23px; display: none">
-                <table class="table table-bordered ReportTable" id="tblMyReports">
-                    <thead id="">
-                        <tr style='background: rgba(158, 158, 158, 0.13)'>
-                            <th style="width: 15%">Customer Code</th>
-                            <th style="width: 15%">Customer Name</th>
-                            <th style="width: 15%">Parent Child</th>
-                            <th style="width: 15%">Location</th>
-                            <th style="width: 10%">Current Balance</th>
-                            <th style="width: 10%">0-30 Days</th>
-                            <th style="width: 10%">31-60 Days</th>
-                            <th style="width: 10%">61-90 Days</th>
-                            <th style="width: 10%">91-120 Days</th>
-                            <th style="width: 10%">121+ Days</th>
-                            <th style="width: 10%"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbodymydata"></tbody>
-                </table>
-                <table></table>
             </div>
+            <div class="col-md-12" style="margin-bottom: 10px; display:none;" id="divCreditNote">
+                <div class="col-md-1">
+                    <label class="control-label">From Date</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="txtFromDTCN" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label class="control-label">To Date</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="txtToDTCN" class="form-control" />
+                </div>
+                <button type="button" id="btnFindReportStmt" class="btn btn-xs btn-primary" onclick="GetReports()" style="width: 80px; background-color: #02AFF3 !important; margin-left: 10px">Get Data</button>
+                <button type="button" id="exportexcelStmt" class="btn btn-xs btn-primary" onclick="GetReportExcel()" style="width: 90px; background-color: #02AFF3 !important; margin-left: 10px">Get To Excel</button>
 
-            @*//Pending Order Report*@
-            <div class="table-responsive" id="divMyReportsPendingOrderReport" style="margin-left: 23px; display: none;">
-                <table class="table table-bordered ReportTable" id="tblMyReportsPendingOrderReport">
-                    <thead id="">
-                        <tr style='background: rgba(158, 158, 158, 0.13)'>
-                            <th>Order No.</th>
-                            <th>Card Code</th>
-                            <th>Card Name</th>
-                            <th>Location</th>
-                            <th>Doc Total</th>
-                            <th>Status</th>
-                            <th>TranspoterName</th>
-                            <th>LR No.</th>
-                            <th>Veh No.</th>
-                        </tr>
-                    </thead>
-                    <tbody id=""></tbody>
-                </table>
             </div>
+            <div class="col-md-12" style="margin-bottom: 10px; display:none;" id="divPaymentSummary">
+                <div class="col-md-1">
+                    <label class="control-label">From Date</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="txtFromDTPS" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label class="control-label">To Date</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="txtToDTPS" class="form-control" />
+                </div>
+                <button type="button" id="btnFindReportStmtPS" class="btn btn-xs btn-primary" onclick="GetReports()" style="width: 80px; background-color: #02AFF3 !important; margin-left: 10px">Get Data</button>
+                <button type="button" id="exportexcelStmtPS" class="btn btn-xs btn-primary" onclick="GetReportExcel()" style="width: 90px; background-color: #02AFF3 !important; margin-left: 10px">Get To Excel</button>
 
-            @*//ItemPurchase----------------*@
-            <div class="table-responsive" id="divMyReportsItemPurchase" style="margin-left: 23px; display: none;">
-                <table class="table table-bordered ReportTable" id="tblMyReportsItemPurchase">
-                    <thead id="">
-                        <tr style='background: rgba(158, 158, 158, 0.13)'>
-                            <th>Item Group Name</th>
-                            <th>Total Qty.</th>
-                            <th>Total Amount</th>
-                            <th>Sub Group</th>
-                            <th>Item</th>
-                        </tr>
-                    </thead>
-                    <tbody id=""></tbody>
-                </table>
             </div>
+        </div>
 
-            @*//Invoice ----------------*@
-            <div class="table-responsive" id="divMyReportsInvoice" style="margin-left: 23px; display: none;">
-                <table class="table table-bordered ReportTable" id="tblMyReportsInvoice">
-                    <thead id="">
-                        <tr style='background: rgba(158, 158, 158, 0.13)'>
-                            <th>Invoice No.</th>
-                            <th>Customer Code</th>
-                            <th>Customer Name</th>
-                            <th>Invoice Date</th>
-                            <th>Invoice Total</th>
-                            <th>Location</th>
-                            <th>Report</th>
-                        </tr>
-                    </thead>
-                    <tbody id=""></tbody>
-                </table>
+        @*//Aging--*@
+        <div class="table-responsive" id="divReport" style="margin-left: 23px; display: none">
+            <table class="table table-bordered ReportTable" id="tblMyReports">
+                <thead id="">
+                    <tr style='background: rgba(158, 158, 158, 0.13)'>
+                        <th style="width: 15%">Customer Code</th>
+                        <th style="width: 15%">Customer Name</th>
+                        <th style="width: 15%">Parent Child</th>
+                        <th style="width: 15%">Location</th>
+                        <th style="width: 10%">Current Balance</th>
+                        <th style="width: 10%">0-30 Days</th>
+                        <th style="width: 10%">31-60 Days</th>
+                        <th style="width: 10%">61-90 Days</th>
+                        <th style="width: 10%">91-120 Days</th>
+                        <th style="width: 10%">121+ Days</th>
+                        <th style="width: 10%"></th>
+                    </tr>
+                </thead>
+                <tbody id="tbodymydata"></tbody>
+            </table>
+            <table></table>
+        </div>
+
+        @*//Pending Order Report*@
+        <div class="table-responsive" id="divMyReportsPendingOrderReport" style="margin-left: 23px; display: none;">
+            <table class="table table-bordered ReportTable" id="tblMyReportsPendingOrderReport">
+                <thead id="">
+                    <tr style='background: rgba(158, 158, 158, 0.13)'>
+                        <th>Order No.</th>
+                        <th>Card Code</th>
+                        <th>Card Name</th>
+                        <th>Location</th>
+                        <th>Doc Total</th>
+                        <th>Status</th>
+                        <th>TranspoterName</th>
+                        <th>LR No.</th>
+                        <th>Veh No.</th>
+                    </tr>
+                </thead>
+                <tbody id=""></tbody>
+            </table>
+        </div>
+
+        @*//ItemPurchase----------------*@
+        <div class="table-responsive" id="divMyReportsItemPurchase" style="margin-left: 23px; display: none;">
+            <table class="table table-bordered ReportTable" id="tblMyReportsItemPurchase">
+                <thead id="">
+                    <tr style='background: rgba(158, 158, 158, 0.13)'>
+                        <th>Item Group Name</th>
+                        <th>Total Qty.</th>
+                        <th>Total Amount</th>
+                        <th>Sub Group</th>
+                        <th>Item</th>
+                    </tr>
+                </thead>
+                <tbody id=""></tbody>
+            </table>
+        </div>
+
+        @*//Invoice ----------------*@
+        <div class="table-responsive" id="divMyReportsInvoice" style="margin-left: 23px; display: none;">
+            <table class="table table-bordered ReportTable" id="tblMyReportsInvoice">
+                <thead id="">
+                    <tr style='background: rgba(158, 158, 158, 0.13)'>
+                        <th>Invoice No.</th>
+                        <th>Customer Code</th>
+                        <th>Customer Name</th>
+                        <th>Invoice Date</th>
+                        <th>Invoice Total</th>
+                        <th>Location</th>
+                        <th>Report</th>
+                    </tr>
+                </thead>
+                <tbody id=""></tbody>
+            </table>
+        </div>
+
+        @*//Account Statement ----------------*@
+        <div class="table-responsive" id="divMyReportsAccount" style="margin-left: 23px;display:none;">
+            <table class="table table-bordered ReportTable" id="tblMyReportsAccount">
+                <thead id="">
+                    <tr style='background: rgba(158, 158, 158, 0.13)'>
+                        <th>Customer Name</th>
+                        <th>Customer Code</th>
+                        <th>Location</th>
+                        <th>Trans Type</th>
+                        <th>Payment/Invoice Date</th>
+                        <th>Series</th>
+                        <th>Payment/Invoice No.</th>
+                        <th>Remarks</th>
+                        <th>DEBIT</th>
+                        <th>CREDIT</th>
+                        <th>RunningTotal</th>
+
+                    </tr>
+                </thead>
+                <tbody id=""></tbody>
+            </table>
+        </div>
+
+        @*//Payment Summary---------------*@
+        <div class="table-responsive" id="divMyReportsBank" style="margin-left: 23px; display: none;">
+            <table class="table table-bordered ReportTable" id="tblMyReportsBank">
+                <thead id="">
+                    <tr style='background: rgba(158, 158, 158, 0.13)'>
+                        <th>Payment No.</th>
+                        <th>Payment Date</th>
+                        <th>Description</th>
+
+                        <th>Payment Type</th>
+                        <th>Cheque No.</th>
+                        <th>Cheque Date</th>
+                        <th>Drawee Bank Name</th>
+                        <th>Chequee Amount</th>
+                        <th>Report</th>
+                    </tr>
+                </thead>
+                <tbody id=""></tbody>
+            </table>
+        </div>
+
+        @*//Credit Note--------------*@
+        <div class="table-responsive" id="divMyReportsCredit" style="margin-left: 23px; display: none;">
+            <table class="table table-bordered ReportTable" id="tblMyReportsCredit">
+                <thead id="">
+                    <tr style='background: rgba(158, 158, 158, 0.13)'>
+                        <th>Customer Name</th>
+                        <th>Customer Code</th>
+                        <th>Credit Note No.</th>
+                        <th>Credit Note Date</th>
+                        @*<th>Ware House</th>*@
+                        <th>Item Code</th>
+                        <th>Item Description</th>
+                        <th>Quantity</th>
+                        <th>C.N Amount</th>
+                        <th>Location</th>
+                        <th>Report</th>
+                    </tr>
+                </thead>
+                <tbody id=""></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Overdue 15 <= days -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="width: 180%; margin-left: -180px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">View Details</h4>
             </div>
-
-            @*//Account Statement ----------------*@
-            <div class="table-responsive" id="divMyReportsAccount" style="margin-left: 23px;">
-                <table class="table table-bordered ReportTable" id="tblMyReportsAccount">
-                    <thead id="">
-                        <tr style='background: rgba(158, 158, 158, 0.13)'>
-                            <th>Customer Name</th>
-                            <th>Customer Code</th>
-                            <th>Location</th>
-                            <th>Trans Type</th>
-                            <th>Payment/Invoice Date</th>
-                            <th>Series</th>
-                            <th>Payment/Invoice No.</th>
-                            <th>Remarks</th>
-                            <th>DEBIT</th>
-                            <th>CREDIT</th>
-                            <th>RunningTotal</th>
-
-                        </tr>
-                    </thead>
-                    <tbody id=""></tbody>
-                </table>
+            <div class="modal-body">
+                <div>
+                    <table class="table table-bordered" id="tblMyDataList">
+                        <thead id="theadmydata1">
+                            <tr style='background: black'>
+                                <th>Document No.</th>
+                                <th>Document Date</th>
+                                <th>Due Date</th>
+                                <th>Remark</th>
+                                <th>Balance Amount</th>
+                                <th>Days</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodymydata1"></tbody>
+                    </table>
+                </div>
             </div>
-
-            @*//Payment Summary---------------*@
-            <div class="table-responsive" id="divMyReportsBank" style="margin-left: 23px; display: none;">
-                <table class="table table-bordered ReportTable" id="tblMyReportsBank">
-                    <thead id="">
-                        <tr style='background: rgba(158, 158, 158, 0.13)'>
-                            <th>Payment No.</th>
-                            <th>Payment Date</th>
-                            <th>Description</th>
-
-                            <th>Payment Type</th>
-                            <th>Cheque No.</th>
-                            <th>Cheque Date</th>
-                            <th>Drawee Bank Name</th>
-                            <th>Chequee Amount</th>
-                            <th>Report</th>
-                        </tr>
-                    </thead>
-                    <tbody id=""></tbody>
-                </table>
-            </div>
-
-            @*//Credit Note--------------*@
-            <div class="table-responsive" id="divMyReportsCredit" style="margin-left: 23px; display: none;">
-                <table class="table table-bordered ReportTable" id="tblMyReportsCredit">
-                    <thead id="">
-                        <tr style='background: rgba(158, 158, 158, 0.13)'>
-                            <th>Customer Name</th>
-                            <th>Customer Code</th>
-                            <th>Credit Note No.</th>
-                            <th>Credit Note Date</th>
-                            @*<th>Ware House</th>*@
-                            <th>Item Code</th>
-                            <th>Item Description</th>
-                            <th>Quantity</th>
-                            <th>C.N Amount</th>
-                            <th>Location</th>
-                            <th>Report</th>
-                        </tr>
-                    </thead>
-                    <tbody id=""></tbody>
-                </table>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Modal Overdue 15 <= days -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
+<!-- Modal Overdue >Due Within 30 Days -->
+<div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content" style="width: 180%; margin-left: -180px;">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">View Details</h4>
+        <!-- Modal content-->
+        <div class="modal-content" style="width: 180%; margin-left: -180px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">View Details / Due Within 30 Days</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <table class="table table-bordered" id="tblMyDataList2">
+                        <thead id="theadmydata2">
+                            <tr style='background: black'>
+                                <th>Invoice No.</th>
+                                <th>Invoice Date</th>
+                                <th>Due Date</th>
+                                <th>Invoice Amount</th>
+                                <th>Balance Amount</th>
+                                <th>Days</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodymydata2"></tbody>
+                    </table>
                 </div>
-                <div class="modal-body">
-                    <div>
-                        <table class="table table-bordered" id="tblMyDataList">
-                            <thead id="theadmydata1">
-                                <tr style='background: black'>
-                                    <th>Document No.</th>
-                                    <th>Document Date</th>
-                                    <th>Due Date</th>
-                                    <th>Remark</th>
-                                    <th>Balance Amount</th>
-                                    <th>Days</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbodymydata1"></tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Modal Overdue >Due Within 30 Days -->
-    <div class="modal fade" id="myModal2" role="dialog">
-        <div class="modal-dialog">
+<!-- Model Expected Payment -->
+<div class="modal fade" id="myModal3" role="dialog">
+    <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content" style="width: 180%; margin-left: -180px;">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">View Details / Due Within 30 Days</h4>
+        <!-- Modal content-->
+        <div class="modal-content" style="width: 180%; margin-left: -180px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">View Details / Expected Payment</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <table class="table table-bordered" id="tblMyDataList3">
+                        <thead id="theadmydata3">
+                            <tr style='background: black'>
+                                <th>Invoice No.</th>
+                                <th>Invoice Date</th>
+                                <th>Due Date</th>
+                                <th>Invoice Amount</th>
+                                <th>Balance Amount</th>
+                                <th>Days</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodymydata3"></tbody>
+                    </table>
                 </div>
-                <div class="modal-body">
-                    <div>
-                        <table class="table table-bordered" id="tblMyDataList2">
-                            <thead id="theadmydata2">
-                                <tr style='background: black'>
-                                    <th>Invoice No.</th>
-                                    <th>Invoice Date</th>
-                                    <th>Due Date</th>
-                                    <th>Invoice Amount</th>
-                                    <th>Balance Amount</th>
-                                    <th>Days</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbodymydata2"></tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Model Expected Payment -->
-    <div class="modal fade" id="myModal3" role="dialog">
-        <div class="modal-dialog">
+<!-- Model Order Value -->
+<div class="modal fade" id="myModal4" role="dialog">
+    <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content" style="width: 180%; margin-left: -180px;">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">View Details / Expected Payment</h4>
+        <!-- Modal content-->
+        <div class="modal-content" style="width: 180%; margin-left: -180px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">View Details / Order Value</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <table class="table table-bordered" id="tblMyDataList4">
+                        <thead id="theadmydata4">
+                            <tr style='background: black'>
+                                <th>Order No.</th>
+                                <th>Order Date</th>
+                                <th>Due Date</th>
+                                <th>Order Amount</th>
+                                <th>Balance Amount</th>
+                                <th>Days</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodymydata4"></tbody>
+                    </table>
                 </div>
-                <div class="modal-body">
-                    <div>
-                        <table class="table table-bordered" id="tblMyDataList3">
-                            <thead id="theadmydata3">
-                                <tr style='background: black'>
-                                    <th>Invoice No.</th>
-                                    <th>Invoice Date</th>
-                                    <th>Due Date</th>
-                                    <th>Invoice Amount</th>
-                                    <th>Balance Amount</th>
-                                    <th>Days</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbodymydata3"></tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Model Order Value -->
-    <div class="modal fade" id="myModal4" role="dialog">
-        <div class="modal-dialog">
+<!-- Model partially unpaid invoice -->
+<div class="modal fade" id="myModal5" role="dialog">
+    <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content" style="width: 180%; margin-left: -180px;">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">View Details / Order Value</h4>
+        <!-- Modal content-->
+        <div class="modal-content" style="width: 180%; margin-left: -180px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">View Details / Partially unpaid invoice</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <table class="table table-bordered" id="tblMyDataList5">
+                        <thead id="theadmydata5">
+                            <tr style='background: black'>
+                                <th>Invoice No.</th>
+                                <th>Invoice Date</th>
+                                <th>Due Date</th>
+                                <th>Invoice Amount</th>
+                                <th>Paid Amount</th>
+                                <th>Balance Amount</th>
+                                <th>Days</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodymydata5"></tbody>
+                    </table>
                 </div>
-                <div class="modal-body">
-                    <div>
-                        <table class="table table-bordered" id="tblMyDataList4">
-                            <thead id="theadmydata4">
-                                <tr style='background: black'>
-                                    <th>Order No.</th>
-                                    <th>Order Date</th>
-                                    <th>Due Date</th>
-                                    <th>Order Amount</th>
-                                    <th>Balance Amount</th>
-                                    <th>Days</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbodymydata4"></tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Model partially unpaid invoice -->
-    <div class="modal fade" id="myModal5" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content" style="width: 180%; margin-left: -180px;">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">View Details / Partially unpaid invoice</h4>
+<!-- Model Pop-Up For Aging Report Row Wise Details -->
+<div class="modal fade" id="myModalARD" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="width: 180%; margin-left: -180px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">View Details / Aging</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <table class="table table-bordered" id="tblMyDataListAgingDetail">
+                        <thead id="theadmydataARD">
+                            <tr style='background: black'>
+                                @*<th>Document No.</th>*@
+                                <th>Invoice Date</th>
+                                <th>Invoice Due Date</th>
+                                <th>Invoice No.</th>
+                                <th>Invoice Value</th>
+                                <th>Balance Amount</th>
+                                <th>Days</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodymydataARD"></tbody>
+                    </table>
                 </div>
-                <div class="modal-body">
-                    <div>
-                        <table class="table table-bordered" id="tblMyDataList5">
-                            <thead id="theadmydata5">
-                                <tr style='background: black'>
-                                    <th>Invoice No.</th>
-                                    <th>Invoice Date</th>
-                                    <th>Due Date</th>
-                                    <th>Invoice Amount</th>
-                                    <th>Paid Amount</th>
-                                    <th>Balance Amount</th>
-                                    <th>Days</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbodymydata5"></tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Model Pop-Up For Aging Report Row Wise Details -->
-    <div class="modal fade" id="myModalARD" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content" style="width: 180%; margin-left: -180px;">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">View Details / Aging</h4>
+<!-- Model Pop-Up For Item SUb Group Row Wise Details -->
+<div class="modal fade" id="myModalItmSubGrp" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="width: 180%; margin-left: -180px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">View Details / SubGroup</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <table class="table table-bordered" id="tblMyDataListSubGroup">
+                        <thead id="theadmydataISGroup">
+                            <tr style='background: black'>
+                                <th>Item Sub Group</th>
+                                <th>Total Quantity</th>
+                                <th>Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="theadmydataISGroup"></tbody>
+                    </table>
                 </div>
-                <div class="modal-body">
-                    <div>
-                        <table class="table table-bordered" id="tblMyDataListAgingDetail">
-                            <thead id="theadmydataARD">
-                                <tr style='background: black'>
-                                    @*<th>Document No.</th>*@
-                                    <th>Invoice Date</th>
-                                    <th>Invoice Due Date</th>
-                                    <th>Invoice No.</th>
-                                    <th>Invoice Value</th>
-                                    <th>Balance Amount</th>
-                                    <th>Days</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbodymydataARD"></tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Model Pop-Up For Item SUb Group Row Wise Details -->
-    <div class="modal fade" id="myModalItmSubGrp" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content" style="width: 180%; margin-left: -180px;">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">View Details / SubGroup</h4>
+<!-- Model Pop-Up For Item Details Group Row Wise Details -->
+<div class="modal fade" id="myModalItem" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="width: 180%; margin-left: -180px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">View Details / Item</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <table class="table table-bordered" id="tblMyDataListItem">
+                        <thead id="theadmydataItemDetails">
+                            <tr style='background: black'>
+                                <th>Invoice No.</th>
+                                <th>Customer Code</th>
+                                <th>Customer Name</th>
+                                <th>Item Code</th>
+                                <th>Item Description</th>
+                                <th>Quantity</th>
+                                <th>Item Value</th>
+                            </tr>
+                        </thead>
+                        <tbody id="theadmydataItemDetails"></tbody>
+                    </table>
                 </div>
-                <div class="modal-body">
-                    <div>
-                        <table class="table table-bordered" id="tblMyDataListSubGroup">
-                            <thead id="theadmydataISGroup">
-                                <tr style='background: black'>
-                                    <th>Item Sub Group</th>
-                                    <th>Total Quantity</th>
-                                    <th>Total Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody id="theadmydataISGroup"></tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-
-    <!-- Model Pop-Up For Item Details Group Row Wise Details -->
-    <div class="modal fade" id="myModalItem" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content" style="width: 180%; margin-left: -180px;">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">View Details / Item</h4>
-                </div>
-                <div class="modal-body">
-                    <div>
-                        <table class="table table-bordered" id="tblMyDataListItem">
-                            <thead id="theadmydataItemDetails">
-                                <tr style='background: black'>
-                                    <th>Invoice No.</th>
-                                    <th>Customer Code</th>
-                                    <th>Customer Name</th>
-                                    <th>Item Code</th>
-                                    <th>Item Description</th>
-                                    <th>Quantity</th>
-                                    <th>Item Value</th>
-                                </tr>
-                            </thead>
-                            <tbody id="theadmydataItemDetails"></tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 
 
-    @*<script src="~/js/jquery.min.js"></script>*@
-
-    <script src="~/DataTable/js/jquery.dataTables.min.js"></script>
-
-    <script src="~/Content/tableExport.js"></script>
-    @*Main file which does export feature *@
-    <script src="~/Content/jquery.base64.js"></script>
-    @*Main file which does convert the content to base64  *@
-    <script src="~/Content/html2canvas.js"></script>
-    @*Main file which does export to image feature *@
-    <script src="~/Content/jspdf/libs/base64.js"></script>
-    @*Main file which does  convert the content to base64 for pdf *@
-    <script src="~/Content/jspdf/libs/sprintf.js"></script>
-    @*Main file which does export feature for pdf *@
-    <script src="~/Content/jspdf/jspdf.js"></script>
-    @*Main file which does export feature for pdf *@
-    <script type="text/javascript">
+<script src="~/DataTable/js/jquery.dataTables.min.js"></script>
+<script src="~/Content/tableExport.js"></script>
+<script src="~/Content/jquery.base64.js"></script>
+<script src="~/Content/jspdf/jspdf.js"></script>
+<script type="text/javascript">
         $(document).ready(function () {
             $('#aLogout').click(function () {
                 window.location.href = '../LogOutPage.aspx';
@@ -1200,55 +1162,91 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
             });
         }
 
-        // Hide & Show Tab Menu
-        var _CurrentActive = 'liMenu5';
-        function CurrentActive(currTab) {
-            $('#divMyReportsPendingOrderReport').hide();
-            $('#divMyReportsItemPurchase').hide();
-            $('#divMyReportsAccount').hide();
-            $('#divMyReportsInvoice').hide();
-            $('#divMyReportsCredit').hide();
-            $('#divMyReportsBank').hide();
-            $('#divMyReportsAccount').hide();
-            $('#divReport').hide();
-            _CurrentActive = currTab.id;
-            var MyMenuLength = $('#MyUl li').length;
-            for (var i = 1; i <= MyMenuLength; i++) {
-                $('#liMenu' + i + '').removeClass('active')
-                $('#liMenu' + i + '').removeClass('CurrentActiveTab')
-            }
-            $('#' + currTab.id + '').addClass('CurrentActiveTab')
-            if (currTab.id == 'liMenu1') {
-                $('#divReportsAgeing').hide();
-                $('#divReports').hide();
-                $('#divPenOrder').hide();
-                $('#divAccountStatements').show();
-            }
-            else if (currTab.id == 'liMenu2') {
-                $('#divReports').hide();
-                $('#divReportsAgeing').hide();
-                $('#divPenOrder').hide();
-                $('#divAccountStatements').show();
-            }
-            else if (currTab.id == 'liMenu5') {
-                $('#divReports').hide();
-                $('#divReportsAgeing').hide();
-                $('#divPenOrder').hide();
-                $('#divAccountStatements').show();
-            }
-            else {
-                $('#divReports').hide();
-                $('#divReportsAgeing').hide();
-                $('#divPenOrder').hide();
-                $('#divAccountStatements').show();
-            }
-
-            //$('#tblMyReports').empty();
-            //$('#theadmydata').empty();
-            //$('#tbodymydata').empty();
-            $('#txtFromDT').val('');
-            $('#txtToDT').val('');
+    // Hide & Show Tab Menu
+    var _CurrentActive = 'liMenu1';
+    function CurrentActive(currTab) {
+        ////debugger;
+        $('#divMyReportsPendingOrderReport').hide();
+        $('#divMyReportsItemPurchase').hide();
+        $('#divMyReportsInvoice').hide();
+        $('#divMyReportsCredit').hide();
+        $('#divPaymentSummary').hide();
+        $('#divMyReportsAccount').hide();
+        $('#divReport').hide();
+        _CurrentActive = currTab.id;
+        var MyMenuLength = $('#MyUl li').length;
+        for (var i = 1; i <= MyMenuLength; i++) {
+            $('#liMenu' + i + '').removeClass('active')
+            $('#liMenu' + i + '').removeClass('CurrentActiveTab')
         }
+        $('#' + currTab.id + '').addClass('CurrentActiveTab')
+        if (currTab.id == 'liMenu1') {
+            $('#divReportsAgeing').show();
+            $('#divPenOrder').hide();
+            $('#divItemPurchase').hide();
+            $('#divReports').hide();
+            $('#divAccountStatements').hide();
+            $('#divCreditNote').hide();
+            $('#divPaymentSummary').hide();
+        }
+        else if (currTab.id == 'liMenu2') {
+            $('#divReportsAgeing').hide();
+            $('#divPenOrder').show();
+            $('#divItemPurchase').hide();
+            $('#divReports').hide();
+            $('#divAccountStatements').hide();
+            $('#divCreditNote').hide();
+            $('#divPaymentSummary').hide();
+        }
+        else if (currTab.id == 'liMenu3') {
+            $('#divReportsAgeing').hide();
+            $('#divPenOrder').hide();
+            $('#divItemPurchase').show();
+            $('#divReports').hide();
+            $('#divAccountStatements').hide();
+            $('#divCreditNote').hide();
+            $('#divPaymentSummary').hide();
+        }
+        else if (currTab.id == 'liMenu4') {
+            $('#divReportsAgeing').hide();
+            $('#divPenOrder').hide();
+            $('#divItemPurchase').hide();
+            $('#divReports').show();
+            $('#divAccountStatements').hide();
+            $('#divCreditNote').hide();
+            $('#divPaymentSummary').hide();
+        }
+        else if (currTab.id == 'liMenu5') {
+            $('#divReportsAgeing').hide();
+            $('#divPenOrder').hide();
+            $('#divItemPurchase').hide();
+            $('#divReports').hide();
+            $('#divAccountStatements').show();
+            $('#divCreditNote').hide();
+            $('#divPaymentSummary').hide();
+        }
+        else if (currTab.id == 'liMenu6') {
+            $('#divReportsAgeing').hide();
+            $('#divPenOrder').hide();
+            $('#divItemPurchase').hide();
+            $('#divReports').hide();
+            $('#divAccountStatements').hide();
+            $('#divCreditNote').show();
+            $('#divPaymentSummary').hide();
+        }
+        else {
+            $('#divReportsAgeing').hide();
+            $('#divPenOrder').hide();
+            $('#divItemPurchase').hide();
+            $('#divReports').hide();
+            $('#divAccountStatements').hide();
+            $('#divCreditNote').hide();
+            $('#divPaymentSummary').show();
+        }
+
+        $('#txtFromDT').val('');
+        $('#txtToDT').val('');
+    }
 
         //Find Customer Name
         function OnChangeFill() {
@@ -1344,10 +1342,10 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
             else if (_CurrentActive == 'liMenu5') {
                 AccountStatement();
             }
-            else if (_CurrentActive == 'liMenu6') {
+            else if (_CurrentActive == 'liMenu7') {
                 BankReceiptReport();
             }
-            else if (_CurrentActive == 'liMenu7') {
+            else if (_CurrentActive == 'liMenu6') {
                 CreditNoteReport();
             }
             else if (_CurrentActive == 'liMenu8') {
@@ -1377,10 +1375,10 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
                 AccountStatementReportExcel();
 
             }
-            else if (_CurrentActive == 'liMenu6') {
+            else if (_CurrentActive == 'liMenu7') {
                 BankReceiptReportExcel();
             }
-            else if (_CurrentActive == 'liMenu7') {
+            else if (_CurrentActive == 'liMenu6') {
                 CreditNoteReportExcel();
             }
             else if (_CurrentActive == 'liMenu8') {
@@ -1499,8 +1497,8 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
         //Item Purchase Excel
         function ItemPurchaseExcel() {
             var CardCode = $('#ddlCustomerName').val();
-            var FromDT = $('#txtFromDT').val();
-            var ToDT = $('#txtToDT').val();
+            var FromDT = $('#txtFromDTIP').val();
+            var ToDT = $('#txtToDTIP').val();
             var radiovalue = '';
             if ($("#radio_1").is(":checked")) {
                 radiovalue = 1;
@@ -1762,8 +1760,8 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
         //Credit Note Excel
         function CreditNoteReportExcel() {
             var CardCode = $('#ddlCustomerName').val();
-            var FromDT = $('#txtFromDT').val();
-            var ToDT = $('#txtToDT').val();
+            var FromDT = $('#txtFromDTCN').val();
+            var ToDT = $('#txtToDTCN').val();
             var radiovalue = '';
             if ($("#radio_1").is(":checked")) {
                 radiovalue = 1;
@@ -1962,8 +1960,8 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
                 $('#divMyReportsPendingOrderReport').hide();
                 $('#divMyReportsItemPurchase').show();
                 var CardCode = $('#ddlCustomerName').val();
-                var FromDT = $('#txtFromDT').val();
-                var ToDT = $('#txtToDT').val();
+                var FromDT = $('#txtFromDTIP').val();
+                var ToDT = $('#txtToDTIP').val();
                 var radiovalue = '';
                 if ($("#radio_1").is(":checked")) {
                     radiovalue = 1;
@@ -2219,8 +2217,8 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
                                 else
                                     radiovalue = 3;
                                 var CardCode = $('#ddlCustomerName').val();
-                                var FromDT = $('#txtFromDT').val();
-                                var ToDT = $('#txtToDT').val();
+                                var FromDT = $('#txtFromDTCN').val();
+                                var ToDT = $('#txtToDTCN').val();
                                 $('#theadmydata').empty();
                                 var rowhead = "<tr style='background: rgba(158, 158, 158, 0.13)'></tr>";
                                 //rowhead += "<th>C Form Days</th><th>Advance</th><th>0-15</th><th>16-30</th><th>31-45</th><th>>45</th><th>Total</th></tr>";
@@ -2515,8 +2513,8 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
                                                                             //FOR BIND ITEM PURCHASE REPORT ITEM SUB GROUP ROW WISE
                                                                             function BindItemSubGroup(ItemGroupName) {
                                                                                 //debugger;
-                                                                                var FromDT = $('#txtFromDT').val();
-                                                                                var ToDT = $('#txtToDT').val();
+                                                                                var FromDT = $('#txtFromDTIP').val();
+                                                                                var ToDT = $('#txtToDTIP').val();
                                                                                 var CardCode = $('#ddlCustomerName').val();
                                                                                 var radiovalue = '';
                                                                                 if ($("#radio_1").is(":checked")) {
@@ -2561,8 +2559,8 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
                                                                                     //FOR BIND ITEM PURCHASE REPORT ITEM SUB GROUP Item ROW WISE
                                                                                     function BindItemGroupItem(ItemGroupName) {
                                                                                         //debugger;
-                                                                                        var FromDT = $('#txtFromDT').val();
-                                                                                        var ToDT = $('#txtToDT').val();
+                                                                                        var FromDT = $('#txtFromDTIP').val();
+                                                                                        var ToDT = $('#txtToDTIP').val();
                                                                                         var CardCode = $('#ddlCustomerName').val();
                                                                                         var radiovalue = '';
                                                                                         if ($("#radio_1").is(":checked")) {
@@ -2716,48 +2714,9 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
                                                                                                     }
                                                                                                 });
                                                                                             }
-    </script>
-    @*<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">*@
-    <link href="~/DataTable/css/jquery-ui.css" rel="stylesheet" />
-    @*<link rel="stylesheet" href="/resources/demos/style.css">*@
-    @*<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
-    <script src="~/DataTable/js/jquery-ui.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#txtFromDT").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat: "mm/dd/yy"
-            });
-            $("#txtToDT").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat: "mm/dd/yy"
-            });
-            $("#txtFromDatePen").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat: "mm/dd/yy"
-            });
-            $("#txtToDatePen").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat: "mm/dd/yy"
-            });
-            $("#txtFromDTStmt").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat: "mm/dd/yy"
-            });
-            $("#txtToDTStmt").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat: "mm/dd/yy"
-            });
-        });
-    </script>
-
-</body>
-</html>
+</script>
+<link href="~/DataTable/css/jquery-ui.css" rel="stylesheet" />
+<script src="~/DataTable/js/jquery-ui.js"></script>
+<script src="~/CustomScripts/CustomerDatePicker.js"></script>
 
 

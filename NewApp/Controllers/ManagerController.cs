@@ -20,8 +20,8 @@ namespace NewApp.Controllers
         string username = string.Empty;
         string lastseen = string.Empty;
         string UserCode = string.Empty;
-        string usertype = string.Empty;
         int _PortalId = 0;
+        int usertype = 0;
         public List<CardCodeBind> _CustomerList = new List<CardCodeBind>();
         string _sExcelPath = ConfigurationManager.AppSettings["ExcelPath"];
         string dtCurrentDate = System.DateTime.Now.ToString("yyyyMMddHHmmss");
@@ -39,7 +39,9 @@ namespace NewApp.Controllers
         public ManagerController()
         {
             username = (string)System.Web.HttpContext.Current.Session["_SAP_ID"];
+            lastseen = (string)System.Web.HttpContext.Current.Session["LastLoginDateTime"];
             UserCode = (string)System.Web.HttpContext.Current.Session["USER_CODE"];
+            usertype = (int)System.Web.HttpContext.Current.Session["USER_TYPEID"];
         }
         #endregion
 
@@ -71,8 +73,8 @@ namespace NewApp.Controllers
                     {
                         ViewBag.UserName = "Good Evening : " + Session["F_NAME"].ToString();
                     }
-                    //ViewBag.UserName = Session["F_NAME"].ToString();
-                    //ViewBag.lastseen = "Last Login:" + Session["LastLoginDateTime"].ToString();
+                    ViewBag.lastseen = "Last Login:" + Session["LastLoginDateTime"].ToString();
+                    ViewBag.UserType = Session["USER_TYPEID"].ToString();
                     GetMovingValue();
                 }
             }
@@ -376,7 +378,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@CARDCODE", sCardCode));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_CUSTOMER_AGING", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_CUSTOMER_AGING_EXCEL", lstparameters);
 
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
@@ -420,7 +422,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@STATUS", sStatus.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_SALESORDER", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_SALESORDER_EXCEL", lstparameters);
 
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
@@ -463,7 +465,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@TODATE", sToDate.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_ItemPurchase_Group", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_ItemPurchase_Group_EXCEL", lstparameters);
 
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
@@ -500,7 +502,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@TODATE", sToDate.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_InvoiceReport", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_InvoiceReport_EXCEL", lstparameters);
 
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
@@ -540,7 +542,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@TODATE", sToDate.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_AccountStatement", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_AccountStatement_EXCEL", lstparameters);
 
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
@@ -592,7 +594,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@TODATE", sToDate.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PARTAL_BankReceipt", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PARTAL_BankReceipt_EXCEL", lstparameters);
 
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
@@ -635,7 +637,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@TODATE", sToDate.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_CREDITNOTE", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_CREDITNOTE_EXCEL", lstparameters);
 
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
@@ -699,7 +701,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@CARDCODE", sCardCode));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_CUSTOMER_AGING", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_CUSTOMER_AGING_New", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
                     _CustomerList.Add(new CardCodeBind()
@@ -741,7 +743,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@STATUS", sStatus.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_SALESORDER", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_SALESORDER_New", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
                     _CustomerList.Add(new CardCodeBind()
@@ -784,7 +786,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@TODATE", sToDate.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_ItemPurchase_Group", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_ItemPurchase_Group_New", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
                     _CustomerList.Add(new CardCodeBind()
@@ -820,7 +822,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@TODATE", sToDate.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_InvoiceReport", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_InvoiceReport_New", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
                     _CustomerList.Add(new CardCodeBind()
@@ -857,7 +859,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@TODATE", sToDate.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_AccountStatement", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_AccountStatement_New", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
                     _CustomerList.Add(new CardCodeBind()
@@ -967,7 +969,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@TODATE", sToDate.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PARTAL_BankReceipt", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PARTAL_BankReceipt_New", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
                     _CustomerList.Add(new CardCodeBind()
@@ -1008,7 +1010,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@TODATE", sToDate.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_CREDITNOTE", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_CREDITNOTE_New", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
                     _CustomerList.Add(new CardCodeBind()
@@ -1089,7 +1091,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio));
                 lstparameters.Add(new Parameters("@GROUP", sGroupName));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_ItemPurchase_SUB_Group", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_ItemPurchase_SUB_Group_New", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
                     _CustomerList.Add(new CardCodeBind()
@@ -1125,7 +1127,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio));
                 lstparameters.Add(new Parameters("@GROUP", sGroupName));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_ItemPurchase", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_ItemPurchase_New", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
                     _CustomerList.Add(new CardCodeBind()
@@ -1223,11 +1225,12 @@ namespace NewApp.Controllers
                     if (_DS.Tables[0].Rows[0][0].ToString() == "G")
                     {
                         //_DS1 = dataAccess.GetDataSet("UNE_SP_GST_INVOICE_PORTAL", lstparameters);
-                        _DS1 = dataAccess.GetDataSet("UNE_SP_GST_INVOICE_PORTAL_Final", lstparameters);
+                        //_DS1 = dataAccess.GetDataSet("UNE_SP_GST_INVOICE_PORTAL_Final", lstparameters);
+                        _DS1 = dataAccess.GetDataSet("BPS_SP_GST_INVOICE_Final", lstparameters);
 
                         ReportDocument rd = new ReportDocument();
                         //rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "Final Invoice Layout-NEW 20082020.rpt"));
-                        rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "TCS Invoice- Item 03-11-2020.rpt"));
+                        rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "AR  Invoice Item Knauf.rpt"));
                         rd.SetDataSource(_DS1.Tables[0]);
 
                         if (rd.Subreports.Count > 0)
@@ -1255,18 +1258,24 @@ namespace NewApp.Controllers
                     else if (_DS.Tables[0].Rows[0][0].ToString().Equals("E"))
                     {
                         //_DS1 = dataAccess.GetDataSet("SFLLP_SALESInvoiceSERVICE", lstparameters);
-                        _DS1 = dataAccess.GetDataSet("UNE_SP_GST_INVOICEFORSERVICE_PORTAL_FINAL", lstparameters);
+                        //_DS1 = dataAccess.GetDataSet("UNE_SP_GST_INVOICEFORSERVICE_PORTAL_FINAL", lstparameters);
+                        _DS1 = dataAccess.GetDataSet("BPS_SP_GST_INVOICEFORSERVICE", lstparameters);
 
                         ReportDocument rd = new ReportDocument();
                         //rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "Purchase Invoice_14102016.rpt"));
                         //rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "GST AR INVOICE  SERVICE TYPE REPORT 20082020.rpt"));
-                        rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "GST AR INVOICE  SERVICE TYPE REPORT.rpt"));
+                        //rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "GST AR INVOICE  SERVICE TYPE REPORT.rpt"));
+                        rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "AR Invoice Service Knauf.rpt"));
                         rd.SetDataSource(_DS1.Tables[0]);
 
-                        //if (rd.Subreports.Count > 0)
-                        //{
-                        //    rd.Subreports[0].SetDataSource(_DS1.Tables[0]);
-                        //}
+                        if (rd.Subreports.Count > 0)
+                        {
+                            List<Parameters> lstparameters1 = new List<Parameters>();
+                            lstparameters1.Add(new Parameters("@DOCNUM", sDocNum.ToString()));
+                            lstparameters1.Add(new Parameters("@Date", sDocDate.ToString())); ;
+                            _DS1 = dataAccess.GetDataSet("GST_Freight", lstparameters1);
+                            rd.Subreports[0].SetDataSource(_DS1.Tables[0]);
+                        }
 
                         Session["report"] = rd;
                     }
@@ -1343,12 +1352,14 @@ namespace NewApp.Controllers
                     if (_DS.Tables[0].Rows[0][0].ToString() == "B")
                     {
                         //_DS1 = dataAccess.GetDataSet("UNE_SP_GST_CRNOTEFORSERVICE_PORTAL", lstparameters);
-                        _DS1 = dataAccess.GetDataSet("UNE_SP_GST_ARCREDITFORSERVICE_PORTAL_FINAL", lstparameters);
+                        //_DS1 = dataAccess.GetDataSet("UNE_SP_GST_ARCREDITFORSERVICE_PORTAL_FINAL", lstparameters);
+                        _DS1 = dataAccess.GetDataSet("BPS_SP_GST_ARCREDITFORSERVICE", lstparameters);
                         ReportDocument rd = new ReportDocument();
 
                         //rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "GST AR CREDIT SERVICE TYPE REPORT_01092017.rpt"));
                         //rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "GST AR CREDIT SERVICE TYPE REPORT_20082020.rpt"));
-                        rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "GST AR CREDIT SERVICE TYPE REPORT_01092017.rpt"));
+                        //rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "GST AR CREDIT SERVICE TYPE REPORT_01092017.rpt"));
+                        rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "AR Credit Memo Service Knauf.rpt"));
                         rd.SetDataSource(_DS1.Tables[0]);
 
                         if (rd.Subreports.Count > 0)
@@ -1365,12 +1376,14 @@ namespace NewApp.Controllers
                     {
 
                         //_DS1 = dataAccess.GetDataSet("UNE_SP_GST_CRNOTE_PORTAL", lstparameters);
-                        _DS1 = dataAccess.GetDataSet("UNE_SP_GST_CREDIT_NOTE_PORTAL_FINAL", lstparameters);
+                        //_DS1 = dataAccess.GetDataSet("UNE_SP_GST_CREDIT_NOTE_PORTAL_FINAL", lstparameters);
+                        _DS1 = dataAccess.GetDataSet("BPS_SP_GST_CREDIT_NOTE", lstparameters);
                         ReportDocument rd = new ReportDocument();
 
                         //rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "GST AR CREDIT REPORT.rpt"));
                         //rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "GST AR CREDIT REPORT item 20082020.rpt"));
-                        rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "GST AR CREDIT -Item REPORT.rpt"));
+                        //rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "GST AR CREDIT -Item REPORT.rpt"));
+                        rd.Load(Path.Combine(Server.MapPath("~/CrRPT"), "AR Credit memo item Knauf.rpt"));
                         rd.SetDataSource(_DS1.Tables[0]);
 
                         if (rd.Subreports.Count > 0)
@@ -1464,7 +1477,7 @@ namespace NewApp.Controllers
                 lstparameters.Add(new Parameters("@TODATE", sToDate.ToString()));
                 lstparameters.Add(new Parameters("@MCUSTOMER", sRadio.ToString()));
                 lstparameters.Add(new Parameters("@PORTALID", _PortalId.ToString()));
-                _DS = dataAccess.GetDataSet("SP_PORTAL_AccountStatement", lstparameters);
+                _DS = dataAccess.GetDataSet("SP_PORTAL_AccountStatement_New", lstparameters);
 
                 if (_DS.Tables[0].Rows.Count > 0)
                 {

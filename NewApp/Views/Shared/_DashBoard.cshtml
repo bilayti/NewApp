@@ -91,10 +91,10 @@
     <!----webfonts--->
     <!-- jQuery -->
     <script src="~/js/jquery.min.js"></script>
-    <link href='//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css' />
+    <link href='//fonts.googleapis.com/css?family=futura:400,100,300,500,700,900' rel='stylesheet' type='text/css' />
     <!---//webfonts--->
 </head>
-<body onunload="bodyUnload();" onclick="clicked=true;" >
+<body onunload="bodyUnload();" onclick="clicked=true;" style="background-color:#6ea1b9; font-family:'//fonts.googleapis.com/css?family=futura:400,100,300,500,700,900'">
     <div id="wrapper">
         <!-- Navigation -->
         <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; height: auto; background-color: white; margin-top: -5px; left: 0; top: 0;">
@@ -111,7 +111,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle avatar" data-toggle="dropdown" />
-                        @*<div class="label">
+                        @*<div class="label"/>
                                 <span style="font-size: 10px; color: black;" id="date_time"></span>
                                 <script type="text/javascript">
                                     window.onload = date_time('date_time');
@@ -138,51 +138,85 @@
             </div>
 
 
-            <div class="navbar-default sidebar" role="navigation">
+            <div class="navbar-default sidebar" role="navigation" style="background-color:#6ea1b9;">
 
-                <div class="sidebar-nav navbar-collapse">
+                <div class="sidebar-nav navbar-collapse" style="background-color:#6ea1b9;">
 
-                    <ul class="nav" id="side-menu">
+                    <ul class="nav" id="side-menu" style="background-color:#6ea1b9; color:white;">
+                        @if (System.Web.HttpContext.Current.Session["USER_CODE"].ToString() == "ADMIN" || (int)System.Web.HttpContext.Current.Session["USER_TYPEID"] == 1)
+                        {
+                            <li>
+                                <p><b style="color: white;">@ViewBag.lastseen</b></p>
+                                <a href='@Url.Action("Home", "HomePage")' id="liHome"><i class="fa fa-home fa-fw nav_icon"></i><b style="color: white;">HOME</b></a>
+                            </li>
 
-                        <li>
-                            <p><b style="color: white;">@ViewBag.lastseen</b></p>
-                            <a href='@Url.Action("Home", "HomePage")' id="liHome"><i class="fa fa-home fa-fw nav_icon"></i><b>HOME</b></a>
-                        </li>
-                        <li>
-                            <a><i class="fa fa-check-square-o nav_icon"></i><b>USER MANAGEMENT</b><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href='@Url.Action("UserReg", "UserRegistration")'>User Registration</a>
-                                </li>
-                                <li>
-                                    <a href='@Url.Action("Index", "EnableDisable")'>Enable/Disable User</a>
-                                </li>
-                                <li>
-                                    <a href="~/ManageUser.aspx">Manage User</a>
-                                </li>
+                            <li>
+                                <a><i class="fa fa-check-square-o nav_icon"></i><b style="color: white;">USER MANAGEMENT</b><span class="fa arrow" style="color: white;"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href='@Url.Action("UserReg", "UserRegistration")'><b style="color: white;">User Registration</b></a>
+                                    </li>
+                                    <li>
+                                        <a href='@Url.Action("Index", "EnableDisable")'><b style="color: white;">Enable/Disable User</b></a>
+                                    </li>
+                                    <li>
+                                        <a href="~/ManageUser.aspx"><b style="color: white;">Manage User</b></a>
+                                    </li>
 
-                            </ul>
-                            <!-- /.nav-second-level -->
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a><i class="fa fa-cog fa-fw nav_icon"></i><b style="color:white;">SETTINGS</b><span class="fa arrow" style="color: white;"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href='@Url.Action("UserType", "HomePage")'><b style="color: white;">User Type</b></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href='@Url.Action("Index", "LoginStatus")'><i class="fa fa-anchor fa-fw fa-lock" style="color:white;"></i><b style="color:white;">LOGIN STATUS</b></a>
+                            </li>
+                            <li>
+                                <a href='@Url.Action("Index", "AuditLog")'><i class="fa fa-arrow-circle-o-left fa-fw fa-lock" style="color:white;"></i><b style="color:white;">AUDIT LOG</b></a>
+                            </li>
+                            <li>
+                                <a href="~/LogOutPage.aspx"><i class="fa fa-lock fa-fw nav_icon"></i><b style="color:white;">LOGOUT</b></a>
+                            </li>
+                        }
+                        else if (ViewBag.UserType == "2")
+                        {
+                        <li>
+                            <p><b style="color: white;"> @ViewBag.lastseen </b></p>
+
+                            <a href='@Url.Action("Index", "Sale")' id="liHome"><i class="fa fa-home fa-fw nav_icon"></i><b style="color:white;">HOME</b></a>
                         </li>
                         <li>
-                            <a><i class="fa fa-cog fa-fw nav_icon"></i><b>SETTINGS</b><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href='@Url.Action("UserType", "HomePage")'>User Type</a>
-                                </li>
-                            </ul>
+                            <a href="~/LogOutPage.aspx"><i class="fa fa-anchor fa-fw nav_icon"></i><b style="color:white;">LOGOUT</b></a>
+                        </li>
+                        }
+                        else if (ViewBag.UserType == "3")
+                        {
+                        <li>
+                            <p><b style="color: white;"> @ViewBag.lastseen </b></p>
+
+                            <a href='@Url.Action("Index", "UserPage")' id="liHome"><i class="fa fa-home fa-fw nav_icon"></i><b style="color:white;">HOME</b></a>
                         </li>
                         <li>
-                            <a href='@Url.Action("Index", "LoginStatus")'><i class="fa fa-sitemap fa-fw nav_icon"></i><b>LOGIN STATUS</b><span class="fa arrow"></span></a>
-                            <!-- /.nav-second-level -->
+                            <a href="~/LogOutPage.aspx"><i class="fa fa-anchor fa-fw nav_icon"></i><b style="color:white;">LOGOUT</b></a>
+                        </li>
+                        }
+                        else
+                        {
+                        <li>
+                            <p><b style="color: white;"> @ViewBag.lastseen </b></p>
+
+                            <a href='@Url.Action("Index", "Manager")' id="liHome"><i class="fa fa-home fa-fw nav_icon"></i><b style="color:white;">HOME</b></a>
                         </li>
                         <li>
-                            <a href='@Url.Action("Index", "AuditLog")'><i class="fa fa-ambulance fa-fw nav_icon"></i><b>AUDIT LOG</b><span class="fa arrow"></span></a>
+                            <a href="~/LogOutPage.aspx"><i class="fa fa-anchor fa-fw nav_icon"></i><b style="color:white;">LOGOUT</b></a>
                         </li>
-                        <li>
-                            <a href="~/LogOutPage.aspx" /><i class="fa fa-anchor fa-fw nav_icon"></i><b>LOGOUT</b><span class="fa arrow"></span></a>
-                            <!-- /.nav-second-level -->
-                        </li>
+                        }
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

@@ -4,19 +4,19 @@
 }
 
 @{var listItems = new List<System.Web.UI.WebControls.ListItem>
-    {
-          new System.Web.UI.WebControls.ListItem { Text = "ADMIN", Value="1" }, 
-          new System.Web.UI.WebControls.ListItem { Text = "MANAGER", Value="4" } ,
-          new System.Web.UI.WebControls.ListItem { Text = "SALES", Value="2" } ,
-          new System.Web.UI.WebControls.ListItem { Text = "CUSTOMER", Value="3" }
-    };
+{
+  new System.Web.UI.WebControls.ListItem { Text = "ADMIN", Value="1" },
+  new System.Web.UI.WebControls.ListItem { Text = "MANAGER", Value="4" } ,
+  new System.Web.UI.WebControls.ListItem { Text = "SALES", Value="2" } ,
+  new System.Web.UI.WebControls.ListItem { Text = "CUSTOMER", Value="3" }
+};
 }
 
 @{var status = new List<System.Web.UI.WebControls.ListItem>
-    {
-          new System.Web.UI.WebControls.ListItem { Text = "OPEN", Value="1" }, 
-          new System.Web.UI.WebControls.ListItem { Text = "CLOSED", Value="3" }
-    };
+{
+  new System.Web.UI.WebControls.ListItem { Text = "OPEN", Value="1" },
+  new System.Web.UI.WebControls.ListItem { Text = "CLOSED", Value="3" }
+};
 }
 
 <script type="text/javascript">
@@ -46,7 +46,7 @@
                 $('#tbodymydata').empty();
                 var rowhead = "<tr style='background: rgba(158, 158, 158, 0.13)'><th>User Code</th><th>User Name</th><th>User Type</th><th>SAP Id</th><th>Status</th><th>Is Active</th><th>#</th>";
                 var rowbody = '';
-                if (data.length > 0) { 
+                if (data.length > 0) {
                     for (var i = 0; i < data.length; i++) {
                         rowbody += "<tr><td style='width:15%'>" +
                            data[i].USER_CODE + "</td><td style='width:25%'>" +
@@ -74,25 +74,23 @@
     }
 </script>
 
-<div style="display: none; position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.5)" id="loader">
-    <img alt="" src="~/fonts/ajax-loader-6.gif" style="top: 50%; left: 50%; position: absolute; text-align: center;" />
-</div>
-<div id="page-wrapper"> 
+@Html.Partial("_LoaderImage");
+<div id="page-wrapper">
     <div class="graphs">
         <div class="md">
             @*Account Information Area*@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12">
-                            <div class="col-md-4">
-                                <h4 style="font-family: bookman old style; font-weight: bold;">User Registration</h4>
-                            </div>
-                            <div class="col-md-4">
-                            </div>
-                            <div class="col-md-2">
-                            </div>
-                            <div class="col-md-2">
-                            </div>
+                        <div class="col-md-4">
+                            <h4 style="font-family: bookman old style; font-weight: bold;">User Registration</h4>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-2">
+                        </div>
                         <div class="row MarginTop1">
                             <div class="col-md-6">
                                 <div class="col-md-4">
@@ -109,8 +107,8 @@
                                 <div class="col-md-2">
                                     <label class="control-label">Select User Type</label>
                                 </div>
-                                <div class="col-md-4">                                    
-                                    @Html.DropDownList("ddlUserType", new SelectList(listItems, "Value", "Text"), "- Select User Type -", new { @class = "form-control"})
+                                <div class="col-md-4">
+                                    @Html.DropDownList("ddlUserType", new SelectList(listItems, "Value", "Text"), "- Select User Type -", new { @class = "form-control" })
                                 </div>
                                 <div class="col-md-2">
                                     <label class="control-label">SAP ID</label>
@@ -128,15 +126,15 @@
                                 <div class="col-md-2">
                                     <label class="control-label">User Name</label>
                                 </div>
-                                <div class="col-md-4"> 
-                                         @Html.TextBox("txtUserName", null, new { @class = "form-control" })
+                                <div class="col-md-4">
+                                    @Html.TextBox("txtUserName", null, new { @class = "form-control" })
                                 </div>
                                 <div class="col-md-2">
                                     <label class="control-label">User ID</label>
                                 </div>
                                 <div class="col-md-4">
                                     @Html.TextBox("txtUserID", null, new { @class = "form-control" })
-                                </div>                                
+                                </div>
                             </div>
                             <div class="col-md-3">
                             </div>
@@ -146,8 +144,8 @@
                                 <div class="col-md-2">
                                     <label class="control-label">Status</label>
                                 </div>
-                                <div class="col-md-4"> 
-                                     @Html.DropDownList("ddlStatus", new SelectList(status, "Value", "Text"), "- Select Status -", new { @class = "form-control"})
+                                <div class="col-md-4">
+                                    @Html.DropDownList("ddlStatus", new SelectList(status, "Value", "Text"), "- Select Status -", new { @class = "form-control" })
                                 </div>
                                 <div class="col-md-2">
                                 </div>
@@ -156,7 +154,7 @@
                             </div>
                             <div class="col-md-3">
                             </div>
-                        </div> 
+                        </div>
                         <div class="row MarginTop1" style="margin-top: 10px">
                             <div class="col-md-9">
                                 <div class="col-md-4">
@@ -184,6 +182,6 @@
                 </div>
             </div>
         </div>
-        </div>
     </div>
+</div>
 

@@ -18,8 +18,7 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
 
 @Html.Partial("_LoaderImage");
 
-
-<div id="page-wrapper" style="font-family: Verdana; font-size: 16px; color: black;">
+<div id="page-wrapper" style="font-size: 16px; color: black;">
     <div class="graphs">
         <div id="header" class="MarqueStyle" style="background-color: #02AFF3;">
             <marquee onmouseover="this.stop();" onmouseout="this.start();" behavior="alternate" width="100%">
@@ -36,7 +35,7 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
                     <div class="col-md-8">
                         <div>
                             <div class="col-md-4">
-                                <h4 style="font-family: bookman old style; font-weight: bold;">Account Information</h4>
+                                <h4 style="font-family: futura; font-weight: bold;">Account Information</h4>
                             </div>
                             <div class="col-md-4">
                             </div>
@@ -473,9 +472,9 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
                 <li id="liMenu4" onclick="CurrentActive(this)"><a href="#" style="font-size: small">Invoice report</a></li>
                 <li id="liMenu5" onclick="CurrentActive(this)"><a href="#" id="" style="font-size: small">Account statement</a></li>
                 <li id="liMenu6" onclick="CurrentActive(this)"><a href="#" style="font-size: small">Credit note report</a></li>
-                @*<li id="liMenu6" onclick="CurrentActive(this)"><a href="#" id="" style="font-size: small">Payment summary</a></li>
-                    <li id="liMenu7" onclick="CurrentActive(this)"><a href="#" style="font-size: small">Credit note report</a></li>
-                    <li id="liMenu8" onclick="CurrentActive(this)"><a href="#" id="" style="font-size: small">Feedback</a></li>*@
+                <li id="liMenu7" onclick="CurrentActive(this)"><a href="#" id="" style="font-size: small">Payment summary</a></li>
+                @*<li id="liMenu7" onclick="CurrentActive(this)"><a href="#" style="font-size: small">Credit note report</a></li>
+            <li id="liMenu8" onclick="CurrentActive(this)"><a href="#" id="" style="font-size: small">Feedback</a></li>*@
                 @*<li id="liMenu9" onclick="CurrentActive(this)"><a href="#" style="font-size: small">Account Statement Old</a></li>*@
                 @*<li id="liMenu10" onclick="CurrentActive(this)"><a href="#" style="font-size: small">Collection Summary</a></li>*@
             </ul>
@@ -562,7 +561,7 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
                 </div>
 
             </div>
-            <div class="col-md-12" style="margin-bottom: 10px;display:none;" id="divAccountStatements">
+            <div class="col-md-12" style="margin-bottom: 10px; display:none;" id="divAccountStatements">
                 <div class="col-md-1">
                     <label class="control-label">From Date</label>
                 </div>
@@ -595,6 +594,23 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
                 </div>
                 <button type="button" id="btnFindReportStmt" class="btn btn-xs btn-primary" onclick="GetReports()" style="width: 80px; background-color: #02AFF3 !important; margin-left: 10px">Get Data</button>
                 <button type="button" id="exportexcelStmt" class="btn btn-xs btn-primary" onclick="GetReportExcel()" style="width: 90px; background-color: #02AFF3 !important; margin-left: 10px">Get To Excel</button>
+
+            </div>
+            <div class="col-md-12" style="margin-bottom: 10px; display:none;" id="divPaymentSummary">
+                <div class="col-md-1">
+                    <label class="control-label">From Date</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="txtFromDTPS" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label class="control-label">To Date</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="txtToDTPS" class="form-control" />
+                </div>
+                <button type="button" id="btnFindReportStmtPS" class="btn btn-xs btn-primary" onclick="GetReports()" style="width: 80px; background-color: #02AFF3 !important; margin-left: 10px">Get Data</button>
+                <button type="button" id="exportexcelStmtPS" class="btn btn-xs btn-primary" onclick="GetReportExcel()" style="width: 90px; background-color: #02AFF3 !important; margin-left: 10px">Get To Excel</button>
 
             </div>
         </div>
@@ -679,7 +695,7 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
         </div>
 
         @*//Account Statement ----------------*@
-        <div class="table-responsive" id="divMyReportsAccount" style="margin-left: 23px;display:none;">
+        <div class="table-responsive" id="divMyReportsAccount" style="margin-left: 23px; display:none;">
             <table class="table table-bordered ReportTable" id="tblMyReportsAccount">
                 <thead id="">
                     <tr style='background: rgba(158, 158, 158, 0.13)'>
@@ -708,7 +724,6 @@ new System.Web.UI.WebControls.ListItem { Text = "Invoiced", Value="5" }
                         <th>Payment No.</th>
                         <th>Payment Date</th>
                         <th>Description</th>
-
                         <th>Payment Type</th>
                         <th>Cheque No.</th>
                         <th>Cheque Date</th>
@@ -1027,7 +1042,7 @@ function CurrentActive(currTab) {
     $('#divMyReportsItemPurchase').hide();
     $('#divMyReportsInvoice').hide();
     $('#divMyReportsCredit').hide();
-    $('#divMyReportsBank').hide();
+    $('#divPaymentSummary').hide();
     $('#divMyReportsAccount').hide();
     $('#divReport').hide();
     _CurrentActive = currTab.id;
@@ -1044,6 +1059,7 @@ function CurrentActive(currTab) {
         $('#divReports').hide();
         $('#divAccountStatements').hide();
         $('#divCreditNote').hide();
+        $('#divPaymentSummary').hide();
     }
     else if (currTab.id == 'liMenu2') {
         $('#divReportsAgeing').hide();
@@ -1052,6 +1068,7 @@ function CurrentActive(currTab) {
         $('#divReports').hide();
         $('#divAccountStatements').hide();
         $('#divCreditNote').hide();
+        $('#divPaymentSummary').hide();
     }
     else if (currTab.id == 'liMenu3') {
         $('#divReportsAgeing').hide();
@@ -1060,6 +1077,7 @@ function CurrentActive(currTab) {
         $('#divReports').hide();
         $('#divAccountStatements').hide();
         $('#divCreditNote').hide();
+        $('#divPaymentSummary').hide();
     }
     else if (currTab.id == 'liMenu4') {
         $('#divReportsAgeing').hide();
@@ -1068,6 +1086,7 @@ function CurrentActive(currTab) {
         $('#divReports').show();
         $('#divAccountStatements').hide();
         $('#divCreditNote').hide();
+        $('#divPaymentSummary').hide();
     }
     else if (currTab.id == 'liMenu5') {
         $('#divReportsAgeing').hide();
@@ -1076,6 +1095,16 @@ function CurrentActive(currTab) {
         $('#divReports').hide();
         $('#divAccountStatements').show();
         $('#divCreditNote').hide();
+        $('#divPaymentSummary').hide();
+    }
+    else if (currTab.id == 'liMenu6') {
+        $('#divReportsAgeing').hide();
+        $('#divPenOrder').hide();
+        $('#divItemPurchase').hide();
+        $('#divReports').hide();
+        $('#divAccountStatements').hide();
+        $('#divCreditNote').show();
+        $('#divPaymentSummary').hide();
     }
     else {
         $('#divReportsAgeing').hide();
@@ -1083,7 +1112,8 @@ function CurrentActive(currTab) {
         $('#divItemPurchase').hide();
         $('#divReports').hide();
         $('#divAccountStatements').hide();
-        $('#divCreditNote').show();
+        $('#divCreditNote').hide();
+        $('#divPaymentSummary').show();
     }
 
     $('#txtFromDT').val('');
@@ -1193,12 +1223,13 @@ function GetReports() {
     else if (_CurrentActive == 'liMenu5') {
         AccountStatement();
     }
-    else if (_CurrentActive == 'liMenu7') {
-        BankReceiptReport();
-    }
     else if (_CurrentActive == 'liMenu6') {
         CreditNoteReport();
     }
+    else if (_CurrentActive == 'liMenu7') {
+        BankReceiptReport();
+    }
+
     else if (_CurrentActive == 'liMenu8') {
         FeedBack();
     }
@@ -1229,12 +1260,13 @@ function GetReportExcel() {
     else if (_CurrentActive == 'liMenu5') {
         AccountStatementReportExcel();
     }
-    else if (_CurrentActive == 'liMenu7') {
-        BankReceiptReportExcel();
-    }
     else if (_CurrentActive == 'liMenu6') {
         CreditNoteReportExcel();
     }
+    else if (_CurrentActive == 'liMenu7') {
+        BankReceiptReportExcel();
+    }
+
     else if (_CurrentActive == 'liMenu8') {
         FeedBack();
     }
@@ -1537,8 +1569,8 @@ function GetAccountStatementPDF() {
 //Bank Receipt Excel
 function BankReceiptReportExcel() {
     var CardCode = $('#ddlCustomerName').val();
-    var FromDT = $('#txtFromDT').val();
-    var ToDT = $('#txtToDT').val();
+    var FromDT = $('#txtFromDTPS').val();
+    var ToDT = $('#txtToDTPS').val();
     var radiovalue = '';
     if ($("#radio_1").is(":checked")) {
         radiovalue = 1;
@@ -1712,7 +1744,8 @@ function AgingReport() {
                         }, targets: 'no-sort', orderable: false
                     },  //, '" + row.CompanyID + "'
 
-                ]
+                ],
+            'order': [[1, 'asc']]
         });
     $('#tblMyReports').on('xhr.dt', function (e, settings, json) {
         $.each(json.data, function (a, data) {
@@ -1762,8 +1795,8 @@ function PendingOrderReport() {
                     { "data": "CardCode_Pen" },
                     { "data": "CardName_Pen" },
                     { "data": "Location" },
-                    { "data": "Quantity_Pen" },
-                    { "data": "Open_Quantity_Pen" },
+                    { "data": "dispatchedqty" },
+                    { "data": "pendingqty" },
                     {
                         "mRender": function (data, type, row) {
                             return "<span style='float: right;'>" + row.DocTotal + "</span>"
@@ -1794,8 +1827,8 @@ function ItemPurchase() {
     $('#divMyReportsAccount').hide();
     $('#divMyReportsItemPurchase').show();
     var CardCode = $('#ddlCustomerName').val();
-    var FromDT = $('#txtFromDT').val();
-    var ToDT = $('#txtToDT').val();
+    var FromDT = $('#txtFromDTIP').val();
+    var ToDT = $('#txtToDTIP').val();
     var radiovalue = '';
     if ($("#radio_1").is(":checked")) {
         radiovalue = 1;
@@ -2039,16 +2072,16 @@ function AccountStatementPDF() {
 }
 //Bank Receipt Report Report Code
 function BankReceiptReport() {
-    $('#divMyReportsInvoice').hide();
-    $('#divMyReportsCredit').hide();
     $('#divReport').hide();
+    $('#divMyReportsInvoice').hide();
     $('#divMyReportsItemPurchase').hide();
     $('#divMyReportsPendingOrderReport').hide();
     $('#divMyReportsAccount').hide();
+    $('#divMyReportsCredit').hide();
     $('#divMyReportsBank').show();
     var CardCode = $('#ddlCustomerName').val();
-    var FromDT = $('#txtFromDT').val();
-    var ToDT = $('#txtToDT').val();
+    var FromDT = $('#txtFromDTPS').val();
+    var ToDT = $('#txtToDTPS').val();
     var radiovalue = '';
     if ($("#radio_1").is(":checked")) {
         radiovalue = 1;
@@ -2106,8 +2139,8 @@ function CreditNoteReport() {
     $('#divMyReportsAccount').hide();
     $('#divMyReportsCredit').show();
     var CardCode = $('#ddlCustomerName').val();
-    var FromDT = $('#txtFromDT').val();
-    var ToDT = $('#txtToDT').val();
+    var FromDT = $('#txtFromDTCN').val();
+    var ToDT = $('#txtToDTCN').val();
     $('#theadmydata').empty();
     var rowhead = "<tr style='background: rgba(158, 158, 158, 0.13)'></tr>";
     //rowhead += "<th>C Form Days</th><th>Advance</th><th>0-15</th><th>16-30</th><th>31-45</th><th>>45</th><th>Total</th></tr>";
@@ -2416,8 +2449,8 @@ function BindAgingReportRowWise(CardCode) {
 //FOR BIND ITEM PURCHASE REPORT ITEM SUB GROUP ROW WISE
 function BindItemSubGroup(ItemGroupName) {
     //debugger;
-    var FromDT = $('#txtFromDT').val();
-    var ToDT = $('#txtToDT').val();
+    var FromDT = $('#txtFromDTIP').val();
+    var ToDT = $('#txtToDTIP').val();
     var CardCode = $('#ddlCustomerName').val();
     var radiovalue = '';
     if ($("#radio_1").is(":checked")) {
@@ -2462,8 +2495,8 @@ function BindItemSubGroup(ItemGroupName) {
 //FOR BIND ITEM PURCHASE REPORT ITEM SUB GROUP Item ROW WISE
 function BindItemGroupItem(ItemGroupName) {
     //debugger;
-    var FromDT = $('#txtFromDT').val();
-    var ToDT = $('#txtToDT').val();
+    var FromDT = $('#txtFromDTIP').val();
+    var ToDT = $('#txtToDTIP').val();
     var CardCode = $('#ddlCustomerName').val();
     var radiovalue = '';
     if ($("#radio_1").is(":checked")) {

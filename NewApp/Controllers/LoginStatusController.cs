@@ -14,6 +14,7 @@ namespace NewApp.Controllers
         string username = (string)System.Web.HttpContext.Current.Session["_SAP_ID"];
         string UserCode = (string)System.Web.HttpContext.Current.Session["USER_CODE"];
         static string lastseen = (string)System.Web.HttpContext.Current.Session["LastLoginDateTime"];
+        static int usertype = (int) System.Web.HttpContext.Current.Session["USER_TYPEID"];
         DataSet _DS = null;
         public List<UserRegistrationDetails> _UserList = new List<UserRegistrationDetails>();
 

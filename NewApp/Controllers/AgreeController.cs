@@ -18,6 +18,7 @@ namespace NewApp.Controllers
         static string username = (string)System.Web.HttpContext.Current.Session["_SAP_ID"];
         static string lastseen = (string)System.Web.HttpContext.Current.Session["LastLoginDateTime"];
         static string UserCode = (string)System.Web.HttpContext.Current.Session["USER_CODE"];
+        static int usertype = (int) System.Web.HttpContext.Current.Session["USER_TYPEID"];
         public ActionResult Index()
         {
             Agree agree = new Agree();

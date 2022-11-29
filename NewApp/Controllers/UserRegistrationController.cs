@@ -15,14 +15,16 @@ namespace NewApp.Controllers
         string username = string.Empty;
         string lastseen = string.Empty;
         string UserCode = string.Empty;
+        int usertype = 0;
         
         DataSet _DS = null;
         public List<UserRegistrationDetails> _UserList = new List<UserRegistrationDetails>();
         public UserRegistrationController()
         {
             username = (string)System.Web.HttpContext.Current.Session["_SAP_ID"];
-            UserCode = (string)System.Web.HttpContext.Current.Session["USER_CODE"];
             lastseen = (string)System.Web.HttpContext.Current.Session["LastLoginDateTime"];
+            UserCode = (string)System.Web.HttpContext.Current.Session["USER_CODE"];
+            usertype = (int)System.Web.HttpContext.Current.Session["USER_TYPEID"];
         }
         public ActionResult UserReg()
         {
