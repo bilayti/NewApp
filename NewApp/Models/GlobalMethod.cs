@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Configuration;
 using System.Data.OleDb;
 using System.Data;
-using System.Collections.Specialized;
-using System.Data.SqlClient;
-using Microsoft.ApplicationBlocks.Data;
-using System.Net;
 using System.IO;
-using System.Xml;
 
 namespace NewApp.Models
 {

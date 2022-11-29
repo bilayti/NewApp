@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.ApplicationBlocks.Data;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
-using Microsoft.ApplicationBlocks.Data;
 
 namespace NewApp.Models
 {

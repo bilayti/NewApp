@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.Security.Application;
 
 namespace NewApp.Controllers
 {
@@ -92,16 +91,16 @@ namespace NewApp.Controllers
                 _Cmd.Parameters.AddWithValue("@USERID", HttpUtility.HtmlEncode(_UserReg.USERID));
                 _Cmd.Parameters.AddWithValue("@USER_TYPEID", HttpUtility.HtmlEncode(_UserReg.USER_TYPEID));
                 _Cmd.Parameters.AddWithValue("@USER_CODE", HttpUtility.HtmlEncode(_UserReg.USER_CODE));
-                _Cmd.Parameters.AddWithValue("@F_NAME", Encoder.HtmlEncode(_UserReg.F_NAME));
-                _Cmd.Parameters.AddWithValue("@M_NAME", Encoder.HtmlEncode(_UserReg.M_NAME));
-                _Cmd.Parameters.AddWithValue("@L_NAME", Encoder.HtmlEncode(_UserReg.L_NAME));
+                _Cmd.Parameters.AddWithValue("@F_NAME", HttpUtility.HtmlEncode(_UserReg.F_NAME));
+                _Cmd.Parameters.AddWithValue("@M_NAME", HttpUtility.HtmlEncode(_UserReg.M_NAME));
+                _Cmd.Parameters.AddWithValue("@L_NAME", HttpUtility.HtmlEncode(_UserReg.L_NAME));
                 _Cmd.Parameters.AddWithValue("@PASSWORD1", "45f238b0ebc278486948ab92322d412b4f91ed17ee80fc9ad13433dc6c7ce035");
-                _Cmd.Parameters.AddWithValue("@EMAIL", Encoder.HtmlEncode(_UserReg.EMAIL));
-                _Cmd.Parameters.AddWithValue("@MOBILE", Encoder.HtmlEncode(_UserReg.MOBILE));
-                _Cmd.Parameters.AddWithValue("@REMARKS1", Encoder.HtmlEncode(_UserReg.REMARKS1));
+                _Cmd.Parameters.AddWithValue("@EMAIL", HttpUtility.HtmlEncode(_UserReg.EMAIL));
+                _Cmd.Parameters.AddWithValue("@MOBILE", HttpUtility.HtmlEncode(_UserReg.MOBILE));
+                _Cmd.Parameters.AddWithValue("@REMARKS1", HttpUtility.HtmlEncode(_UserReg.REMARKS1));
                 _Cmd.Parameters.AddWithValue("@SAP_ID", _UserReg.SAP_ID);
-                _Cmd.Parameters.AddWithValue("@USER_STATUS", Encoder.HtmlEncode(_UserReg.USER_STATUS.ToString()));
-                _Cmd.Parameters.AddWithValue("@IsActive", Encoder.HtmlEncode(_UserReg.IsActive));
+                _Cmd.Parameters.AddWithValue("@USER_STATUS", HttpUtility.HtmlEncode(_UserReg.USER_STATUS.ToString()));
+                _Cmd.Parameters.AddWithValue("@IsActive", HttpUtility.HtmlEncode(_UserReg.IsActive));
                 _Con.Open();
                 result = _Cmd.ExecuteNonQuery();
                 _Con.Close();
@@ -134,13 +133,13 @@ namespace NewApp.Controllers
                 _Cmd = new SqlCommand("SP_PORTAL_USERAuthorization", _Con);
                 _Cmd.CommandType = CommandType.StoredProcedure;
                 _Cmd.Parameters.AddWithValue("@USERID", HttpUtility.HtmlEncode(_UserReg.USERID));
-                _Cmd.Parameters.AddWithValue("@Aging", Encoder.HtmlEncode(_UserReg.Aging));
-                _Cmd.Parameters.AddWithValue("@PendingOrder", Encoder.HtmlEncode(_UserReg.PendingOrder));
-                _Cmd.Parameters.AddWithValue("@ItemPurchase", Encoder.HtmlEncode(_UserReg.ItemPurchase));
-                _Cmd.Parameters.AddWithValue("@Invoice", Encoder.HtmlEncode(_UserReg.Invoice));
-                _Cmd.Parameters.AddWithValue("@AccountStatement", Encoder.HtmlEncode(_UserReg.AccountStatement));
-                _Cmd.Parameters.AddWithValue("@CollectionSummary", Encoder.HtmlEncode(_UserReg.CollectionSummary));
-                _Cmd.Parameters.AddWithValue("@CreditNote", Encoder.HtmlEncode(_UserReg.CreditNote));
+                _Cmd.Parameters.AddWithValue("@Aging", HttpUtility.HtmlEncode(_UserReg.Aging));
+                _Cmd.Parameters.AddWithValue("@PendingOrder", HttpUtility.HtmlEncode(_UserReg.PendingOrder));
+                _Cmd.Parameters.AddWithValue("@ItemPurchase", HttpUtility.HtmlEncode(_UserReg.ItemPurchase));
+                _Cmd.Parameters.AddWithValue("@Invoice", HttpUtility.HtmlEncode(_UserReg.Invoice));
+                _Cmd.Parameters.AddWithValue("@AccountStatement", HttpUtility.HtmlEncode(_UserReg.AccountStatement));
+                _Cmd.Parameters.AddWithValue("@CollectionSummary", HttpUtility.HtmlEncode(_UserReg.CollectionSummary));
+                _Cmd.Parameters.AddWithValue("@CreditNote", HttpUtility.HtmlEncode(_UserReg.CreditNote));
                 _Con.Open();
                 result = _Cmd.ExecuteNonQuery();
                 _Con.Close();
@@ -169,7 +168,7 @@ namespace NewApp.Controllers
                 _UserList.Clear();
                 _DS = new DataSet();
                 List<Parameters> lstparameters = new List<Parameters>();
-                lstparameters.Add(new Parameters("@UserID", Encoder.HtmlEncode(sUserID.ToString())));
+                lstparameters.Add(new Parameters("@UserID", HttpUtility.HtmlEncode(sUserID.ToString())));
                 _DS = dataAccess.GetDataSet("SP_PORTAL_FillUserDetails", lstparameters);
                 foreach (DataRow _Dr in _DS.Tables[0].Rows)
                 {
